@@ -6,11 +6,12 @@
 
 @font-face {
   font-family: 'Madelyn';
-  src: url('../vendors/MadelynFill-Trial-Regular.otf') format('opentype');
+  src: url('../../fonts/Madelyn.otf') format('opentype');
 }
 
-.sectionTitle_title {
+.Made {
   font-family: 'Madelyn', sans-serif;
+  font-weight: normal;
 }
 
 .bg-blue-1-05 {
@@ -27,6 +28,10 @@
 }
 .bg-black-20 {
   background-color: color-opac(black, 0.2);
+}
+
+.bg-black-2 {
+  background-color: color-opac(black, 0.9);
 }
 
 @each $name, $color in $colors {
@@ -676,12 +681,6 @@ $_displays: none, inline-block, block, flex;
     @include media-below(lg) {
       grid-row: unset;
     }
-  }
-
-  > *:nth-child(2) {
-  }
-
-  > *:nth-child(3) {
   }
 }
 

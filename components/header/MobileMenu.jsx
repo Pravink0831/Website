@@ -210,14 +210,7 @@ const MobileMenu = () => {
             <Social />
           </div>
         </div>
-        <div className="mt-20">
-          <Link
-            className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
-            href="/login"
-          >
-            Become An Expert
-          </Link>
-        </div>
+        
       </div>
       {/* End pro-footer */}
     </>

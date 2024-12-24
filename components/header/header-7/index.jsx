@@ -29,8 +29,8 @@ const Header1 = () => {
   return (
     <>
       {" "}
-      <header className={`header ${navbar ? "bg-white is-sticky" : ""}`}>
-        <div className="header__container px-30 pt-20 sm:px-20">
+      <header className={`header ${navbar ? "bg-black-2 is-sticky" : ""}`}>
+        <div className="header__container px-70 sm:px-20">
           <div className="row justify-between items-center">
             <div className="col-auto col-auto-menu">
               <div className="d-flex items-center">
@@ -39,11 +39,6 @@ const Header1 = () => {
                 </Link>
                 {/* End logo */}
 
-                <div className="header-menu">
-                  <div className="header-menu__content">
-                    <MainMenu style="text-white" />
-                  </div>
-                </div>
                 {/* End header-menu */}
               </div>
               {/* End d-flex */}
@@ -52,18 +47,14 @@ const Header1 = () => {
 
             <div className="col-auto">
               <div className="d-flex items-center">
-                
+              <div className="header-menu">
+                  <div className="header-menu__content">
+                    <MainMenu style="text-white" />
+                  </div>
+                </div>
                 {/* End language and currency selector */}
 
                 {/* Start btn-group */}
-                <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
-                  <Link
-                    href="/signup"
-                    className="button px-30 fw-400 text-14 -outline-blue-1 h-50 text-white ml-20"
-                  >
-                    Sign In / Register
-                  </Link>
-                </div>
                 {/* End btn-group */}
 
                 {/* Start mobile menu icon */}

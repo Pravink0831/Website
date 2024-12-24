@@ -33,10 +33,10 @@ const home_7 = () => {
 
       <section className="layout-pt-lg layout-pb-md">
               <div className="container">
-                <div className="row text-left">
+                <div className="row justify-center text-center">
                   <div className="col-auto">
                     <div className="sectionTitle -md">
-                      <h2 className="sectionTitle__title">Explore Our Stunning Villas</h2>
+                      <h2 className="sectionTitle__title text-80 Made">Explore Our Stunning Villas</h2>
                       <p className=" sectionTitle__text mt-5 sm:mt-0">
                       Indulge in the beauty and elegance of our carefully curated villa collection, crafted for unforgettable stays.
                       </p>
@@ -51,10 +51,10 @@ const home_7 = () => {
 
       <section className="layout-pt-md layout-pb-md">
         <div className="container">
-          <div className="row text-left">
+          <div className="row justify-center text-center">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Step Out and Explore</h2>
+                <h2 className="sectionTitle__title text-80 Made">Step Out and Explore</h2>
                 <p className=" sectionTitle__text mt-5 sm:mt-0">
                 Enjoy easy access to North Goa’s most famous attractions and activities
                 </p>

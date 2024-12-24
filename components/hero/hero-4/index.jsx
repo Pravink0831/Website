@@ -24,6 +24,26 @@ const index = () => {
                 <img alt="image" src="/img/masthead/7/6.jpg" />
               </div>
             </SwiperSlide>
+            <SwiperSlide>
+              <div className="masthead__image">
+                <img alt="image" src="/img/masthead/7/3.jpg" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="masthead__image">
+                <img alt="image" src="/img/masthead/7/2.jpg" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="masthead__image">
+                <img alt="image" src="/img/masthead/7/1.jpg" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="masthead__image">
+                <img alt="image" src="/img/masthead/7/4.jpg" />
+              </div>
+            </SwiperSlide>
           </Swiper>
 
           <div className="masthead__content">
@@ -36,21 +56,14 @@ const index = () => {
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle_title text-80 lg:text-40 md:text-40 text-white" style={{ fontFamily: 'Madelyn, sans-serif' }}>
+                    <p className="sectionTitle__title Made text-80 lg:text-60 md:text-40 text-white">
                     Discover the ultimate villa experience in Goa
                     </p>
-                    <p className="text-white mt-5">
-                    Unwind in our collection of 10 luxurious villas, offering comfort, privacy, and 
+                    <p className="text-white text-20 mt-5 mb-10">
+                    Unwind in our collection of 10 luxurious villas, offering comfort, privacy,<br></br> and 
                     proximity to Goa’s finest attractions
                     </p>
-                    <div className="d-inline-block">
-                      <a
-                        href="#"
-                        className="button -md -outline-white h-50 text-white mt-30"
-                      >
-                        Discover More
-                      </a>
-                    </div>
+                
                   </div>
                   {/* End text-center */}
                   <MainFilterSearchBox />
