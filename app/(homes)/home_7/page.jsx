@@ -6,13 +6,14 @@ import BlockGuide from "@/components/block/BlockGuide";
 import Subscribe from "@/components/home/home-7/Subscribe";
 import Blog from "@/components/home/home-7/Blog";
 import Counter from "@/components/counter/Counter3";
-import Testimonial from "@/components/home/home-7/Testimonial";
+import Testimonial from "@/components/home/home-4/Testimonial";
 import TopDestinations from "@/components/home/home-7/TopDestinations";
 import Rentals from "@/components/rentals/Rentals";
 import HotelTypes from "@/components/home/home-7/HotelTypes";
 import FilterHotels4 from "@/components/hotels/FilterHotels4";
 import PopularDestinations from "@/components/destinations/PopularDestinations";
 import ParallaxBanner from "@/components/banner/ParallaxBanner";
+
 
 export const metadata = {
   title: "Home-7 || GoTrip - Travel & Tour React NextJS Template",
@@ -38,7 +39,7 @@ const home_7 = () => {
                   <div className="col-auto">
                     <div className="sectionTitle -md">
                       <h2 className="sectionTitle__title text-80 Made">Explore Our Stunning Villas</h2>
-                      <p className=" sectionTitle__text mt-5 sm:mt-0">
+                      <p className=" sectionTitle__text text-20 text-black mt-5 sm:mt-0">
                       Indulge in the beauty and elegance of our carefully curated villa collection, crafted for unforgettable stays.
                       </p>
                     </div>
@@ -56,7 +57,7 @@ const home_7 = () => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title text-80 Made">Step Out and Explore</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                <p className=" sectionTitle__text text-20 text-black mt-5 sm:mt-0">
                 Enjoy easy access to North Goa’s most famous attractions and activities
                 </p>
               </div>
@@ -94,6 +95,33 @@ const home_7 = () => {
       {/* End counter section */}
 
       {/* End blog section */}
+      <section className="section-bg layout-pt-lg layout-pb-lg">
+        <div className="section-bg__item -mx-20 bg-light-2" />
+        <div className="container">
+          <div className="row justify-center text-center">
+            <div className="col-auto">
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title text-80 Made">
+                Real Guests, Real Reviews
+                </h2>
+                <p className=" sectionTitle__text text-20 text-black mt-5 sm:mt-0">
+                Honest reviews from guests who’ve stayed and loved their time with us
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* End .row */}
+
+          <div className="relative mt-80 md:mt-40  position-relative">
+            <Testimonial />
+          </div>
+          {/* End .overflow-hidden */}
+
+          {/* End .row */}
+        </div>
+        {/* End .container */}
+      </section>
+      {/* End testimonial section */}
 
       <section className="layout-pt-md layout-pb-md">
         <div className="container">
