@@ -12,6 +12,7 @@ import Rentals from "@/components/rentals/Rentals";
 import HotelTypes from "@/components/home/home-7/HotelTypes";
 import FilterHotels4 from "@/components/hotels/FilterHotels4";
 import PopularDestinations from "@/components/destinations/PopularDestinations";
+import ParallaxBanner from "@/components/banner/ParallaxBanner";
 
 export const metadata = {
   title: "Home-7 || GoTrip - Travel & Tour React NextJS Template",
@@ -28,10 +29,10 @@ const home_7 = () => {
 
       <Hero4 />
       {/* End Hero 7 */}
-
+      <ParallaxBanner />
       {/* End ypes of Stays */}
-
-      <section className="layout-pt-lg layout-pb-md">
+      
+      <section className="layout-pt-md layout-pb-sm">
               <div className="container">
                 <div className="row justify-center text-center">
                   <div className="col-auto">
@@ -74,18 +75,18 @@ const home_7 = () => {
 
       {/* End Testimonial Sectoin */}
 
-      <section className="section-bg pt-40 pb-40 bg-black-20">
+      <section className="section-bg pt-40 pb-40 bg-black-2 text-white">
         <div className="section-bg__item -left-100 -right-100 border-bottom-light"></div>
 
         <div className="container">
         <div className="row justify-center text-center">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Our Highlights at a Glance</h2>
+                <h2 className="sectionTitle__title text-80 Made">Discover Our Story in Numbers</h2>
               </div>
             </div>
           </div>
-          <div className="row y-gap-40 justify-center text-center mt-30">
+          <div className="row y-gap-40 justify-center text-center mt-30 mb-30">
             <Counter />
           </div>
         </div>

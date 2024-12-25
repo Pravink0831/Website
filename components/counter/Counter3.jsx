@@ -40,16 +40,16 @@ const Counter3 = () => {
     <>
       {blockContent.map((item) => (
         <div
-          className="col-xl-2 col-6"
+          className="col-xl-2 col-12"
           key={item.id}
           data-aos="fade"
           data-aos-delay={item.delayAnim}
         >
-          <div className="text-30 lh-13 text-black-1 fw-600">
+          <div className="text-40 lh-13 fw-600">
             {item.number}
             {item.hasUnit}
           </div>
-          <div className="text-16 lh-14 text-black-1 mt-5">{item.meta}</div>
+          <div className="text-16 lh-14 mt-5">{item.meta}</div>
         </div>
       ))}
     </>
