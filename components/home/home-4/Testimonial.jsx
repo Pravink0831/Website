@@ -42,8 +42,15 @@ const Testimonial = () => {
               data-aos="fade"
               data-aos-delay={item.dealyAnimation}
             >
-              <h4 className="text-16 fw-500 text-blue-1 mb-20">{item.meta}</h4>
-              <p className="testimonials__text lh-18 fw-500 text-dark-1">
+              <h4 className="text-16 fw-500 text-blue-1 mb-5">{item.meta}</h4>
+              <div className="d-flex items-center x-gap-5">
+                        <div className="icon-star text-yellow-1 text-10" />
+                        <div className="icon-star text-yellow-1 text-10" />
+                        <div className="icon-star text-yellow-1 text-10" />
+                        <div className="icon-star text-yellow-1 text-10" />
+                        <div className="icon-star text-yellow-1 text-10" />
+                      </div>
+              <p className="testimonials__text lh-18 fw-500 text-dark-1 mt-20">
                 {item.text}
               </p>
               <div className="pt-20 mt-28 border-top-light">

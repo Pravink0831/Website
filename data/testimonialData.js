@@ -51,6 +51,7 @@ export const testimonial2 = [
     Japan with our luggage - the location for this hotel made that so
     easy. Agoda price was fantastic."`,
     dealyAnimation: "100",
+    Rating:3,
   },
   {
     id: 2,
@@ -62,6 +63,7 @@ export const testimonial2 = [
     Japan with our luggage - the location for this hotel made that so
     easy. Agoda price was fantastic."`,
     dealyAnimation: "200",
+    Rating:5,
   },
   {
     id: 3,
@@ -73,6 +75,7 @@ export const testimonial2 = [
     Japan with our luggage - the location for this hotel made that so
     easy. Agoda price was fantastic."`,
     dealyAnimation: "300",
+    Rating:1,
   },
   {
     id: 4,
@@ -84,6 +87,7 @@ export const testimonial2 = [
     Japan with our luggage - the location for this hotel made that so
     easy. Agoda price was fantastic."`,
     dealyAnimation: "400",
+    Rating:2,
   },
   {
     id: 5,
@@ -95,6 +99,7 @@ export const testimonial2 = [
     Japan with our luggage - the location for this hotel made that so
     easy. Agoda price was fantastic."`,
     dealyAnimation: "500",
+    Rating:3,
   },
 ];
 

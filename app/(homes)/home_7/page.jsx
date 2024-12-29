@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import DefaultFooter from "@/components/footer/default";
+import DefaultFooter from "@/components/footer/footer-3";
 import Header7 from "@/components/header/header-7";
 import Hero4 from "@/components/hero/hero-4";
 import BlockGuide from "@/components/block/BlockGuide";
@@ -13,6 +13,7 @@ import HotelTypes from "@/components/home/home-7/HotelTypes";
 import FilterHotels4 from "@/components/hotels/FilterHotels4";
 import PopularDestinations from "@/components/destinations/PopularDestinations";
 import ParallaxBanner from "@/components/banner/ParallaxBanner";
+import CallToActions from "@/components/common/CallToActions";
 
 
 export const metadata = {
@@ -104,7 +105,7 @@ const home_7 = () => {
                 <h2 className="sectionTitle__title text-80 Made">
                 Real Guests, Real Reviews
                 </h2>
-                <p className=" sectionTitle__text text-20 text-black mt-5 sm:mt-0">
+                <p className="sectionTitle__text text-20 text-black mt-5 sm:mt-0">
                 Honest reviews from guests who’ve stayed and loved their time with us
                 </p>
               </div>
@@ -128,16 +129,16 @@ const home_7 = () => {
           <div className="row justify-center text-center">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Why Choose Us</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  These popular destinations have a lot to offer
+                <h2 className="sectionTitle__title Made text-80">Core Comforts you Can Count On</h2>
+                <p className=" sectionTitle__text mt-5 text-20 text-black sm:mt-0">
+                  Our villas come fully equipped with modern amenties to make your stay effortless and relaxing
                 </p>
               </div>
             </div>
           </div>
           {/* End .row */}
 
-          <div className="row y-gap-20 justify-between pt-50">
+          <div className="row justify-center y-gap-20 pt-50">
             <BlockGuide />
           </div>
           {/* End .row */}
@@ -146,7 +147,7 @@ const home_7 = () => {
       </section>
       {/* Block Guide Section */}
 
-      <Subscribe />
+      <CallToActions />
       {/* End Subscribe Section */}
 
       <DefaultFooter />
