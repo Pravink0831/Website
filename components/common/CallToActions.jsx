@@ -23,7 +23,8 @@ const CallToActions = () => {
 
               <div>
                 <button className="button -md h-60 rounded-100 bg-black-2 text-white">
-                <i className="icon-arrow-right text-20 mr-10"/> Call us on now
+                <i className="icon-arrow-right text-20 mr-10"/>
+                Call us on now
                 </button>
               </div>
               {/* End subscribe btn */}

@@ -37,7 +37,7 @@ const Testimonial = () => {
         {testimonial2.map((item) => (
           <SwiperSlide key={item.id}>
             <div
-              className="testimonials -type-1 bg-white rounded-4 pt-40 pb-30 px-40"
+              className="testimonials -type-1 bg-white rounded-16 pt-40 pb-30 px-40"
               key={item.id}
               data-aos="fade"
               data-aos-delay={item.dealyAnimation}
@@ -77,13 +77,13 @@ const Testimonial = () => {
         ))}
       </Swiper>
 
-      <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-hm4tm-prev-active">
-        <i className="icon icon-chevron-left text-12" />
+      <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-60 rounded-full sm:d-none js-hm4tm-prev-active">
+        <i className="icon icon-chevron-left text-18" />
       </button>
       {/* End js-prev */}
 
-      <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-hm4tm-next-active">
-        <i className="icon icon-chevron-right text-12" />
+      <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-60 rounded-full sm:d-none js-hm4tm-next-active">
+        <i className="icon icon-chevron-right text-18" />
       </button>
       {/* End js-next */}
     </>

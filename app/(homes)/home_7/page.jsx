@@ -17,8 +17,8 @@ import CallToActions from "@/components/common/CallToActions";
 
 
 export const metadata = {
-  title: "Home-7 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home || Villa M Stay",
+  description: "Villa M Stay",
 };
 
 const home_7 = () => {
@@ -96,8 +96,8 @@ const home_7 = () => {
       {/* End counter section */}
 
       {/* End blog section */}
-      <section className="section-bg layout-pt-lg layout-pb-lg">
-        <div className="section-bg__item -mx-20 bg-light-2" />
+      <section className="section-bg layout-pt-md layout-pb-lg">
+        <div className="section-bg__item -left -right bg-egg-1" />
         <div className="container">
           <div className="row justify-center text-center">
             <div className="col-auto">
@@ -105,7 +105,7 @@ const home_7 = () => {
                 <h2 className="sectionTitle__title text-80 Made">
                 Real Guests, Real Reviews
                 </h2>
-                <p className="sectionTitle__text text-20 text-black mt-5 sm:mt-0">
+                <p className="sectionTitle__text text-25 text-black mt-5 sm:mt-0">
                 Honest reviews from guests who’ve stayed and loved their time with us
                 </p>
               </div>

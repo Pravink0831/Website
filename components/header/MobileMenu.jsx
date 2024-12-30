@@ -10,7 +10,7 @@ import {
   SubMenu,
 } from "react-pro-sidebar";
 import {
-  homeItems,
+  home,
   blogItems,
   pageItems,
   dashboardItems,
@@ -78,8 +78,9 @@ const MobileMenu = () => {
         <Sidebar width="400" backgroundColor="#fff">
 
           <Menu>
-            <SubMenu label="Home" className={ homeItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
-              {homeItems.map((item, i) => (
+            {/*}
+            <SubMenu label="Home" className={ home.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
+              {home.map((item, i) => (
                 <MenuItem
                   key={i}
                   onClick={()=>router.push(item.routePath)}
@@ -93,9 +94,44 @@ const MobileMenu = () => {
                   {item.name}
                 </MenuItem>
               ))}
-            </SubMenu>
-            {/* End  All Home Menu */}
-
+            </SubMenu> */}
+            <MenuItem
+             onClick={()=>router.push("/")}
+             className={
+              pathname === "/contact" ? "menu-active-link" : ""
+            }
+             
+            >
+              Home
+            </MenuItem>
+            <MenuItem
+             onClick={()=>router.push("/contact")}
+             className={
+              pathname === "/contact" ? "menu-active-link" : ""
+            }
+             
+            >
+              About us
+            </MenuItem>
+            <MenuItem
+             onClick={()=>router.push("/contact")}
+             className={
+              pathname === "/contact" ? "menu-active-link" : ""
+            }
+             
+            >
+            Our villas
+            </MenuItem>
+            <MenuItem
+             onClick={()=>router.push("/contact")}
+             className={
+              pathname === "/contact" ? "menu-active-link" : ""
+            }
+             
+            >
+            Partner with us
+            </MenuItem>
+            {/* End  All Home Menu
             <SubMenu label="Categories" className={isActiveParent ? 'menu-active-link':'' }>
               {categorieMobileItems.map((item) => (
                 <SubMenu label={item.title} key={item.id} className={isActiveNestedParent == item.id ? 'menu-active-link':'inactive-menu'}>
@@ -119,7 +155,7 @@ const MobileMenu = () => {
                 </SubMenu>
               ))}
             </SubMenu>
-            {/* End  All Categories Menu */}
+            {/* End  All Categories Menu
 
             <MenuItem
              onClick={()=>router.push("/destinations")}
@@ -132,7 +168,7 @@ const MobileMenu = () => {
             >
               Desitinations
             </MenuItem>
-            {/* End  Desitinations Menu */}
+            {/* End  Desitinations Menu
 
             <SubMenu label="Blog" className={ blogItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
               {blogItems.map((item, i) => (
@@ -149,7 +185,7 @@ const MobileMenu = () => {
                 </MenuItem>
               ))}
             </SubMenu>
-            {/* End  All Blog Menu */}
+            {/* End  All Blog Menu
 
             <SubMenu label="Pages" className={ pageItems.some((item=>item.routePath?.split('/')[1] == pathname.split('/')[1])) ? "menu-active-link":''}>
               {pageItems.map((item, i) => (
@@ -166,7 +202,7 @@ const MobileMenu = () => {
                 </MenuItem>
               ))}
             </SubMenu>
-            {/* End  All Pages Menu */}
+            {/* End  All Pages Menu
 
             <SubMenu label="Dashboard" className={ pathname.split('/')[1] == 'dashboard'  || pathname.split('/')[1] == 'vendor-dashboard' ? "menu-active-link":''}>
               {dashboardItems.map((item, i) => (
@@ -183,7 +219,7 @@ const MobileMenu = () => {
                 </MenuItem>
               ))}
             </SubMenu>
-            {/* End  All Dashboard Menu */}
+             End  All Dashboard Menu */}
 
             <MenuItem
              onClick={()=>router.push("/contact")}
@@ -203,7 +239,6 @@ const MobileMenu = () => {
       <div className="mobile-footer px-20 py-5 border-top-light"></div>
 
       <div className="pro-footer">
-        <ContactInfo />
         <div className="mt-10">
           <h5 className="text-16 fw-500 mb-10">Follow us on social media</h5>
           <div className="d-flex x-gap-20 items-center">

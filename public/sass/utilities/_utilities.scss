@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'Madelyn';
-  src: url('../../fonts/Madelyn.otf') format('opentype');
+  src: url('../../fonts/MadelynFill.otf') format('opentype');
 }
 
 .Made {
@@ -19,6 +19,21 @@
   font-weight:300;
 }
 
+/* Default styles for smaller screens */
+.sm-text {
+  font-size: 40px;
+}
+
+/* Media query for larger screens */
+@media (min-width: 992px) {
+  .sm-text {
+    font-size: 100px;
+  }
+}
+
+.bg-egg-1{
+  background-color: #fff4dc;
+}
 .bg-yellow-1 {
   background-color: color-opac(white, 0.5);
 }
@@ -1726,7 +1741,7 @@ table.table-5 {
       padding: 0 20px;
       border-radius: 4px;
       font-weight: 500;
-      color: var(--color-dark-1);
+      color: var(--color-light-2);
       transition: all 0.2s $easeOutQuart;
 
       .icon {
@@ -1744,7 +1759,7 @@ table.table-5 {
       flex-direction: column;
 
       > li > a {
-        font-size: 20px;
+        font-size: 40px;
 
         &:hover {
           background-color: color-opac(blue-1, 0.05) !important;
@@ -1761,7 +1776,7 @@ table.table-5 {
 
       a {
         height: 40px;
-        font-size: 18px;
+        font-size: 28px;
         padding: 0 20px;
         transform: translateY(100%);
       }

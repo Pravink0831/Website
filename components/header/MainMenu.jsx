@@ -21,12 +21,12 @@ const MainMenu = ({ style = "" }) => {
   const [isActiveParent, setIsActiveParent] = useState(false)
 
   return (
-    <nav className="menu js-navList">
+    <nav className="menu js-navList text-white">
       <ul className={`menu__nav ${style} -is-active`}>
       <li className={pathname === "/" ? "current" : ""}>
           <Link href="/">Home</Link>
         </li>
-        {/* End home page menu */}
+        {/* End home page menu 
 
         <li className={isActiveParent ? "menu-item-has-children -has-mega-menu current":'menu-item-has-children -has-mega-menu'}>
           <a href="#">
@@ -37,12 +37,12 @@ const MainMenu = ({ style = "" }) => {
             <CategoriesMegaMenu setIsActiveParent={setIsActiveParent} />
           </div>
         </li>
-        {/* End categories menu items */}
+        {/* End categories menu items
 
         <li className={pathname === "/destinations" ? "current" : ""}>
           <Link href="/destinations">Destinations</Link>
         </li>
-        {/* End Destinatinos single menu */}
+        {/* End Destinatinos single menu
 
         <li
           className={`${
@@ -66,7 +66,7 @@ const MainMenu = ({ style = "" }) => {
             ))}
           </ul>
         </li>
-        {/* End blogIems */}
+        {/* End blogIems
 
         <li
           className={`${
@@ -90,7 +90,7 @@ const MainMenu = ({ style = "" }) => {
             ))}
           </ul>
         </li>
-        {/* End pages items */}
+        {/* End pages items
 
         <li
           className={`${
@@ -114,9 +114,21 @@ const MainMenu = ({ style = "" }) => {
               </li>
             ))}
           </ul>
+        </li> */}
+
+<li className={pathname === "/" ? "current" : ""}>
+          <Link href="/contact">About us</Link>
         </li>
 
-        <li className={pathname === "/contact" ? "current" : ""}>
+        <li className={pathname === "/" ? "current" : ""}>
+          <Link href="/contact">Our villas</Link>
+        </li>
+
+        <li className={pathname === "/" ? "current" : ""}>
+          <Link href="/contact">Partner with us</Link>
+        </li>
+
+        <li className={pathname === "/" ? "current" : ""}>
           <Link href="/contact">Contact</Link>
         </li>
       </ul>

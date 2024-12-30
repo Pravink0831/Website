@@ -10,7 +10,7 @@ const MainFilterSearchBox = () => {
   const Router = useRouter()
   return (
     <>
-      <div className="mainSearch -w-1000 z-2 bg-white pr-10 py-10 lg:px-20 lg:pt-5 lg:pb-20 rounded-4 shadow-1 mt-40">
+      <div className="mainSearch -w-900 z-2 bg-white pr-10 py-10 lg:px-60 lg:pt-5 lg:pb-20 rounded-4 shadow-1 mt-40 mx-auto">
         <div className="button-grid items-center">
           <LocationSearch />
           {/* End Location */}
@@ -30,7 +30,7 @@ const MainFilterSearchBox = () => {
 
           <div className="button-item">
             <button
-              className="mainSearch__submit button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-yellow-1 text-dark-1"
+              className="mainSearch__submit button -dark-1 py-15 px-35 h-60 col-12 rounded-4 bg-yellow-1 text-black"
               onClick={() => Router.push("/hotel-list-v2")}
             >
               <i className="icon-search text-20 mr-10" />

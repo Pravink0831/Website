@@ -1,3 +1,9 @@
+export const Home = [
+  {
+    name: "Home",
+    routePath: "/",
+  },
+]
 export const homeItems = [
   {
     name: "Home 01",
