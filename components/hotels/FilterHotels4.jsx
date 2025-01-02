@@ -13,19 +13,21 @@ export default function FilterHotels4() {
     <div className="tabs -pills-2 pt-40">
     <div className="tabs__content pt-40">
       <div className="row y-gap-30">
-        <FilterHotels2 filterOption={filterOption}/>
+        <FilterHotels2/>
       </div>
     </div>
     {/* End .tabs__content */}
 
     <div className="row justify-center pt-60">
       <div className="col-auto">
-        <Link
-          href="#"
-          className="button px-40 h-50 -outline-blue-1 text-blue-1"
-        >
-          View All <div className="icon-arrow-top-right ml-15" />
-        </Link>
+      <Link
+                  href="/"
+                  className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
+                >
+                  View All
+                  <i className="icon-arrow-top-right text-20 ml-10" />
+                </Link>
+        
       </div>
     </div>
   </div>

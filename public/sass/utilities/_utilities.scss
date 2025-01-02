@@ -17,12 +17,20 @@
 .Made {
   font-family: 'Madelyn', sans-serif;
   font-weight:300;
+  margin-bottom: -20px;
 }
 
 /* Default styles for smaller screens */
 .sm-text {
   font-size: 40px;
 }
+
+@media (max-width: 992px) {
+  .sectionTitle__title {
+    padding-top: 100px;
+  }
+}
+
 
 /* Media query for larger screens */
 @media (min-width: 992px) {

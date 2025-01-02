@@ -58,12 +58,13 @@ button {
   }
 
   .button.-outline-#{$name} {
-    border-color: var(--color-#{$name});
+    //border-color: var(--color-#{$name});
+    border-color: transparent;
 
     &:hover {
       background-color: var(--color-#{$name});
       border-color: transparent;
-      color: white !important;
+      color: black !important;
     }
   }
 }

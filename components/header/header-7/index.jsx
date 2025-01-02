@@ -35,7 +35,7 @@ const Header1 = () => {
             <div className="col-auto col-auto-menu">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-50">
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <img src="/img/general/VillaMLogo.png" alt="logo icon" />
                 </Link>
                 {/* End logo */}
 

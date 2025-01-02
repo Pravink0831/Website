@@ -62,10 +62,10 @@ const PopularDestinations = () => {
                   
                 </div>
                 <div className="">
-                  <h4 className="text-26 md:text-20 lh-13 text-white mb-20">
+                  <h4 className="text-26 md:text-20 lh-13 text-white mb-5">
                     {item.city}
                   </h4>
-                  <div className="text-18 text-white">{item.hoverText}</div>
+                  <div className="text-18 lh-14 text-white">{item.hoverText}</div>
                   
                 </div>
               </div>
@@ -75,11 +75,11 @@ const PopularDestinations = () => {
       </Swiper>
 
       <div>
-        <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-60 rounded-full sm:d-none js-destination-prev">
-          <i className="icon icon-chevron-left text-18" />
+        <button className="section-slider-nav -prev flex-center button -yellow-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-prev">
+          <i className="icon icon-chevron-left text-16" />
         </button>
-        <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-60 rounded-full sm:d-none js-destination-next">
-          <i className="icon icon-chevron-right text-18" />
+        <button className="section-slider-nav -next flex-center button -yellow-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-next">
+          <i className="icon icon-chevron-right text-16" />
         </button>
         <div className="slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar" />
       </div>

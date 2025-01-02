@@ -88,7 +88,7 @@ const home_7 = () => {
               </div>
             </div>
           </div>
-          <div className="row y-gap-40 justify-center text-center mt-30 mb-30">
+          <div className="row text-center justify-center mt-30 mb-30">
             <Counter />
           </div>
         </div>

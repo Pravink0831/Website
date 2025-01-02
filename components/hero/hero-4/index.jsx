@@ -54,17 +54,17 @@ const index = () => {
           <div className="masthead__content">
             <div className="container">
               <div className="row justify-center">
-                <div className="col-xxl-12 col-md-10">
+                <div className="col-xl-12 col-md-10">
                   <div
                     className="text-center"
                     data-aos="fade-up"
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle__title Made text-100 lg:text-80 md:text-20 text-white">
+                    <p className="sectionTitle__title Made text-100 lg:text-100 md:text-70 text-white">
                     Discover the ultimate villa experience in Goa
                     </p>
-                    <p className="text-white text-20 mt-5 mb-10">
+                    <p className="text-white text-25 md:text-20 mb-10">
                     Unwind in our collection of 10 luxurious villas, offering comfort, privacy,<br></br> and 
                     proximity to Goa’s finest attractions
                     </p>
@@ -84,14 +84,14 @@ const index = () => {
         {/* End slider */}
 
         <div className="masthead-slider__nav -prev js-prev">
-          <button className="button -outline-white size-50 flex-center text-white rounded-full hero4-prev-active">
+          <button className="button -outline-yellow-1 size-50 flex-center text-white rounded-full hero4-prev-active">
             <i className="icon-arrow-left" />
           </button>
         </div>
         {/* End prev navigation */}
 
         <div className="masthead-slider__nav -next js-next">
-          <button className="button -outline-white size-50 flex-center text-white rounded-full hero4-next-active">
+          <button className="button -outline-yellow-1 size-50 flex-center text-white rounded-full hero4-next-active">
             <i className="icon-arrow-right" />
           </button>
         </div>

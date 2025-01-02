@@ -33,8 +33,8 @@ every villa meets our uncompromising standards of quality and care.
             
               <div className="d-inline-block mt-30">
                 <Link
-                  href="/hotel-list-v5"
-                  className="button -md -blue-1 rounded-100 bg-black-2 text-white"
+                  href="/"
+                  className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
                 >
                   Know more about us
                   <i className="icon-arrow-right text-20 ml-10" />
