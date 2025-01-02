@@ -61,7 +61,7 @@ const index = () => {
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle__title Made text-100 lg:text-100 md:text-70 text-white">
+                    <p className="sectionTitle__title Made text-100 lg:text-100 md:text-60 sm:text-40 text-white">
                     Discover the ultimate villa experience in Goa
                     </p>
                     <p className="text-white text-25 md:text-20 mb-10">
