@@ -2,7 +2,7 @@ export const hotelsData = [
   {
     id: 1,
     tag: "Breakfast Included",
-    slideImg: ["/img/hotels/17.png"],
+    slideImg: ["/img/hotels/17.png","/img/hotels/13.png"],
     img: "/img/hotels/17.png",
     title: "Villa M - Jia 4",
     location: "Calangute, North Goa",

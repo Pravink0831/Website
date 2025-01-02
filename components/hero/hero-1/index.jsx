@@ -1,6 +1,6 @@
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const index = () => {
+const index =({ title, location }) => {
   return (
     <section className="masthead -type-1 z-5">
       <div className="masthead__bg">
@@ -11,20 +11,20 @@ const index = () => {
           <div className="col-auto">
             <div className="text-center">
               <h1
-                className="text-60 lg:text-40 md:text-30 text-white"
+                className="text-100 Made lg:text-80 md:text-40 text-white"
                 data-aos="fade-up"
               >
-                Find Next Place To Visit
+                {title}
               </h1>
               <p
-                className="text-white mt-6 md:mt-10"
+                className="text-white text-20 mt-6 md:mt-10"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Discover amzaing places at exclusive deals
+                {location}
               </p>
             </div>
-            {/* End hero title */}
+            {/* End hero title
 
             <div
               className="tabs -underline mt-60 js-tabs"

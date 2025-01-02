@@ -78,7 +78,7 @@ const home_7 = () => {
       {/* End Testimonial Sectoin */}
 
       <section className="section-bg pt-40 pb-40 bg-black-2 text-white">
-        <div className="section-bg__item -left-100 -right-100 border-bottom-light"></div>
+        <div className="section-bg__item -w-1165 border-bottom-light"></div>
 
         <div className="container">
         <div className="row justify-center text-center">
@@ -88,7 +88,7 @@ const home_7 = () => {
               </div>
             </div>
           </div>
-          <div className="row text-center justify-center mt-30 mb-30">
+          <div className="row text-center justify-between mt-30 mb-30">
             <Counter />
           </div>
         </div>

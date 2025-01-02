@@ -23,7 +23,7 @@ const CallToActions = () => {
 
               <div>
                 <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
-                  <img className="mr-10" src="/img/general/call icon.png" />
+                  <img className="text-24 mr-15" src="/img/general/call icon.png" />
                 Call us on now
                 </button>
               </div>

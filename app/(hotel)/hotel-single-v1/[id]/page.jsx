@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
 import "photoswipe/dist/photoswipe.css";
 import { hotelsData } from "@/data/hotels";
-import Header11 from "@/components/header/header-11";
+import Header7 from "@/components/header/header-7";
 import Overview from "@/components/hotel-single/Overview";
 import PopularFacilities from "@/components/hotel-single/PopularFacilities";
 import PropertyHighlights from "@/components/hotel-single/PropertyHighlights";
 import RatingTag from "@/components/hotel-single/RatingTag";
 import StickyHeader from "@/components/hotel-single/StickyHeader";
-import TopBreadCrumb from "@/components/hotel-single/TopBreadCrumb";
+import Hero1 from "@/components/hero/hero-1";
 import SidebarRight from "@/components/hotel-single/SidebarRight";
 import AvailableRooms from "@/components/hotel-single/AvailableRooms";
 import ReviewProgress from "@/components/hotel-single/guest-reviews/ReviewProgress";
@@ -25,29 +25,30 @@ import DefaultFooter from "@/components/footer/default";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 
 export const metadata = {
-  title: "Hotel Single v1 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Villa || GoTrip - Travel & Tour React NextJS Template",
+  description: "Villa M Stays",
 };
 
 const HotelSingleV1Dynamic = ({ params }) => {
   const id = params.id;
   const hotel = hotelsData.find((item) => item.id == id) || hotelsData[0];
-
+  
   return (
     <>
-      {/* End Page Title */}
+      {/* End Page Title 
 
       <div className="header-margin"></div>
       {/* header top margin */}
 
-      <Header11 />
+      <Header7 />
       {/* End Header 1 */}
 
-      <TopBreadCrumb />
-      {/* End top breadcrumb */}
+      <Hero1 title={hotel.title} location={hotel.location}/>
+      {/* End top hero */}
 
+      {/*
       <StickyHeader hotel={hotel} />
-      {/* sticky single header for hotel single */}
+       sticky single header for hotel single */}
 
       <GalleryOne hotel={hotel} />
 

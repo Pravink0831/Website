@@ -19,13 +19,14 @@ export default function GalleryOne({hotel}) {
       />
     <section className="pt-40">
         <div className="container">
+          {/*
           <div className="row y-gap-20 justify-between items-end">
             <div className="col-auto">
               <div className="row x-gap-20  items-center">
                 <div className="col-auto">
                   <h1 className="text-30 sm:text-25 fw-600">{hotel?.title}</h1>
                 </div>
-                {/* End .col */}
+                {/* End .col 
                 <div className="col-auto">
                   <i className="icon-star text-10 text-yellow-1" />
                   <i className="icon-star text-10 text-yellow-1" />
@@ -34,7 +35,7 @@ export default function GalleryOne({hotel}) {
                   <i className="icon-star text-10 text-yellow-1" />
                 </div>
               </div>
-              {/* End .row */}
+              {/* End .row 
 
               <div className="row x-gap-20 y-gap-20 items-center">
                 <div className="col-auto">
@@ -52,9 +53,9 @@ export default function GalleryOne({hotel}) {
                   </button>
                 </div>
               </div>
-              {/* End .row */}
-            </div>
-            {/* End .col */}
+              {/* End .row 
+            </div></>
+             End .col 
 
             <div className="col-auto">
               <div className="row x-gap-15 y-gap-15 items-center">
@@ -76,12 +77,12 @@ export default function GalleryOne({hotel}) {
                 </div>
               </div>
             </div>
-            {/* End .col */}
+            {/* End .col 
           </div>
           {/* End .row */}
 
           <Gallery>
-            <div className="galleryGrid -type-1 pt-30">
+            <div className="galleryGrid -type-1">
               <div className="galleryGrid__item relative d-flex">
                 <Item
                   original={hotel?.img}
@@ -100,26 +101,22 @@ export default function GalleryOne({hotel}) {
                     />
                   )}
                 </Item>
-                <div className="absolute px-20 py-20 col-12 d-flex justify-end">
-                  <button className="button -blue-1 size-40 rounded-full flex-center bg-white text-dark-1">
-                    <i className="icon-heart text-16" />
-                  </button>
-                </div>
+                
               </div>
               {/* End .galleryGrid__item */}
 
               <div className="galleryGrid__item">
                 <Item
-                  original="/img/gallery/1/2.png"
-                  thumbnail="/img/gallery/1/2.png"
-                  width={450}
-                  height={375}
+                  original={hotel?.slideImg[0]}
+                  thumbnail={hotel?.slideImg[0]}
+                  width={600}
+                  height={575}
                 >
                   {({ ref, open }) => (
                     <img
                       ref={ref}
                       onClick={open}
-                      src="/img/gallery/1/2.png"
+                      src={hotel?.slideImg[0]}
                       alt="image"
                       className="rounded-4"
                       role="button"
@@ -129,7 +126,7 @@ export default function GalleryOne({hotel}) {
               </div>
               {/* End .galleryGrid__item */}
 
-              <div className="galleryGrid__item relative d-flex">
+              {/*<div className="galleryGrid__item relative d-flex">
                 <img
                   src="/img/gallery/1/3.png"
                   alt="image"
@@ -146,9 +143,9 @@ export default function GalleryOne({hotel}) {
                   </div>
                 </div>
               </div>
-              {/* End .galleryGrid__item */}
+               End .galleryGrid__item */}
 
-              <div className="galleryGrid__item">
+              {/*<div className="galleryGrid__item">
                 <Item
                   original="/img/gallery/1/4.png"
                   thumbnail="/img/gallery/1/4.png"
@@ -167,7 +164,7 @@ export default function GalleryOne({hotel}) {
                   )}
                 </Item>
               </div>
-              {/* End .galleryGrid__item */}
+               End .galleryGrid__item */}
 
               <div className="galleryGrid__item relative d-flex">
                 <img

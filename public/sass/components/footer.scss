@@ -35,7 +35,18 @@
 
 @media (max-width: 992px) { 
   .video-background { 
-    height: 190%; /* Change height to auto for mobile screens */ 
+    height: 200%; /* Change height to auto for mobile screens */ 
+    padding-top: 56.25%; /* 16:9 aspect ratio padding */ 
+  } 
+  #background-video { 
+    min-width: 100%; 
+    min-height: 100%; 
+    height: auto; 
+  } 
+}
+@media (max-width: 1100px) { 
+  .video-background { 
+    height: 200%; /* Change height to auto for mobile screens */ 
     padding-top: 56.25%; /* 16:9 aspect ratio padding */ 
   } 
   #background-video { 

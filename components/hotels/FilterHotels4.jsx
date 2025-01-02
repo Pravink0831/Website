@@ -24,8 +24,8 @@ export default function FilterHotels4() {
                   href="/"
                   className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
                 >
-                  View All
-                  <i className="icon-arrow-top-right text-20 ml-10" />
+                  Explore All Villas
+                  <i className="icon-arrow-right text-20 ml-10" />
                 </Link>
         
       </div>

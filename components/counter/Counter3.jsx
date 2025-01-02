@@ -40,8 +40,7 @@ const Counter3 = () => {
     <>
       {blockContent.map((item) => (
         <div
-          className="col-xl-2 col-12"
-          style={{width:20+'%'}}
+          className="col-lg-2 col-md-6"
           key={item.id}
           data-aos="fade"
           data-aos-delay={item.delayAnim}
