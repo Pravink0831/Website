@@ -10,28 +10,28 @@ const LocationSearch = () => {
   const locationSearchContent = [
     {
       id: 1,
-      name: "London",
-      address: "Greater London, United Kingdom",
+      name: "Calungute",
+      address: "Goa",
     },
     {
       id: 2,
-      name: "New York",
-      address: "New York State, United States",
+      name: "Panjim",
+      address: "Goa",
     },
     {
       id: 3,
-      name: "Paris",
-      address: "France",
+      name: "Baga",
+      address: "Goa",
     },
     {
       id: 4,
-      name: "Madrid",
-      address: "Spain",
+      name: "candolim",
+      address: "Goa",
     },
     {
       id: 5,
-      name: "Santorini",
-      address: "Greece",
+      name: "margao",
+      address: "Goa",
     },
   ];
 

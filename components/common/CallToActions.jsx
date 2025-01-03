@@ -5,7 +5,7 @@ const CallToActions = () => {
         <div className="row y-gap-30 justify-between items-center">
           <div className="col-auto">
             <div className="row y-gap-20  flex-wrap items-center">
-              <div className="col-auto">
+              <div className="col-auto sm-center">
                 <h4 className="sectionTitle__title text-80 Made">
                   Your Ideal Goan Vacation Starts With Us
                 </h4>
@@ -23,7 +23,7 @@ const CallToActions = () => {
 
               <div>
                 <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
-                  <img className="text-24 mr-15" src="/img/general/call icon.png" />
+                  <img className="icon-phone-12 mr-10 " src="/img/general/call icon.png" />
                 Call us on now
                 </button>
               </div>

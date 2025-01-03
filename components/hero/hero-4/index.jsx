@@ -2,7 +2,7 @@
 'use client'
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper";
+import { Navigation, Autoplay, EffectFade} from "swiper";
 import MainFilterSearchBox from "../hero-2/MainFilterSearchBox";
 
 const index = () => {
@@ -11,18 +11,19 @@ const index = () => {
       <section className="masthead -type-4">
         <div className="masthead-slider overflow-x-hidden js-masthead-slider-4">
           <Swiper
-            modules={[Navigation, Autoplay]}
+            modules={[Navigation, Autoplay,EffectFade]}
             className="vh-100"
             loop={true}
             autoplay={{ 
-              delay: 3000, // 3 seconds disableOnInteraction: false, 
+              delay: 3000, // 3 seconds 
+              disableOnInteraction: false, 
               }}
             speed={2000}
             navigation={{
               nextEl: ".hero4-next-active",
               prevEl: ".hero4-prev-active",
             }}
-            
+            effect="fade"
           >
             <SwiperSlide>
               <div className="masthead__image">
@@ -61,7 +62,7 @@ const index = () => {
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle__title Made text-100 lg:text-100 md:text-60 sm:text-40 text-white">
+                    <p className="sectionTitle__title Made text-100 text-white sm-pt">
                     Discover the ultimate villa experience in Goa
                     </p>
                     <p className="text-white text-25 md:text-20 mb-10">

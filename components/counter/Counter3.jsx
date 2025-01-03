@@ -49,7 +49,7 @@ const Counter3 = () => {
             {item.number}
             {item.hasUnit}
           </div>
-          <div className="text-18 lh-14 mt-5">{item.meta}</div>
+          <div className="text-20 lh-14 mt-5">{item.meta}</div>
         </div>
       ))}
     </>

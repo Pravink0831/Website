@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import "swiper/css/effect-cards";
+import 'swiper/swiper-bundle.min.css';
 import "aos/dist/aos.css";
 import "../styles/index.scss";
 import { Provider } from "react-redux";
@@ -35,7 +36,7 @@ export default function RootLayout({ children }) {
         />
         <link href="https://fonts.googleapis.com/css2?family=Dan&display=swap" rel="stylesheet"/>
         <link
-          href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Dan:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
         <link rel="icon" href="./favicon.ico" />

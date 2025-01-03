@@ -8,6 +8,7 @@ import { hotelsData } from "../../data/hotels";
 import isTextMatched from "../../utils/isTextMatched";
 import { useEffect, useState } from "react";
 
+
 const FilterHotels2 = () => {
 
   return (
