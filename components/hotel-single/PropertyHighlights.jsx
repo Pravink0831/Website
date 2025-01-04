@@ -2,23 +2,23 @@ const PropertyHighlights2 = () => {
   const highlightsContent = [
     {
       id: 1,
-      icon: "icon-city",
-      text: `In London City Centre`,
+      icon: "/img/featureIcons/1/Terrace.png",
+      text: `15 Guests Capacity`,
     },
     {
       id: 2,
-      icon: "icon-airplane",
-      text: `Airport transfer`,
+      icon: "/img/featureIcons/1/Bedrooms.png",
+      text: `5 Bedrooms`,
     },
     {
       id: 3,
-      icon: "icon-bell-ring",
-      text: `Front desk [24-hour]`,
+      icon: "/img/featureIcons/1/Pool.png",
+      text: `Swimming Pool`,
     },
     {
       id: 4,
-      icon: "icon-tv",
-      text: `Premium TV channels`,
+      icon: "/img/featureIcons/1/Living area.png",
+      text: `5 Bathrooms`,
     },
   ];
 
@@ -27,8 +27,8 @@ const PropertyHighlights2 = () => {
       {highlightsContent.map((item) => (
         <div className="col-lg-3 col-6" key={item.id}>
           <div className="text-center">
-            <i className={`${item.icon} text-24 text-blue-1`} />
-            <div className="text-15 lh-1 mt-10">{item.text}</div>
+          <img src={item.icon} className="js-lazy icon-hover icon-amendies-30" />
+            <div className="text-15 bold lh-1 mt-10">{item.text}</div>
           </div>
         </div>
       ))}

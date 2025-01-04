@@ -2,7 +2,7 @@ export const hotelsData = [
   {
     id: 1,
     tag: "Breakfast Included",
-    slideImg: ["/img/hotels/17.png","/img/hotels/13.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/17.png",
     title: "Villa M - Jia 4",
     location: "Calangute, North Goa",
@@ -16,7 +16,7 @@ export const hotelsData = [
   {
     id: 2,
     tag: "",
-    slideImg: ["/img/hotels/19.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/19.png",
     title: "Villa M - Jia 3",
     location: "Calangute, North Goa",
@@ -30,7 +30,7 @@ export const hotelsData = [
   {
     id: 3,
     tag: "best seller",
-    slideImg: ["/img/hotels/21.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/21.png",
     title: "Villa M - Savannah 7",
     location: "Calangute, North Goa",
@@ -44,7 +44,7 @@ export const hotelsData = [
   {
     id: 4,
     tag: "top rated",
-    slideImg: ["/img/hotels/25.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/25.png",
     title: "Villa M - White Castle A",
     location: "Calangute, North Goa",
@@ -58,7 +58,7 @@ export const hotelsData = [
   {
     id: 5,
     tag: "Breakfast Included",
-    slideImg: ["/img/hotels/26.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/26.png",
     title: "Villa M - Jia 5",
     location: "Calangute, North Goa",
@@ -72,7 +72,7 @@ export const hotelsData = [
   {
     id: 6,
     tag: "-25% today",
-    slideImg: ["/img/hotels/20.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/20.png",
     title: "Villa M - Lagoon 4",
     location: "Calangute, North Goa",
@@ -86,7 +86,7 @@ export const hotelsData = [
   {
     id: 7,
     tag: "best seller",
-    slideImg: ["/img/hotels/23.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/23.png",
     title: "Villa M - Solitude 1",
     location: "Calangute, North Goa",
@@ -100,7 +100,7 @@ export const hotelsData = [
   {
     id: 8,
     tag: "top rated",
-    slideImg: ["/img/hotels/24.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/24.png",
     title: "Villa M - White Castle B",
     location: "Calangute, North Goa",
@@ -115,7 +115,7 @@ export const hotelsData = [
     id: 9,
     tag: "Breakfast Included",
     img: "/img/hotels/9.png",
-    slideImg: ["/img/hotels/9.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     title: "The Montcalm At Brewery London City",
     location: "Calangute, North Goa",
     ratings: "4.7",
@@ -128,7 +128,7 @@ export const hotelsData = [
   {
     id: 10,
     tag: "",
-    slideImg: [""],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     title: "Staycity Aparthotels Deptford Bridge Station",
     img: "/img/hotels/10.png",
     location: "Calangute, North Goa",
@@ -142,7 +142,7 @@ export const hotelsData = [
   {
     id: 11,
     tag: "best seller",
-    slideImg: ["/img/hotels/11.png"],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png"],
     img: "/img/hotels/11.png",
     title: "The Westin New York at Times Square West",
     location: "Manhattan, New York",

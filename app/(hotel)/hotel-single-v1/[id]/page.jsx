@@ -21,8 +21,9 @@ import HelpfulFacts from "@/components/hotel-single/HelpfulFacts";
 import Faq from "@/components/faq/Faq";
 import Hotels2 from "@/components/hotels/Hotels2";
 import CallToActions from "@/components/common/CallToActions";
-import DefaultFooter from "@/components/footer/default";
+import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
+import Destinations from "@/components/destinations/TopDestinations2";
 
 export const metadata = {
   title: "Villa || GoTrip - Travel & Tour React NextJS Template",
@@ -54,13 +55,15 @@ const HotelSingleV1Dynamic = ({ params }) => {
 
       {/* End gallery grid wrapper */}
 
+
+
       <section className="pt-30">
-        <div className="container">
-          <div className="row y-gap-30">
-            <div className="col-xl-8">
+        <div className="container ">
+          <div className="row y-gap-30 d-flex relative" >
+            <div className="col-xl-7" >
               <div className="row y-gap-40">
                 <div className="col-12">
-                  <h3 className="text-22 fw-500">Property highlights</h3>
+                  <h3 className="text-80 Made fw-500">Property Highlights</h3>
                   <PropertyHighlights />
                 </div>
                 {/* End .col-12 Property highlights */}
@@ -71,26 +74,97 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 {/* End .col-12  Overview */}
 
                 <div className="col-12">
-                  <h3 className="text-22 fw-500 pt-40 border-top-light">
-                    Most Popular Facilities
+                  <h3 className="text-60 Made fw-500 pt-20">
+                  Features
                   </h3>
                   <div className="row y-gap-10 pt-20">
                     <PopularFacilities />
                   </div>
                 </div>
-                {/* End .col-12 Most Popular Facilities */}
 
                 <div className="col-12">
+                  <h3 className="text-60 Made fw-500 pt-20">
+                  Amenities Available
+                  </h3>
+                  <div className="row y-gap-10 pt-20">
+                  <Facilities />
+                  </div>
+                </div>
+
+                <div className="col-12">
+                  <h3 className="text-60 Made fw-500 pt-20">
+                  Spaces
+                  </h3>
+                  <div className="row y-gap-10 pt-20 relative">
+                    <Destinations />
+                  </div>
+                </div>
+
+                <div className="col-12">
+                  <h3 className="text-60 Made fw-500">
+                  Location
+                  </h3>
+                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 ">
+                    {/* Added renderSection7 map component */}
+                    <div className="listingSection__wrap">
+                      {/* HEADING */}
+                      <div>
+                        <span className="sectionTitle__text mt-10 text-16 text-black">
+                        Conveniently located in Calangute, Villa M - Savannah 7 offers easy access to North
+                Goa’s vibrant attractions. Beaches, supermarkets, restaurants, bars, and popular tourist
+                spots are just a short walk or drive away.
+                        </span>
+                      </div>
+            
+
+                      {/* MAP */}
+                      <div className="aspect-w-5 aspect-h-8 sm:aspect-w-3 sm:aspect-h-4 ring-1 ring-black/10 rounded-xl z-0 mt-20">
+                        <div className="rounded-xl overflow-hidden z-0">
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            loading="lazy"
+                            allowFullScreen
+                            referrerPolicy="no-referrer-when-downgrade"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d292642.58586662007!2d73.78599624297655!3d15.48266594083896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfba106336b741%3A0xeaf887ff62f34092!2sGoa!5e0!3m2!1sen!2sin!4v1736007429957!5m2!1sen!2sin"
+                          ></iframe></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+
+                <div className="col-12">
+                  <h3 className="text-20 fw-500 pt-20">
+                  Nearest points
+                  </h3>
+                  <div className="row y-gap-10">
+                  <ul className="mt-3 list text-neutral-500 dark:text-neutral-400 space-y-2 mb-10">
+                      <li>
+                      Candolim Beach - 2.4 kms</li>
+                      <li>Calangute Beach - 3.2 kms</li>
+                      <li>Baga Beach - 5.1 kms</li>
+                      <li>Anjuna Beach - 10.8 kms</li>
+                      <li>Chapora Fort - 11.5 kms</li>
+                    </ul>
+                  </div>
+                </div>
+
+                
+                {/* End .col-12 Most Popular Facilities */}
+
+                {/*<div className="col-12">
                   <RatingTag />
                 </div>
-                {/* End .col-12 This property is in high demand! */}
+                 End .col-12 This property is in high demand! */}
               </div>
               {/* End .row */}
             </div>
             {/* End .col-xl-8 */}
 
-            <div className="col-xl-4">
-              <SidebarRight hotel={hotel} />
+            <div className="col-xl-4" style={{display:'block',flexGrow:1}}><div  style={{ position: 'sticky', top: '40px' }}>
+              <SidebarRight hotel={hotel} /></div>
             </div>
             {/* End .col-xl-4 */}
           </div>
@@ -100,35 +174,35 @@ const HotelSingleV1Dynamic = ({ params }) => {
       </section>
       {/* End single page content */}
 
-      <section id="rooms" className="pt-30">
+      {/*<section id="rooms" className="pt-30">
         <div className="container">
           <div className="row pb-20">
             <div className="col-auto">
-              <h3 className="text-22 fw-500">Available Rooms</h3>
+              <h3 className="text-22 fw-500">Features</h3>
             </div>
           </div>
-          {/* End .row */}
+          {/* End .row 
           <AvailableRooms hotel={hotel} />
         </div>
-        {/* End .container */}
+        {/* End .container
       </section>
       {/* End Available Rooms */}
 
-      <section className="pt-40" id="reviews">
+      {/*<section className="pt-40" id="reviews">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h3 className="text-22 fw-500">Guest reviews</h3>
+              <h3 className="text-22 fw-500">Amenities Available</h3>
             </div>
           </div>
-          {/* End .row */}
+          {/* End .row 
 
           <ReviewProgress />
-          {/* End review with progress */}
+          {/* End review with progress
 
           <div className="pt-40">
             <DetailsReview />
-            {/* End review with details */}
+            {/* End review with details 
           </div>
 
           <div className="row pt-30">
@@ -139,14 +213,14 @@ const HotelSingleV1Dynamic = ({ params }) => {
               </a>
             </div>
           </div>
-          {/* End .row */}
+          {/* End .row 
         </div>
-        {/* End .container */}
-        {/* End container */}
+        {/* End .container
+        {/* End container
       </section>
       {/* End Review section */}
 
-      <section className="pt-40">
+      {/*<section className="pt-40">
         <div className="container">
           <div className="row">
             <div className="col-xl-8 col-lg-10">
@@ -158,37 +232,21 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </p>
                 </div>
               </div>
-              {/* End .row */}
+              {/* End .row 
 
               <ReplyFormReview />
-              {/* End ReplyFormReview */}
-
-              <ReplyForm />
+              {/* End ReplyFormReview
+               <ReplyForm />
             </div>
           </div>
         </div>
       </section>
       {/* End Reply Comment box section */}
-
-      <section className="mt-40" id="facilities">
-        <div className="container">
-          <div className="row x-gap-40 y-gap-40">
-            <div className="col-12">
-              <h3 className="text-22 fw-500">Facilities of this Hotel</h3>
-              <div className="row x-gap-40 y-gap-40 pt-20">
-                <Facilities />
-              </div>
-              {/* End .row */}
-            </div>
-            {/* End .col-12 */}
-          </div>
-          {/* End .row */}
-        </div>
-        {/* End .container */}
-      </section>
       {/* End facilites section */}
 
-      <section className="pt-40">
+      
+
+      {/*<section className="pt-40">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -221,7 +279,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
       </section>
       {/* End health &  safety measures section */}
 
-      <section className="pt-40">
+      {/*<section className="pt-40">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -230,16 +288,16 @@ const HotelSingleV1Dynamic = ({ params }) => {
           </div>
           {/* End .row */}
 
-          <div className="row x-gap-50 y-gap-30 pt-20">
+         {/*} <div className="row x-gap-50 y-gap-30 pt-20">
             <Surroundings />
           </div>
           {/* End .row */}
-        </div>
+       {/* </div>
         {/* End .container */}
-      </section>
+     {/* </section>
       {/* End hotel surroundings */}
 
-      <section className="pt-40">
+      {/*<section className="pt-40">
         <div className="container">
           <div className="pt-40 border-top-light">
             <div className="row">
@@ -249,18 +307,18 @@ const HotelSingleV1Dynamic = ({ params }) => {
             </div>
             {/* End .row */}
 
-            <div className="row x-gap-50 y-gap-30 pt-20">
+            {/*<div className="row x-gap-50 y-gap-30 pt-20">
               <HelpfulFacts />
             </div>
             {/* End .row */}
-          </div>
+          {/*</div>
           {/* End .pt-40 */}
-        </div>
+        {/*</div>
         {/* End .container */}
-      </section>
+      {/*</section>
       {/* End helpful facts surroundings */}
 
-      <section id="faq" className="pt-40 layout-pb-md">
+      {/*<section id="faq" className="pt-40 layout-pb-md">
         <div className="container">
           <div className="pt-40 border-top-light">
             <div className="row y-gap-20">
@@ -272,22 +330,22 @@ const HotelSingleV1Dynamic = ({ params }) => {
               </div>
               {/* End .row */}
 
-              <div className="col-lg-8">
+              {/*<div className="col-lg-8">
                 <div className="accordion -simple row y-gap-20 js-accordion">
                   <Faq />
                 </div>
               </div>
               {/* End .col */}
-            </div>
+            {/*</div>
             {/* End .row */}
-          </div>
+          {/*</div>
           {/* End .pt-40 */}
-        </div>
+        {/*</div>
         {/* End .container */}
-      </section>
+     {/* </section>
       {/* End Faq about sections */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      {/*<section className="layout-pt-md layout-pb-lg">
         <div className="container">
           <div className="row justify-center text-center">
             <div className="col-auto">
@@ -300,22 +358,22 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </p>
               </div>
               {/* End sectionTitle */}
-            </div>
+           {/* </div>
             {/* End .col */}
-          </div>
+         {/* </div>
           {/* End .row */}
 
-          <div className="pt-40 sm:pt-20 item_gap-x30">
+          {/*<div className="pt-40 sm:pt-20 item_gap-x30">
             <Hotels2 />
           </div>
           {/* End slide hotel */}
-        </div>
+       {/* </div>
         {/* End .container */}
-      </section>
-      {/* End similar hotel */}
+      {/*</section>
+      {/* End similar hotel 
 
       <CallToActions />
-      {/* End Call To Actions Section */}
+       End Call To Actions Section */}
 
       <DefaultFooter />
     </>

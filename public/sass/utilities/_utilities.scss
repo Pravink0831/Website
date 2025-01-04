@@ -20,6 +20,29 @@
   margin-bottom: -20px;
 }
 
+.flex-start {
+  align-items: flex-start;
+  /* Ensure the section is the containing block for the sticky element */
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 28px;
+}
+
+.list {
+  -webkit-columns: 2; /* Number of columns */
+  -moz-columns: 2; /* Number of columns */
+  columns: 2; /* Number of columns */
+}
+
+.list li {
+  list-style: disc;
+  padding-left: 5px; /* Ensure spacing for bullets */
+  margin-bottom: 5px; /* Adjust spacing between items */
+}
+
+
 /* Default styles for smaller screens */
 .sm-text {
   font-size: 40px;
@@ -62,11 +85,22 @@
 }
 
 .icon-phone-5{
-  width: 5%;
+  width: 5% !important;
+}
+.icon-amendies-30{
+  width: 30%;
+}
+
+.icon-amendies-20{
+  width: 15%;
+}
+
+.icon-phone-14{
+  width: 14% !important;
 }
 
 .icon-phone-12{
-  width: 12%;
+  width: 12% !important;
 }
 
 @media (max-width: 768px) {
@@ -85,8 +119,9 @@
 .bg-egg-1{
   background-color: #fff4dc;
 }
-.bg-yellow-1 {
-  background-color: color-opac(white, 0.5);
+
+.bg-lgpink-1{
+  background-color: #f0e1eb7a;
 }
 
 .bg-blue-1-05 {
@@ -221,6 +256,12 @@ $_displays: none, inline-block, block, flex;
 .italic {
   font-style: italic;
 }
+.bold {
+  font-weight: 600;
+}
+
+
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -927,7 +968,7 @@ $_displays: none, inline-block, block, flex;
 .galleryGrid.-type-1 {
   display: grid;
   grid-template-columns: 0.6fr 0.4fr ;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 0.2fr 0.2fr;
   gap: 10px;
 
   @include media-below(lg) {
@@ -954,7 +995,7 @@ $_displays: none, inline-block, block, flex;
   }
 
   img {
-    width: 100%;
+    width:100%;
     height: 100%;
     object-fit: cover;
 

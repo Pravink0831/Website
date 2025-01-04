@@ -5,7 +5,7 @@ const Facilities = () => {
       items: [
         {
           id: 1,
-          icon: "icon-bathtub ",
+          icon: "/img/featureIcons/1/Bedrooms.png",
           title: "Bathroom",
           facilities: [
             "Towels",
@@ -19,14 +19,14 @@ const Facilities = () => {
         },
         {
           id: 2,
-          icon: "icon-bed ",
-          title: "Bedroom",
+          icon: "/img/featureIcons/1/Bedrooms.png",
+          title: "5 Spacious Bedrooms",
           facilities: ["Linen", "Wardrobe or closet"],
         },
         {
           id: 3,
-          icon: "icon-bell-ring ",
-          title: "Reception services",
+          icon: "/img/featureIcons/1/Pool.png",
+          title: "Private Swimming Pool",
           facilities: [
             "Invoice provided",
             "Private check-in/check-out",
@@ -42,8 +42,8 @@ const Facilities = () => {
       items: [
         {
           id: 1,
-          icon: "icon-tv",
-          title: "Media & Technology",
+          icon: "/img/featureIcons/1/Breakfast.png",
+          title: "Freshly Cooked Breakfast",
           facilities: [
             "Flat-screen TV",
             "Satellite channels",
@@ -54,8 +54,8 @@ const Facilities = () => {
         },
         {
           id: 2,
-          icon: "icon-juice",
-          title: "Food & Drink",
+          icon: "/img/featureIcons/1/Wi-Fi.png",
+          title: "Free Wi-Fi",
           facilities: [
             "Kid meals",
             "Special diet menus (on request)",
@@ -67,47 +67,9 @@ const Facilities = () => {
         },
         {
           id: 3,
-          icon: "icon-washing-machine",
-          title: "Cleaning services",
+          icon: "/img/featureIcons/1/Speaker.png",
+          title: "Woofer Speaker",
           facilities: ["Daily housekeeping", "Dry cleaning", "Laundry"],
-        },
-      ],
-    },
-
-    {
-      id: 3,
-      items: [
-        {
-          id: 1,
-          icon: "icon-shield",
-          title: "Safety & security",
-          facilities: [
-            "Fire extinguishers",
-            "CCTV in common areas",
-            "Smoke alarms",
-            "24-hour security",
-          ],
-        },
-        {
-          id: 2,
-          icon: "icon-city-2",
-          title: "General",
-          facilities: [
-            "Hypoallergenic",
-            "Non-smoking throughout",
-            "Wake-up service",
-            "Heating",
-            "Packed lunches",
-            "Carpeted",
-            "Lift",
-            "Fan",
-            "Family rooms",
-            "Facilities for disabled guests",
-            "Ironing facilities",
-            "Non-smoking rooms",
-            "Iron",
-            "Room service",
-          ],
         },
       ],
     },
@@ -116,23 +78,24 @@ const Facilities = () => {
   return (
     <>
       {facilitiesContent.map((item) => (
-        <div className="col-xl-4" key={item.id}>
+        <div className="col-xl-6 col-md-6" key={item.id}>
           <div className="row y-gap-30">
             {item?.items?.map((facility) => (
               <div className="col-12" key={facility.id}>
                 <div>
                   <div className="d-flex items-center text-16 fw-500">
-                    <i className={`${facility.icon} text-20 mr-10`} />
+                    
+                    <img src={facility.icon} className="js-lazy icon-hover icon-amendies-20 mr-10" />
                     {facility.title}
                   </div>
-                  <ul className="text-15 pt-10">
+                  {/*<ul className="text-15 pt-10">
                     {facility?.facilities?.map((val, i) => (
                       <li className="d-flex items-center" key={i}>
                         <i className="icon-check text-10 mr-20" />
                         {val}
                       </li>
                     ))}
-                  </ul>
+                  </ul>*/}
                 </div>
               </div>
             ))}

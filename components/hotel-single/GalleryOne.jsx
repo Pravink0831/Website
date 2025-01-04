@@ -83,16 +83,16 @@ export default function GalleryOne({hotel}) {
 
           <Gallery>
             <div className="galleryGrid -type-1">
-              <div className="galleryGrid__item relative d-flex">
+              <div className="galleryGrid__item relative">
                 <Item
-                  original={hotel?.img}
-                  thumbnail={hotel?.img}
-                  width={660}
-                  height={660}
+                  original={hotel?.slideImg[2]}
+                  thumbnail={hotel?.slideImg[2]}
+                  width={650}
+                  height={500}
                 >
                   {({ ref, open }) => (
                     <img
-                      src={hotel?.img}
+                      src={hotel?.slideImg[2]}
                       ref={ref}
                       onClick={open}
                       alt="image"
@@ -105,12 +105,12 @@ export default function GalleryOne({hotel}) {
               </div>
               {/* End .galleryGrid__item */}
 
-              <div className="galleryGrid__item">
+              <div className="galleryGrid__item" style={{height: "38vh"}}>
                 <Item
                   original={hotel?.slideImg[0]}
                   thumbnail={hotel?.slideImg[0]}
-                  width={600}
-                  height={575}
+                  width={450}
+                  height={300}
                 >
                   {({ ref, open }) => (
                     <img
@@ -118,7 +118,7 @@ export default function GalleryOne({hotel}) {
                       onClick={open}
                       src={hotel?.slideImg[0]}
                       alt="image"
-                      className="rounded-4"
+                      className="rounded-4"  
                       role="button"
                     />
                   )}
@@ -166,27 +166,28 @@ export default function GalleryOne({hotel}) {
               </div>
                End .galleryGrid__item */}
 
-              <div className="galleryGrid__item relative d-flex">
+              <div className="galleryGrid__item relative d-flex" style={{height: "38vh"}}>
                 <img
-                  src="/img/gallery/1/5.png"
+                  src={hotel?.slideImg[1]}
                   alt="image"
                   className="rounded-4"
                 />
                 <div className="absolute px-10 py-10 col-12 h-full d-flex justify-end items-end">
                   <Item
-                    original="/img/gallery/1/5.png"
-                    thumbnail="/img/gallery/1/5.png"
+                    original={hotel?.slideImg[1]}
+                    thumbnail={hotel?.slideImg[1]}
                     width={450}
-                    height={375}
+                    height={300}
                   >
                     {({ ref, open }) => (
                       <div
-                        className="button -blue-1 px-24 py-15 bg-white text-dark-1 js-gallery"
+                        className="button rounded-100 -yellow-1 px-24 py-15 bg-black text-white js-gallery"
                         ref={ref}
                         onClick={open}
                         role="button"
                       >
                         See All Photos
+                        <img className="icon-phone-14 ml-10" src="/img/general/Album.png" />
                       </div>
                     )}
                   </Item>
