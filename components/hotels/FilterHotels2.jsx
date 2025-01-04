@@ -28,7 +28,7 @@ const FilterHotels2 = () => {
               <div className="cardImage inside-slider">
                 <Slider
                 >
-                  {item?.slideImg?.map((slide, i) => (
+                  {item?.img?.map((slide, i) => (
                     <div className="cardImage ratio ratio-1:1" key={i}>
                       <div className="cardImage__content ">
                         <Image
