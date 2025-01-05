@@ -121,7 +121,7 @@ const MainMenu = ({ style = "" }) => {
         </li>
 
         <li className={pathname === "/" ? "current" : ""}>
-          <Link href="/contact">Our villas</Link>
+          <Link href="/hotel-list-v5">Our villas</Link>
         </li>
 
         <li className={pathname === "/" ? "current" : ""}>

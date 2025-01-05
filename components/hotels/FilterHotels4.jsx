@@ -6,9 +6,10 @@ import React, { useState } from 'react'
 import FilterHotelsTabs2 from './filter-tabs/FilterHotelsTabs2'
 import FilterHotels2 from './FilterHotels2'
 import Link from 'next/link';
+import { fa } from '@faker-js/faker';
 
 export default function FilterHotels4() {
-    const [filterOption, setFilterOption] = useState("new_york");
+    const [filterOption, setFilterOption] = useState(false);
   return (
     <div className="tabs -pills-2 pt-40">
     <div className="tabs__content pt-40">
@@ -21,7 +22,7 @@ export default function FilterHotels4() {
     <div className="row justify-center pt-60">
       <div className="col-auto">
       <Link
-                  href="/"
+                  href="/hotel-list-v5"
                   className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
                 >
                   Explore All Villas

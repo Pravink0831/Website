@@ -6,39 +6,39 @@ import RatingFilter from "./RatingFilter";
 
 const DropdownSelelctBar = () => {
   const [priceValue, setPriceValue] = useState("Price");
-  const [amenitiesValue, setAmenitiesValue] = useState("Amenities");
-  const [styleValue, setStyleValue] = useState("Style");
+  const [bedroomsValue, setbedroomsValue] = useState("Bedrooms");
+  const [sortValue, setsortValue] = useState("Sort by");
 
   const handlePriceValueChange = (value) => {
     setPriceValue(value);
   };
 
-  const handleAmenitesValueChange = (value) => {
-    setAmenitiesValue(value);
+  const handlebedroomsValueChange = (value) => {
+    setbedroomsValue(value);
   };
 
-  const handleStyleChange = (value) => {
-    setStyleValue(value);
+  const handlesortChange = (value) => {
+    setsortValue(value);
   };
 
   const dropdowns = [
     {
       title: "Price",
       value: priceValue,
-      options: ["Less than $500", "$500 - $1000", "$1000 - $2000", "$2000+"],
+      options: ["Less than 5000", "5000 - 10000", "10000 - 20000", "20000+"],
       onChange: handlePriceValueChange,
     },
     {
-      title: "Amenities",
-      value: amenitiesValue,
-      options: ["Swimming pool", "Laundry", "Outdoor spaces", "Security"],
-      onChange: handleAmenitesValueChange,
+      title: "Bedrooms",
+      value: bedroomsValue,
+      options: ["1", "2", "3", "4", "5+"],
+      onChange: handlebedroomsValueChange,
     },
     {
-      title: "Style",
-      value: styleValue,
-      options: ["Modern", "Bohemian", "Minimalist", "Contemporary"],
-      onChange: handleStyleChange,
+      title: "Sort by",
+      value: sortValue,
+      options: ["Property Type", "Price", "Rating", "Guests"],
+      onChange: handlesortChange,
     },
   ];
 
@@ -58,7 +58,7 @@ const DropdownSelelctBar = () => {
     <>
       {dropdowns.map((dropdown, index) => (
         <div className="col-auto" key={index}>
-          <div className="dropdown js-dropdown js-amenities-active">
+          <div className="dropdown js-dropdown js-bedrooms-active">
             <div
               className="dropdown__button d-flex items-center text-14 rounded-100 border-light px-15 h-34"
               data-bs-toggle="dropdown"
@@ -77,8 +77,8 @@ const DropdownSelelctBar = () => {
                   <div key={index}>
                     <button
                       className={`${
-                        item === dropdown.value ? "text-blue-1 " : ""
-                      }d-block js-dropdown-link`}
+                        item === dropdown.value ? " text-black " : ""
+                      }d-block  js-dropdown-link`}
                       onClick={() => dropdown.onChange(item)}
                     >
                       {item}
@@ -93,11 +93,11 @@ const DropdownSelelctBar = () => {
         </div>
       ))}
 
-      <RatingFilter />
+     {/* <RatingFilter />
 
-      {/* End  ratings */}
+       End  ratings */}
 
-      <div className="col-auto">
+      {/*<div className="col-auto">
         <div className="relative ">
           <button
             className="d-flex items-center px-15 py-5 lh-16 text-14 rounded-100 border-light"
@@ -113,7 +113,7 @@ const DropdownSelelctBar = () => {
           </button>
           {/* End dropdown__button */}
 
-          <div className="dropRating dropdown-menu">
+          {/*<div className="dropRating dropdown-menu">
             <div className="px-20 py-20 rounded-4 bg-white border-light">
               <h5 className="text-15 fw-500 mb-15">Neighborhood</h5>
               <div className="sidebar-checkbox">
@@ -144,22 +144,22 @@ const DropdownSelelctBar = () => {
                       </div>
                     </div>
                     {/* End .col */}
-                    <div className="col-auto">
+                    {/*<div className="col-auto">
                       <div className="text-15 text-light-1">92</div>
                     </div>
                   </div>
                 ))}
               </div>
               {/* End sidebar-checkbox */}
-              <button className="d-block text-14 fw-500 underline text-blue-1 mt-15">
+             {/* <button className="d-block text-14 fw-500 underline text-blue-1 mt-15">
                 Show all 30
               </button>
             </div>
           </div>
           {/* End dropdown-menu */}
-        </div>
+        {/*</div>
         {/* End relative */}
-      </div>
+      {/*</div>
       {/* End .col-auto */}
     </>
   );

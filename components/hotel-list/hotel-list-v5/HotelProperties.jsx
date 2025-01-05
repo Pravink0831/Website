@@ -50,17 +50,12 @@ const HotelProperties = () => {
           data-aos-delay={item.delayAnimation}
         >
           <Link
-            href={`/hotel-single-v2/${item.id}`}
+            href={`/hotel-single-v1/${item.id}`}
             className="hotelsCard -type-1 hover-inside-slider"
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
-                <Slider
-                  {...itemSettings}
-                  arrows={true}
-                  nextArrow={<ArrowSlick type="next" />}
-                  prevArrow={<ArrowSlick type="prev" />}
-                >
+                <Slider>
                   {item?.slideImg?.map((slide, i) => (
                     <div className="cardImage ratio ratio-1:1" key={i}>
                       <div className="cardImage__content ">
@@ -68,19 +63,13 @@ const HotelProperties = () => {
                           width={300}
                           height={300}
                           className="rounded-4 col-12 js-lazy"
-                          src={slide}
+                          src={item?.img}
                           alt="image"
                         />
                       </div>
                     </div>
                   ))}
                 </Slider>
-
-                <div className="cardImage__wishlist">
-                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
-                    <i className="icon-heart text-12" />
-                  </button>
-                </div>
 
                 <div className="cardImage__leftBadge">
                   <div
@@ -110,27 +99,21 @@ const HotelProperties = () => {
               </div>
             </div>
             <div className="hotelsCard__content mt-10">
-              <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
+              <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
                 <span>{item?.title}</span>
               </h4>
-              <p className="text-light-1 lh-14 text-14 mt-5">
+              <p className="text-black lh-14 text-14 mt-5">
                 {item?.location}
               </p>
-              <div className="d-flex items-center mt-20">
-                <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                  {item?.ratings}
-                </div>
-                <div className="text-14 text-dark-1 fw-500 ml-10">
-                  Exceptional
-                </div>
-                <div className="text-14 text-light-1 ml-10">
-                  {item?.numberOfReviews} reviews
+              <div className="d-flex items-center mt-5">
+                <div className="text-14 text-black fw-500">
+                15 Guests | 5 Bedrooms | 5 Baths
                 </div>
               </div>
               <div className="mt-5">
                 <div className="fw-500">
                   Starting from{" "}
-                  <span className="text-blue-1">US${item?.price}</span>
+                  <span className="text-black">{item?.price}/-</span>
                 </div>
               </div>
             </div>

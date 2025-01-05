@@ -1,7 +1,7 @@
 import CallToActions from "@/components/common/CallToActions";
-import Header11 from "@/components/header/header-11";
-import DefaultFooter from "@/components/footer/default";
-import MainFilterSearchBox from "@/components/hotel-list/hotel-list-v5/MainFilterSearchBox";
+import Header11 from "@/components/header/header-7";
+import DefaultFooter from "@/components/footer/footer-3";
+import MainFilterSearchBox from "@/components/hero/hero-2/MainFilterSearchBox";
 import Pagination from "@/components/hotel-list/common/Pagination";
 import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperties";
 import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
@@ -16,37 +16,39 @@ const index = () => {
     <>
       {/* End Page Title */}
 
-      <div className="header-margin"></div>
       {/* header top margin */}
 
       <Header11 />
       {/* End Header 1 */}
-
-      <section className="section-bg pt-40 pb-40 relative z-5">
-        <div className="section-bg__item col-12">
-          <img
-            src="/img/misc/bg-1.png"
-            alt="image"
-            className="w-full h-full object-cover"
-          />
-        </div>
         {/* End .section-bg__item */}
 
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="text-center">
-                <h1 className="text-30 fw-600 text-white">
-                  Find Your Dream Luxury Hotel
-                </h1>
-              </div>
-              {/* End text-center */}
-              <MainFilterSearchBox />
+
+        <section className="masthead -type-1 z-5">
+      <div className="masthead__bg">
+        <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
+      </div>
+      <div className="container">
+        <div className="row justify-center">
+          <div className="col-auto">
+            <div className="text-center">
+              <h1
+                className="text-100 Made lg:text-80 md:text-40 text-white"
+                data-aos="fade-up"
+              >
+                Explore All Villas
+              </h1>
+              <p
+                className="text-black text-20 mt-6 md:mt-10"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+               <MainFilterSearchBox />
+              </p>
             </div>
-            {/* End col-12 */}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
       {/* Top SearchBanner */}
 
       <section className="layout-pt-md layout-pb-lg">
@@ -68,7 +70,7 @@ const index = () => {
               </div>
               {/* End .row */}
             </div>
-            {/* End col-auto */}
+            {/* End col-auto 
 
             <div className="col-auto">
               <button className="button -blue-1 h-40 px-20 rounded-100 bg-blue-1-05 text-15 text-blue-1">
@@ -84,8 +86,8 @@ const index = () => {
             <div className="row y-gap-30">
               <HotelProperties />
             </div>
-            {/* End .row */}
-            <Pagination />
+            {/* End .row 
+            <Pagination />*/}
           </div>
           {/* End .row */}
         </div>

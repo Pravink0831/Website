@@ -98,34 +98,34 @@ const MobileMenu = () => {
             <MenuItem
              onClick={()=>router.push("/")}
              className={
-              pathname === "/contact" ? "menu-active-link" : ""
+              pathname === "/" ? "menu-active-link" : ""
             }
              
             >
               Home
             </MenuItem>
             <MenuItem
-             onClick={()=>router.push("/contact")}
+             onClick={()=>router.push("/about")}
              className={
-              pathname === "/contact" ? "menu-active-link" : ""
+              pathname === "/about" ? "menu-active-link" : ""
             }
              
             >
               About us
             </MenuItem>
             <MenuItem
-             onClick={()=>router.push("/contact")}
+             onClick={()=>router.push("/hotel-list-v5")}
              className={
-              pathname === "/contact" ? "menu-active-link" : ""
+              pathname === "/hotel-list-v5" ? "menu-active-link" : ""
             }
              
             >
             Our villas
             </MenuItem>
             <MenuItem
-             onClick={()=>router.push("/contact")}
+             onClick={()=>router.push("/partner-with-us")}
              className={
-              pathname === "/contact" ? "menu-active-link" : ""
+              pathname === "/partner-with-us" ? "menu-active-link" : ""
             }
              
             >
