@@ -46,9 +46,9 @@ const ContactForm = () => {
       <div className="col-auto">
         <button
           type="submit"
-          className="button px-24 h-50 -dark-1 bg-blue-1 text-white"
+          className="button rounded-60 px-24 h-50 -yellow-1 bg-black text-white"
         >
-          Send Message <div className="icon-arrow-top-right ml-15"></div>
+          Submit <div className="icon-arrow-right ml-15"></div>
         </button>
       </div>
     </form>
