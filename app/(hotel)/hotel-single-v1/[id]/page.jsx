@@ -127,7 +127,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                             loading="lazy"
                             allowFullScreen
                             referrerPolicy="no-referrer-when-downgrade"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d292642.58586662007!2d73.78599624297655!3d15.48266594083896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfba106336b741%3A0xeaf887ff62f34092!2sGoa!5e0!3m2!1sen!2sin!4v1736007429957!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61503.663815054795!2d73.83688886848338!3d15.539257072359465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfbfcf70538563%3A0x36aebb950525ab10!2sChor%C3%A3o%20Island!5e0!3m2!1sen!2sin!4v1736071371857!5m2!1sen!2sin"
                           ></iframe></div>
                       </div>
                     </div>

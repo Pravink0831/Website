@@ -4,23 +4,46 @@ const WhyChoose = () => {
   const blockContent = [
     {
       id: 1,
-      icon: "/img/featureIcons/3/1.svg",
-      title: "Best Price Guarantee",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+      icon: "/img/featureIcons/1/ACs.png",
+      title: "Proven Expertise",
+      text: `With extensive experience
+managing luxury and budget-
+friendly villas, we understand
+how to optimize occupancy,
+revenue, and guest satisfaction.`,
       delayAnimation: "100",
     },
     {
       id: 2,
-      icon: "/img/featureIcons/3/2.svg",
-      title: "Easy & Quick Booking",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+      icon: "/img/featureIcons/1/Appliances.png",
+      title: "Exceptional Hospitality",
+      text: `Exceptional Hospitality: Our team
+delivers top-tier guest services,
+creating memorable experiences
+that encourage repeat bookings
+and positive reviews.`,
       delayAnimation: "200",
     },
     {
       id: 3,
-      icon: "/img/featureIcons/3/3.svg",
-      title: "Customer Care 24/7",
-      text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+      icon: "/img/featureIcons/1/Pool.png",
+      title: "Property Management",
+      text: `We provide full property care,
+including regular maintenance,
+cleaning, and attentive
+oversight, ensuring your villa is
+well-maintained and secure.`,
+      delayAnimation: "300",
+    },
+    {
+      id: 3,
+      icon: "/img/featureIcons/1/Kitchen.png",
+      title: "Tailored Solutions",
+      text: `We offer both rental and
+revenue-sharing options,
+allowing you to choose the
+model that best suits your goals
+and preferences.`,
       delayAnimation: "300",
     },
   ];
@@ -30,11 +53,11 @@ const WhyChoose = () => {
         <div
           className="col-lg-3 col-sm-6"
           key={item.id}
-          data-aos="fade"
+          data-aos="fade" 
           data-aos-delay={item.delayAnimation}
         >
-          <div className="featureIcon -type-1 ">
-            <div className="d-flex justify-center">
+          <div className="featureIcon -type-1 bg-egg-1 px-30 py-30">
+            <div className="d-flex justify-start">
               <Image
                 width={70}
                 height={70}
@@ -43,9 +66,9 @@ const WhyChoose = () => {
                 className="js-lazy"
               />
             </div>
-            <div className="text-center mt-30">
+            <div className="text-left text-black mt-30">
               <h4 className="text-18 fw-500">{item.title}</h4>
-              <p className="text-15 mt-10">{item.text}</p>
+              <p className="text-15 text-black mt-10">{item.text}</p>
             </div>
           </div>
         </div>

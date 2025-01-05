@@ -70,6 +70,10 @@ export const pageItems = [
     routePath: "/about",
   },
   {
+    name: "Partner With Us",
+    routePath: "/partner-with-us",
+  },
+  {
     name: "Become Expert",
     routePath: "/become-expert",
   },
