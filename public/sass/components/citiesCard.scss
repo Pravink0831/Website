@@ -31,7 +31,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: color-opac(dark-1, 0.4);
+      background-color: color-opac(dark-1, 0.3);
       border-radius: inherit;
       transition: opacity 0.5s ease-in-out;
       opacity: 1;
@@ -51,7 +51,7 @@
   /* Add hover effect to zoom in the image and change opacity */
   &:hover .citiesCard__image img {
     transform: scale(1.1); /* Zoom in scale */
-    opacity: 0.8; /* Change opacity */
+    opacity: 1; /* Change opacity */
   }
 
   &:hover {
@@ -67,7 +67,7 @@
       }
 
       &__bg {
-        opacity: 0;
+        opacity: 1;
       }
     }
   }

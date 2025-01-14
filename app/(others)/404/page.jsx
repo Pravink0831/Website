@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import CallToActions from "@/components/common/CallToActions";
-import DefaultHeader from "@/components/header/default-header";
-import DefaultFooter from "@/components/footer/default";
+import DefaultHeader from "@/components/header/header-7";
+import DefaultFooter from "@/components/footer/footer-3";
 import NotFound from "@/components/common/NotFound";
 
 export const metadata = {

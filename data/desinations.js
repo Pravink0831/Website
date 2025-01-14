@@ -134,21 +134,21 @@ export const destinations3 = [
 export const destinations4 = [
   {
     id: 1,
-    img: "/img/destinations/3/1.png",
+    img: "/img/gallery/1/6.png",
     location: "Bedroom 1",
     properties: "4,090",
     delayAnimation: "0",
   },
   {
     id: 2,
-    img: "/img/destinations/3/2.png",
+    img: "/img/gallery/1/7.png",
     location: "Bedroom 2",
     properties: "4,090",
     delayAnimation: "100",
   },
   {
     id: 3,
-    img: "/img/destinations/3/3.png",
+    img: "/img/gallery/1/8.png",
     location: "Kitchen",
     properties: "4,090",
     delayAnimation: "200",

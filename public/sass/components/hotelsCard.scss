@@ -18,7 +18,8 @@
 
     &__title {
       span {
-        background-image: linear-gradient(transparent 24px, black 20px);
+        
+        background-image: linear-gradient(transparent 24px, #fcaf00 20px);
         background-size: 0;
         background-repeat: no-repeat;
         transition: background-size 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0s;
@@ -38,6 +39,7 @@
       &__title {
         span {
           background-size: 100% !important;
+          color: #fcaf00 ;
         }
       }
     }

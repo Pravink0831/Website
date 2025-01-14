@@ -48,12 +48,12 @@ const LocationSearch = () => {
           data-bs-auto-close="true"
           data-bs-offset="0,22"
         >
-          <h4 className="text-15 fw-500 ls-2 lh-16">Location</h4>
-          <div className="text-15 text-light-1 ls-2 lh-16">
+          <h4 className="text-left text-16 fw-500 ls-2 lh-16">Location</h4>
+          <div className="text-15 text-black ls-2 lh-16">
             <input
               autoComplete="off"
               type="search"
-              placeholder="Where are you go?"
+              placeholder="Location"
               className="js-search js-dd-focus"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
@@ -74,12 +74,12 @@ const LocationSearch = () => {
                   onClick={() => handleOptionClick(item)}
                 >
                   <div className="d-flex">
-                    <div className="icon-location-2 text-light-1 text-20 pt-4" />
+                    <div className="icon-location-2 text-black text-20 pt-4" />
                     <div className="ml-10">
-                      <div className="text-15 lh-12 fw-500 js-search-option-target">
+                      <div className="text-16 lh-12 fw-500 js-search-option-target">
                         {item.name}
                       </div>
-                      <div className="text-14 lh-12 text-light-1 mt-5">
+                      <div className="text-14 lh-12 text-black mt-5">
                         {item.address}
                       </div>
                     </div>

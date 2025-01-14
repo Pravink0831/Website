@@ -5,7 +5,7 @@ const Facilities = () => {
       items: [
         {
           id: 1,
-          icon: "/img/featureIcons/1/Bedrooms.png",
+          icon: "/img/featureIcons/1/Bathroom.png",
           title: "Bathroom",
           facilities: [
             "Towels",

@@ -6,10 +6,10 @@ const CallToActions = () => {
           <div className="col-auto">
             <div className="row y-gap-20  flex-wrap items-center">
               <div className="col-auto sm-center">
-                <h4 className="sectionTitle__title text-80 Made">
+                <h4 className="sectionTitle__title text-80 lh-8 Made">
                   Your Ideal Goan Vacation Starts With Us
                 </h4>
-                <div className="sectionTitle__text text-20 text-black ml-10 sm:mt-0">
+                <div className="sectionTitle__text text-20 text-black ml-10 sm:mt-5">
                   We invite you to discover the villa M experience
                 </div>
               </div>
@@ -21,13 +21,15 @@ const CallToActions = () => {
             <div className="single-field -w-410 d-flex y-gap-20 justify-center">
               {/* End email input */}
 
-              <div>
-                <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
-                  <img className="icon-phone-12 mr-10 " src="/img/general/call icon.png" />
-                Call us on now
-                </button>
-              </div>
-              {/* End subscribe btn */}
+                      <div>
+                      <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white hover:bg-yellow-1 hover:text-black hover:img-hover">
+                        <img className="icon-phone-12 mr-10 " src="/img/general/call icon.png" />
+                      Call us on now
+                      </button>
+                      </div>
+                      {/* End subscribe btn */}
+
+            
             </div>
           </div>
           {/* End .col */}

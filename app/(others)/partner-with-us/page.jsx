@@ -20,7 +20,7 @@ const Contact = () => {
 
             <Header7 />
 
-            <section className="masthead -type-1 z-5">
+            <section className="masthead -type-11 z-5">
       <div className="masthead__bg">
         <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
       </div>
@@ -36,7 +36,7 @@ const Contact = () => {
                     <p className="sectionTitle__title Made text-80 text-white sm-pt">
                     Partner With Us
                     </p>
-                    <p className="text-white text-18 md:text-12 mb-10">
+                    <p className="text-white text-20 md:text-12 mb-10">
                     Join hands with us to create exceptional experiences and unlock the true
 potential of your property. Partnering with us means innovative solutions,
 dedicated support, and seamless management.
@@ -46,9 +46,9 @@ dedicated support, and seamless management.
                   
                 </div>
                 <div className="col-xl-5 col-md-6">
-                        <div className=" px-40 pt-10 pb-10 lg:px-30 lg:py-30 md:px-24 md:py-24 bg-white rounded-4 shadow-4">
-                            <div className="text-22 fw-500">Lets get Started</div>
-                            <p className="text-16">Give us your details and we will call you back</p>
+                        <div className=" px-20 pt-10 pb-10 lg:px-30 lg:py-30 md:px-24 md:py-24 bg-white rounded-4 shadow-4">
+                            <div className="text-20 fw-500">Let's get Started</div>
+                            <p className="text-16 text-black">Give us your details and we will call you back</p>
                             <PartnerForm />
                         </div>
                     </div>
@@ -62,8 +62,8 @@ dedicated support, and seamless management.
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title text-80 Made">Why Partner With Villa M ?</h2>
-                <div className="d-flex justify-center mb-20">
-                        <img src="/img/featureIcons/1/Palm.png" className="js-lazy" />
+                <div className="d-flex justify-center mb-5">
+                        <img src="/img/featureIcons/1/Seperator.png" className="js-lazy" />
                       </div>
               </div>
             </div>

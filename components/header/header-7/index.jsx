@@ -67,7 +67,7 @@ const Header1 = () => {
                   </div> */}
                   <div>
                     <button
-                      className="d-flex items-center icon-menu text-inherit text-20"
+                      className="d-flex items-center icon-menu text-white text-20"
                       data-bs-toggle="offcanvas"
                       aria-controls="mobile-sidebar_menu"
                       data-bs-target="#mobile-sidebar_menu"

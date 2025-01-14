@@ -7,8 +7,8 @@ import HotelProperties from "@/components/hotel-list/hotel-list-v5/HotelProperti
 import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
 
 export const metadata = {
-  title: "Hotel List v5 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Villa List",
+  description: "",
 };
 
 const index = () => {
@@ -27,7 +27,7 @@ const index = () => {
       <div className="masthead__bg">
         <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
       </div>
-      <div className="container">
+      <div className="container mt--10">
         <div className="row justify-center">
           <div className="col-auto">
             <div className="text-center">

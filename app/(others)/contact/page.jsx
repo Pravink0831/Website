@@ -36,9 +36,9 @@ const Contact = () => {
 
       <section className="masthead -type-1 z-5">
         <div className="masthead__bg">
-          <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
+          <img alt="image" src="/img/masthead/1/5.jpg" className="js-lazy" />
         </div>
-        <div className="container">
+        <div className="container mt--10">
         <div className="row justify-center">
           <div className="col-xl-7">
             <div className="text-center">
@@ -73,7 +73,7 @@ Reach out for bookings, inquiries, or any assistance – we’d love to hear fro
           <div className="col-xl-6 px-60 py-60">
             <ContactForm />
           </div>
-          <div className="col-xl-6 px-60 bg-lgpink-1 mt-75 md:mt-20 lg:mt-40 mb-60 text-black">
+          <div className="col-xl-6 px-60 bg-egg-1 mt-75 md:mt-20 lg:mt-40 mb-60 text-black">
             <div className="mt-60">
               <h3 className="text-30 Made fw-500 mb-10 ">Call Us</h3>
               <p className="text-16"><img className="icon-phone-5 mr-10 " src="/img/general/call icon.png" />+91 832 671 3333</p>

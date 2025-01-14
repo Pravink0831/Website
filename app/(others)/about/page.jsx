@@ -27,9 +27,9 @@ const About = () => {
 
       <section className="masthead -type-1 z-5">
       <div className="masthead__bg">
-        <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
+        <img alt="image" src="/img/masthead/1/1.jpg" className="js-lazy" />
       </div>
-      <div className="container">
+      <div className="container mt--10">
         <div className="row justify-center">
           <div className="col-auto">
             <div className="text-center">

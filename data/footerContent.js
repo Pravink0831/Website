@@ -4,13 +4,11 @@ module.exports = [
     title: "Quick Links",
     menuList: [
       { name: "Home", routerPath: "/" },
-      { name: "About us", routerPath: "/" },
-      { name: "Our villas", routerPath: "/" },
-      { name: "Partner with us", routerPath: "/" },
-      { name: "Contact", routerPath: "/" },
-      { name: "Terms & Conditions", routerPath: "/" },
-      { name: "Privacy Policy", routerPath: "/" },
-      { name: "Refund Policy", routerPath: "/" },
+      { name: "About us", routerPath: "/about" },
+      { name: "Our villas", routerPath: "/hotel-list-v5" },
+      { name: "Partner with us", routerPath: "/partner-with-us" },
+      { name: "Contact", routerPath: "/contact" },
+      { name: "Booking & Cancellations", routerPath: "/" },
     ],
   },  
 ];

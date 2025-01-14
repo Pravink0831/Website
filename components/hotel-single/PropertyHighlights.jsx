@@ -2,7 +2,7 @@ const PropertyHighlights2 = () => {
   const highlightsContent = [
     {
       id: 1,
-      icon: "/img/featureIcons/1/Terrace.png",
+      icon: "/img/featureIcons/1/People.png",
       text: `15 Guests Capacity`,
     },
     {
@@ -17,7 +17,7 @@ const PropertyHighlights2 = () => {
     },
     {
       id: 4,
-      icon: "/img/featureIcons/1/Living area.png",
+      icon: "/img/featureIcons/1/Bathroom.png",
       text: `5 Bathrooms`,
     },
   ];

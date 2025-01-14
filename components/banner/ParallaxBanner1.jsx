@@ -12,7 +12,7 @@ const ParallaxBanner = () => {
       bgImageAlt="amazing place"
       bgClassName="object-fit-cover"
     >
-      <div className="section-bg layout-pt-xl layout-pb-xl">
+      <div className="section-bg layout-pt-lg layout-pb-lg">
         <div className="container">
           <div className="row justify-center text-center text-black">
             <div className="col-xl-9" data-aos="fade">

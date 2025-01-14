@@ -44,7 +44,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
       <Header7 />
       {/* End Header 1 */}
 
-      <Hero1 title={hotel.title} location={hotel.location}/>
+      <Hero1 img={hotel.img} title={hotel.title} location={hotel.location}/>
       {/* End top hero */}
 
       {/*

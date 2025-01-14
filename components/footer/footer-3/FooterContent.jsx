@@ -6,8 +6,8 @@ const FooterContent = () => {
     <>
       {footerDataContent.map((item) => (
         <div className="col-lg-6 col-sm-12" key={item.id}>
-          <h5 className="text-40 fw-500 mb-10 Made">{item.title}</h5>
-          <div className="d-flex y-gap-10 flex-column">
+          <h5 className="text-50 fw-500 mb-10 Made">{item.title}</h5>
+          <div className="d-flex y-gap-10 text-18 flex-column">
             {item.menuList.map((menu, i) => (
               <Link href={menu.routerPath} key={i}>
                 {menu.name}

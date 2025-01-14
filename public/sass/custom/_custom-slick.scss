@@ -197,6 +197,12 @@
     display: inline-block;
     min-width: 200px;
     margin-right: 20px;
+
+    @media (max-width: 768px) {
+        min-width: 75px;
+        margin-right: 40px;
+        
+    }
   }
   
   @keyframes scroll {

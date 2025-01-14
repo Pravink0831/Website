@@ -4,7 +4,7 @@ const WhyChoose = () => {
   const blockContent = [
     {
       id: 1,
-      icon: "/img/featureIcons/1/ACs.png",
+      icon: "/img/featureIcons/1/1.png",
       title: "Proven Expertise",
       text: `With extensive experience
 managing luxury and budget-
@@ -15,7 +15,7 @@ revenue, and guest satisfaction.`,
     },
     {
       id: 2,
-      icon: "/img/featureIcons/1/Appliances.png",
+      icon: "/img/featureIcons/1/2.png",
       title: "Exceptional Hospitality",
       text: `Exceptional Hospitality: Our team
 delivers top-tier guest services,
@@ -26,7 +26,7 @@ and positive reviews.`,
     },
     {
       id: 3,
-      icon: "/img/featureIcons/1/Pool.png",
+      icon: "/img/featureIcons/1/3.png",
       title: "Property Management",
       text: `We provide full property care,
 including regular maintenance,
@@ -37,7 +37,7 @@ well-maintained and secure.`,
     },
     {
       id: 3,
-      icon: "/img/featureIcons/1/Kitchen.png",
+      icon: "/img/featureIcons/1/4.png",
       title: "Tailored Solutions",
       text: `We offer both rental and
 revenue-sharing options,

@@ -29,7 +29,7 @@ const FilterHotels2 = () => {
                 <Slider
                 >
                   {item?.slideImg?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-1:1" key={i}>
+                    <div className="cardImage ratio ratio-63:55" key={i}>
                       <div className="cardImage__content">
                         <Image
                           width={300}
@@ -70,24 +70,24 @@ const FilterHotels2 = () => {
                 </div>
               </div>
             </div>
-            <div className="hotelsCard__content mt-10">
+            <div className="hotelsCard__content">
               <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
                 <span>{item?.title}</span>
               </h4>
-              <p className="text-black lh-14 text-14 mt-5">
+              <p className="text-black lh-14 text-14">
                 {item?.location}
               </p>
-              <div className="d-flex items-center mt-5">
+              <div className="d-flex items-center">
                 <div className="text-14 text-black fw-500">
                 15 Guests | 5 Bedrooms | 5 Baths
                 </div>
               </div>
-              <div className="mt-5">
-                <div className="fw-500">
+              
+                <div className="fw-500 mb-5">
                   Starting from{" "}
                   <span className="text-black">{item?.price}/-</span>
                 </div>
-              </div>
+              
             </div>
           </Link>
         </div>

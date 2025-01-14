@@ -28,7 +28,7 @@ const TopDestinations2 = () => {
             spaceBetween: 22,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 2.5,
           },
           1200: {
             slidesPerView: 3,
@@ -43,7 +43,7 @@ const TopDestinations2 = () => {
               data-aos="fade"
               data-aos-delay={item.delayAnimation}
             >
-              <div className="citiesCard__image rounded-4 ratio ratio-4:3">
+              <div className="citiesCard__image rounded-4 ratio ratio-15:9">
                 <Image
                   width={191}
                   height={191}

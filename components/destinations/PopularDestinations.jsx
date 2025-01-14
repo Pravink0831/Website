@@ -13,7 +13,7 @@ const PopularDestinations = () => {
     <>
       <Swiper
         spaceBetween={30}
-        className="overflow-hidden"
+        className="overflow-hidden pd-20"
         scrollbar={{
           el: ".js-popular-destination-scrollbar",
           draggable: true,
@@ -47,7 +47,7 @@ const PopularDestinations = () => {
               className="citiesCard -type-1 d-block rounded-60"
               key={item.id}
             >
-              <div className="citiesCard__image ratio ratio-3:4">
+              <div className="citiesCard__image ratio ratio-41:45">
                 <Image
                   width={300}
                   height={400}
@@ -81,7 +81,7 @@ const PopularDestinations = () => {
         <button className="section-slider-nav -next flex-center button -yellow-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-destination-next">
           <i className="icon icon-chevron-right text-16" />
         </button>
-        <div className="slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar" />
+        {/*<div className="slider-scrollbar bg-light-2 mt-40  js-popular-destination-scrollbar" />*/}
       </div>
     </>
   );

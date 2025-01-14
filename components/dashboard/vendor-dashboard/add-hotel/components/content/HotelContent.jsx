@@ -1,29 +1,21 @@
-const HotelContent = () => {
+'use client';
+
+const HotelContent = ({ formData, handleInputChange }) => {
   return (
     <div className="row x-gap-20 y-gap-20">
       <div className="col-12">
-        <div className="form-input ">
-          <input type="text" required />
-          <label className="lh-1 text-16 text-light-1">Hotel Name</label>
-        </div>
+      <div className="form-group">
+        <label htmlFor="title">Hotel Name</label>
+        <input type="text" name="title" id="title" value={formData.title} onChange={handleInputChange} className="form-control" />
       </div>
-      {/* End Name */}
-
+      </div>
       <div className="col-12">
-        <div className="form-input ">
-          <textarea required rows={5} defaultValue={""} />
-          <label className="lh-1 text-16 text-light-1">Content</label>
-        </div>
+      <div className="form-group">
+        <label htmlFor="location">Location</label>
+        <input type="text" name="location" id="location" value={formData.location} onChange={handleInputChange} className="form-control" />
       </div>
-      {/* End Content */}
-
-      <div className="col-12">
-        <div className="form-input ">
-          <input type="text" required />
-          <label className="lh-1 text-16 text-light-1">Youtube Video</label>
-        </div>
       </div>
-      {/* End youtube Video */}
+      
     </div>
   );
 };

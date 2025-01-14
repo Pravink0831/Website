@@ -15,12 +15,12 @@ const index = () => {
       </div>
       <div className="container content">
         
-        <div className="pt-60 pb-60">
+        <div className="pt-30 pb-20">
           <div className="row y-gap-40 justify-between xl:justify-start">
             <div className="col-xl-4 col-lg-6">
               <img src="/img/general/VillaMLogo.png" alt="image" />
               <div className="row y-gap-30 justify-between pt-30">
-              <p className="sectionTitle__text text-16 text-white mt-5 sm:mt-0">
+              <p className="sectionTitle__text text-18 text-white mt-5 sm:mt-0">
               At Villa M Goa, we specialize in offering
 exquisite villas in the heart of North Goa.
 Each villa is thoughtfully designed with
@@ -49,20 +49,20 @@ vibrant spirit of Goa.
             </div>
             
             <div className="col-xl-4 col-md-6">
-            <h2 className="sectionTitle__title text-40 Made">
+            <h2 className="sectionTitle__title text-50 Made">
                 Get in touch
                 </h2>
-                <p className="sectionTitle__text text-16 text-white mt-30">
+                <p className="sectionTitle__text text-18 text-white mt-30">
                 Office address will come here.
 lorem ipsum lorem ipsum lorem
 ipsum lorem ipsum
                 </p>
-                <p className="text-16 text-white mt-20">
+                <p className="text-18 text-white mt-20">
                 <img className="icon-phone-5 mr-10" src="/img/general/call icon.png" />
                 +91 77789 02229
                   </p>
             <div className="mt-60">
-                <h5 className="text-16 fw-500 mb-10">
+                <h5 className="text-18 fw-500 mb-10">
                   Follow us on social media
                 </h5>
                 <div className="d-flex x-gap-20 items-center">

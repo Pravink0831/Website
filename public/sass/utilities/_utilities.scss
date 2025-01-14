@@ -42,6 +42,10 @@
   margin-bottom: 5px; /* Adjust spacing between items */
 }
 
+.pd-20{
+  padding: 20px;
+}
+
 
 /* Default styles for smaller screens */
 .sm-text {
@@ -68,14 +72,20 @@
     font-size: 16px !important;
   }
   .text-16 { 
+    font-size: 12px !important; /* Adjust font size for smaller screens */ 
+  } 
+  .text-18 { 
     font-size: 14px !important; /* Adjust font size for smaller screens */ 
   } 
   .lh-13 { 
-    line-height: 1.2 !important; /* Adjust line height for smaller screens */ 
+    line-height: 1.1 !important; /* Adjust line height for smaller screens */ 
   } 
   .lh-14 { 
     line-height: 1.2 !important; /* Adjust line height for smaller screens */ 
   } 
+  .lh-8 { 
+    line-height: 1 !important; /* Adjust line height for smaller screens */ 
+  }
 }
 
 @media (max-width: 992px) {
@@ -117,7 +127,7 @@
 }
 
 .bg-egg-1{
-  background-color: #fff4dc;
+  background-color: #fff7e5;
 }
 
 .bg-lgpink-1{
@@ -1295,7 +1305,7 @@ $_displays: none, inline-block, block, flex;
   label {
     position: absolute;
     top: 0;
-    top: 26px;
+    top: 15px;
     padding: 0 15px;
     pointer-events: none;
     font-size: 14px;
@@ -1307,8 +1317,7 @@ $_displays: none, inline-block, block, flex;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     padding: 0 15px;
-    padding-top: 25px;
-    min-height: 70px;
+    padding-top: 20px;
     transition: all 0.2s $easeOutQuart;
 
     &:focus {
@@ -1695,6 +1704,7 @@ table.table-5 {
 .h-100vh{
   height: 100vh;
 }
+
 .h-400 {
   height: 400px;
   min-height: 400px;

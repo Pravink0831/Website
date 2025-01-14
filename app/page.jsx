@@ -3,7 +3,7 @@ import MainHome from "../app/(homes)/home_7/page";
 
 export const metadata = {
   title: "Home",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  description: "",
 };
 
 export default function Home() {
