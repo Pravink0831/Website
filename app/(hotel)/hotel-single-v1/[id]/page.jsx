@@ -24,6 +24,7 @@ import CallToActions from "@/components/common/CallToActions";
 import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 import Destinations from "@/components/destinations/TopDestinations2";
+import HousePolicies from "@/app/(others)/Policies/Page";
 
 export const metadata = {
   title: "Villa || GoTrip - Travel & Tour React NextJS Template",
@@ -97,6 +98,14 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </h3>
                   <div className="row y-gap-10 pt-20 relative">
                     <Destinations />
+                  </div>
+                </div>
+                <div className="col-12">
+                  <h3 className="text-60 Made fw-500 pt-20">
+                  House Rules
+                  </h3>
+                  <div className="row y-gap-10 pt-20">
+                  <HousePolicies />
                   </div>
                 </div>
 
