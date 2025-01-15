@@ -24,7 +24,7 @@ import CallToActions from "@/components/common/CallToActions";
 import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 import Destinations from "@/components/destinations/TopDestinations2";
-import HousePolicies from "@/app/(others)/Policies/Page";
+import HousePolicies from "./../../../(others)/Policies/Page";
 
 export const metadata = {
   title: "Villa || GoTrip - Travel & Tour React NextJS Template",
