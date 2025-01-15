@@ -19,7 +19,7 @@ const ParallaxBanner = () => {
             <div className="sectionTitle -md">
                       <h2 className="sectionTitle__title text-80 Made">Grow With Us – Partner for Success</h2>
                       <div className="d-flex justify-center mb-20">
-                        <img src="/img/featureIcons/1/Palm.png" className="js-lazy" />
+                        <img src="/img/featureIcons/1/Palm.png" className="partner js-lazy" />
                       </div>
                       <p className=" sectionTitle__text text-black text-20 mt-5 sm:mt-0">
                       At Villa M, we specialize in managing premium properties with the utmost care and professionalism. If you’re a villa owner seeking a

@@ -62,9 +62,6 @@ dedicated support, and seamless management.
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title text-80 Made">Why Partner With Villa M ?</h2>
-                <div className="d-flex justify-center mb-5">
-                        <img src="/img/featureIcons/1/Seperator.png" className="js-lazy" />
-                      </div>
               </div>
             </div>
           </div>
