@@ -7,7 +7,7 @@ const SidebarRight = ({ hotel }) => {
         <div className="d-flex items-center justify-between">
           <div>
             <span className="text-20 fw-500">{hotel?.price}/</span>
-            <span className="text-20 text-black ml-5">nights</span>
+            <span className="text-20 text-black ml-5">Nights</span>
           </div>
           {/*<div className="d-flex items-center">
             <div className="text-14 text-right mr-10">
@@ -32,9 +32,9 @@ const SidebarRight = ({ hotel }) => {
     <p className="text-20 bold text-black">Still not sure?</p>
   </div>
   <div className="col-6">
-    <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white hover:bg-yellow-1 hover:text-black hover:img-hover">
-      <img className="icon-phone-12 mr-5" src="/img/general/call icon.png" />
-      Call us on now
+    <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
+      <img className="icon-phone-12 mr-5" src="/img/featureIcons/1/call-yellow.png" />
+      Call us now
     </button>
   </div>
 </div>

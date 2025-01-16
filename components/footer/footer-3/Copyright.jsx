@@ -2,7 +2,7 @@ import Social from "../../../components/common/social/Social";
 
 const Copyright = () => {
   return (
-    <div className="row justify-center items-center y-gap-10">
+    <div className="row justify-between jc items-center y-gap-10">
       <div className="col-auto">
         <div className="row x-gap-30 y-gap-10">
           <div className="col-auto">

@@ -17,13 +17,13 @@ const CallToActions = () => {
           </div>
           {/* End .col */}
 
-          <div className="col-lg-3">
-            <div className="single-field -w-410 d-flex y-gap-20 justify-center">
+          <div className="col-lg-2 col-md-3">
+            <div className="single-field d-flex y-gap-20 justify-center">
               {/* End email input */}
 
                       <div>
-                      <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white hover:bg-yellow-1 hover:text-black hover:img-hover">
-                        <img className="icon-phone-12 mr-10 " src="/img/general/call icon.png" />
+                      <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
+                        <img className="icon-phone-12 mr-10 " src="/img/featureIcons/1/call-yellow.png" />
                       Call us on now
                       </button>
                       </div>

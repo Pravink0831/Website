@@ -8,7 +8,7 @@ const ParallaxBanner = () => {
   return (
     <Parallax
       strength={200}
-      bgImage="/img/backgrounds/12.png"
+      bgImage=""
       bgImageAlt="amazing place"
       bgClassName="object-fit-cover"
     >

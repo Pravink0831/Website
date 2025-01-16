@@ -56,7 +56,7 @@ and preferences.`,
           data-aos="fade" 
           data-aos-delay={item.delayAnimation}
         >
-          <div className="featureIcon -type-1 bg-egg-1 px-30 py-30">
+          <div className="featureIcon -type-1 bg-white px-30 py-30">
             <div className="d-flex justify-start">
               <Image
                 width={70}

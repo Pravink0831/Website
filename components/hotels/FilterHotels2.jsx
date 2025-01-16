@@ -74,7 +74,7 @@ const FilterHotels2 = () => {
               <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
                 <span>{item?.title}</span>
               </h4>
-              <p className="text-black lh-14 text-14">
+              <p className="text-black lh-14 text-14 fw-500">
                 {item?.location}
               </p>
               <div className="d-flex items-center">
@@ -83,9 +83,9 @@ const FilterHotels2 = () => {
                 </div>
               </div>
               
-                <div className="fw-500 mb-5">
+                <div className="fw-600 mb-5">
                   Starting from{" "}
-                  <span className="text-black">{item?.price}/-</span>
+                  <span className="text-black text-14">{item?.price}/-</span>
                 </div>
               
             </div>

@@ -2,7 +2,7 @@ export const hotelsData = [
   {
     id: 1,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/2.png",
     title: "Villa M - Jia 4",
     location: "Calangute, North Goa",
@@ -16,7 +16,7 @@ export const hotelsData = [
   {
     id: 2,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/1.png",
     title: "Villa M - Jia 3",
     location: "Calangute, North Goa",
@@ -30,7 +30,7 @@ export const hotelsData = [
   {
     id: 3,
     tag: "best seller",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/5.png",
     title: "Villa M - Savannah 7",
     location: "Calangute, North Goa",
@@ -44,7 +44,7 @@ export const hotelsData = [
   {
     id: 4,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/9.png",
     title: "Villa M - White Castle A",
     location: "Calangute, North Goa",
@@ -58,7 +58,7 @@ export const hotelsData = [
   {
     id: 5,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/10.png",
     title: "Villa M - Jia 5",
     location: "Calangute, North Goa",
@@ -72,7 +72,7 @@ export const hotelsData = [
   {
     id: 6,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/4.png",
     title: "Villa M - Lagoon 4",
     location: "Calangute, North Goa",
@@ -86,7 +86,7 @@ export const hotelsData = [
   {
     id: 7,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/8.png",
     title: "Villa M - Solitude 1",
     location: "Calangute, North Goa",
@@ -100,7 +100,7 @@ export const hotelsData = [
   {
     id: 8,
     tag: "",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     img: "/img/hotels/3.png",
     title: "Villa M - White Castle B",
     location: "Calangute, North Goa",
@@ -114,8 +114,8 @@ export const hotelsData = [
   {
     id: 9,
     tag: "",
-    img: "/img/hotels/7.png",
-    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/7.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
+    img: "/img/hotels/11.png",
+    slideImg: ["/img/gallery/1/8.png","/img/gallery/1/6.png","/img/gallery/1/11.png","/img/gallery/1/1.jpg","/img/gallery/1/2.jpg","/img/gallery/1/3.jpg","/img/gallery/1/4.jpg","/img/gallery/1/5.jpg",],
     title: "Villa M - Savannah 4",
     location: "Calangute, North Goa",
     ratings: "4.7",

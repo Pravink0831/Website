@@ -58,7 +58,7 @@ lorem ipsum lorem ipsum lorem
 ipsum lorem ipsum
                 </p>
                 <p className="text-18 text-white mt-20">
-                <img className="icon-phone-5 mr-10" src="/img/general/call icon.png" />
+                <img className="icon-phone-5 mr-10" src="/img/featureIcons/1/call-yellow.png" />
                 +91 77789 02229
                   </p>
             <div className="mt-60">

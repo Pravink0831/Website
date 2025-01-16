@@ -56,7 +56,7 @@ dedicated support, and seamless management.
       </div>
     </section>
     <ParallaxBanner />
-    <section className="layout-pt-md layout-pb-md">
+    <section className="layout-pt-md layout-pb-md bg-egg-1">
         <div className="container">
           <div className="row justify-center text-center">
             <div className="col-auto">

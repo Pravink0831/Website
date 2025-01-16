@@ -11,92 +11,50 @@ const HousePolicies = () => {
 
     return (
         <div className="container mt-4">
-            <ol className="list-group list-group-numbered">
+            <ol className="list-group">
                 <li className="list-group-item">
-                    Check-In and Check-Out:
-                    <ul className="list-group list-group-flush list-group-bulleted">
-                        <li className="list-group-item">Check-in time: 3:00 PM</li>
-                        <li className="list-group-item">Check-out time: 11:00 AM</li>
-                    </ul>
+                    <strong>Check-In and Check-Out:</strong> Check-in time is 3:00 PM, and check-out time is 11:00 AM.
                 </li>
                 <li className="list-group-item">
-                    Guest Identification:
-                    <ul className="list-group list-group-flush list-group-bulleted">
-                        <li className="list-group-item">All guests must present valid government-issued ID at check-in.</li>
-                        <li className="list-group-item">For non-Indian nationals, a valid passport and visa are required.</li>
-                    </ul>
+                    <strong>Guest Identification:</strong> All guests must present a valid government-issued ID at check-in. For non-Indian nationals, a valid passport and visa are required.
                 </li>
                 {showMore && (
-                    <><li className="list-group-item">
-                    Security Deposit and Payment:
-                    <ul className="list-group list-group-flush list-group-bulleted">
-                        <li className="list-group-item">Full payment, including a refundable security deposit of ₹5,000, must be made at check-in.</li>
-                        <li className="list-group-item">The security deposit will be refunded at check-out after an inspection of the property.</li>
-                    </ul>
-                </li>
-                
+                    <>
                         <li className="list-group-item">
-                            Liability Waiver:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Guests are required to sign a liability waiver at check-in.</li>
-                            </ul>
+                            <strong>Security Deposit and Payment:</strong> Full payment, including a refundable security deposit of ₹5,000, is due at check-in. The security deposit will be refunded at check-out after an inspection of the property.
                         </li>
                         <li className="list-group-item">
-                            Housekeeping and Maintenance:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Daily housekeeping is provided between 9:00 AM and 5:00 PM.</li>
-                                <li className="list-group-item">Please inform the caretaker for any additional assistance.</li>
-                            </ul>
+                            <strong>Liability Waiver:</strong> Guests are required to sign a liability waiver upon check-in.
                         </li>
                         <li className="list-group-item">
-                            Swimming Pool Usage and Safety Rules:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Proper swimwear is mandatory.</li>
-                                <li className="list-group-item">No food or drinks are allowed around the pool area.</li>
-                                <li className="list-group-item">No diving or running near the pool for safety reasons.</li>
-                                <li className="list-group-item">No glassware near the pool area.</li>
-                                <li className="list-group-item">Children must be supervised by an adult at all times.</li>
-                                <li className="list-group-item">Guests must adhere to all pool safety instructions provided by the management.</li>
-                            </ul>
+                            <strong>Housekeeping and Maintenance:</strong> Daily housekeeping is provided between 9:00 AM and 5:00 PM. Guests are requested to inform the caretaker for any additional assistance.
                         </li>
                         <li className="list-group-item">
-                            Visitor Policy:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Visitors are not allowed unless prior approval is obtained.</li>
-                            </ul>
+                            <strong>Swimming Pool Usage and Safety Rules:</strong> Proper swimwear is mandatory for pool access. Food and drinks are not allowed around the pool area. Diving or running near the pool is prohibited for safety reasons. Glassware is not permitted in the pool area. Children must be supervised by an adult at all times. Guests must follow all pool safety instructions provided by management.
                         </li>
                         <li className="list-group-item">
-                            Care for the Property:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Guests are expected to treat the villa and its belongings with care.</li>
-                                <li className="list-group-item">Any damages will be deducted from the security deposit and/or charged separately.</li>
-                            </ul>
+                            <strong>Visitor Policy:</strong> Visitors are not allowed unless prior approval is obtained from management.
                         </li>
                         <li className="list-group-item">
-                            Complimentary Breakfast:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">Breakfast is served daily from 8:30 AM to 11:00 AM.</li>
-                            </ul>
+                            <strong>Care for the Property:</strong> Guests are expected to treat the villa and its belongings with care. Any damages will be deducted from the security deposit or charged separately.
                         </li>
                         <li className="list-group-item">
-                            Respect for Other Guests:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">The villa is located in a gated complex; guests are requested to respect the privacy and comfort of other villa guests.</li>
-                            </ul>
+                            <strong>Complimentary Breakfast:</strong> Breakfast is served daily from 8:30 AM to 11:00 AM.
                         </li>
                         <li className="list-group-item">
-                            Safety Precautions:
-                            <ul className="list-group list-group-flush list-group-bulleted">
-                                <li className="list-group-item">For safety, guests are requested to keep all doors and windows closed to prevent insects from entering the villa due to its location.</li>
-                                <li className="list-group-item">CCTV cameras are installed at all entry and exit points for security purposes.</li>
-                            </ul>
+                            <strong>Respect for Other Guests:</strong> The villa is located in a gated complex, and guests are requested to respect the privacy and comfort of other villa residents.
+                        </li>
+                        <li className="list-group-item">
+                            <strong>Safety Precautions:</strong> To prevent insects from entering, guests are requested to keep all doors and windows closed. CCTV cameras are installed at all entry and exit points for security purposes.
                         </li>
                     </>
                 )}
+                <div className="list-group-item text-center">
+                    <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white hover:bg-yellow-1 hover:text-black hover:img-hover" onClick={toggleShowMore}>
+                        {showMore ? 'Read Less' : 'Read More'}
+                    </button>
+                </div>
             </ol>
-            <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 mt-10 text-white hover:bg-yellow-1 hover:text-black hover:img-hover" onClick={toggleShowMore}>
-                {showMore ? 'Read Less' : 'Read More'}
-            </button>
         </div>
     );
 };

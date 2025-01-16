@@ -21,8 +21,9 @@ const index = () => {
       </div>
       {/* End .col-12 */}
 
-      <div className="col-12 text-center bg-egg-1 rounded-4">
-        <p className="text-14 text-yellow-1">Reserve your villa now and let us take care of the rest.</p>
+      <div className="col-12 ">
+        <div className="px-20 text-center bg-egg-1 rounded-4">
+        <p className="text-14 text-yellow-1">Reserve your villa now and let us take care of the rest.</p></div>
       </div>
 
       <div className="col-12">

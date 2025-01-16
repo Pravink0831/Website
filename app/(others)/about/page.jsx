@@ -55,9 +55,9 @@ const About = () => {
 
       {/* End Why Choose Us section */}
 
-      <section className="layout-pt-md">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
-          <div className="row y-gap-30 justify-between items-center">
+          <div className="row y-gap-30 items-center">
             <Block1 />
           </div>
         </div>

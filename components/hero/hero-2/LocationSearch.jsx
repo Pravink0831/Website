@@ -53,7 +53,7 @@ const LocationSearch = () => {
             <input
               autoComplete="off"
               type="search"
-              placeholder="Location"
+              placeholder="Search destination"
               className="js-search js-dd-focus"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
