@@ -22,7 +22,7 @@ const FilterHotels2 = () => {
         >
           <Link
             href={`/hotel-single-v1/${item.id}`}
-            className="hotelsCard -type-1 hover-inside-slider"
+            className="hotelsCard -type-1 hover-inside-slider" 
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">

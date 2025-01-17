@@ -85,14 +85,14 @@ const index = () => {
         {/* End slider */}
 
         <div className="masthead-slider__nav -prev js-prev">
-          <button className="button -outline-yellow-1 size-50 flex-center text-white rounded-full hero4-prev-active">
+          <button className="button -yellow-1 bg-white size-50 flex-center rounded-full hero4-prev-active">
             <i className="icon-arrow-left" />
           </button>
         </div>
         {/* End prev navigation */}
 
         <div className="masthead-slider__nav -next js-next">
-          <button className="button -outline-yellow-1 size-50 flex-center text-white rounded-full hero4-next-active">
+          <button className="button -yellow-1 bg-white size-50 flex-center rounded-full hero4-next-active">
             <i className="icon-arrow-right" />
           </button>
         </div>
