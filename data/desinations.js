@@ -134,7 +134,7 @@ export const destinations3 = [
 export const destinations4 = [
   {
     id: 1,
-    img: "/img/gallery/1/6.png",
+    img: "/img/gallery/1/13.jpg",
     location: "Bedroom 1",
     properties: "4,090",
     delayAnimation: "0",
@@ -148,7 +148,7 @@ export const destinations4 = [
   },
   {
     id: 3,
-    img: "/img/gallery/1/8.png",
+    img: "/img/gallery/1/12.jpg",
     location: "Kitchen",
     properties: "4,090",
     delayAnimation: "200",
