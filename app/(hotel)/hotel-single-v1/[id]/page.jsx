@@ -27,7 +27,7 @@ import Destinations from "@/components/destinations/TopDestinations2";
 import HousePolicies from "@/components/Policies/page";
 
 export const metadata = {
-  title: "Villa || GoTrip - Travel & Tour React NextJS Template",
+  title: "Villa M Stay",
   description: "Villa M Stays",
 };
 

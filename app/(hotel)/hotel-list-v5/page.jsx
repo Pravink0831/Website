@@ -51,7 +51,7 @@ const index = () => {
     </section>
       {/* Top SearchBanner */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-20 justify-between items-center">
             <div className="col-auto">
@@ -80,7 +80,7 @@ const index = () => {
             </div>
             {/* End col-auto */}
 
-            <div className="border-top-light mt-30 mb-30"></div>
+            <div className="border-top-light mt-30"></div>
             {/* End border-top */}
 
             <div className="row y-gap-30">

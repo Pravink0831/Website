@@ -1,48 +1,45 @@
-
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 
 const ContactForm = () => {
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [id]: value
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission logic here
   };
 
   return (
-    <form className="row y-gap-20 pt-20" onSubmit={handleSubmit}>
-      <div className="col-12">
-        <div className="form-input">
-          <input type="text" id="name" required />
-          <label htmlFor="name" className="lh-1 text-16 text-light-1">
-            Full Name
-          </label>
+    <form className="row y-gap-20 pt-20 text-12" onSubmit={handleSubmit}>
+      {Object.keys(formValues).map((key) => (
+        <div className="col-12" key={key}>
+          <div className="form-input">
+            {key === 'message' ? (
+              <textarea id={key} value={formValues[key]} onChange={handleChange} required rows="4"></textarea>
+            ) : (
+              <input type={key === 'email' ? 'email' : 'text'} id={key} value={formValues[key]} onChange={handleChange} required />
+            )}
+            <label htmlFor={key} className="lh-1 text-12 text-black">
+              {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
+              {formValues[key] === "" && <span style={{ color: 'red' }}>*</span>}
+            </label>
+          </div>
         </div>
-      </div>
-      <div className="col-12">
-        <div className="form-input">
-          <input type="email" id="email" required />
-          <label htmlFor="email" className="lh-1 text-16 text-light-1">
-            Email
-          </label>
-        </div>
-      </div>
-      <div className="col-12">
-        <div className="form-input">
-          <input type="text" id="subject" required />
-          <label htmlFor="subject" className="lh-1 text-16 text-light-1">
-            Subject
-          </label>
-        </div>
-      </div>
-      <div className="col-12">
-        <div className="form-input">
-          <textarea id="message" required rows="4"></textarea>
-          <label htmlFor="message" className="lh-1 text-16 text-light-1">
-            Your Message
-          </label>
-        </div>
-      </div>
+      ))}
       <div className="col-auto">
         <button
           type="submit"

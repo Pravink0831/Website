@@ -74,15 +74,15 @@ Reach out for bookings, inquiries, or any assistance – we’d love to hear fro
             <ContactForm />
           </div>
           <div className="col-xl-6 px-60 bg-egg-1 mt-75 md:mt-20 lg:mt-40 mb-60 text-black">
-            <div className="mt-60">
-              <h3 className="text-30 Made fw-500 mb-10 ">Call Us</h3>
-              <p className="text-16"><img className="icon-phone-5 mr-10 " src="/img/general/call icon.png" />+91 832 671 3333</p>
+            <div className="mt-40">
+              <h3 className="text-30 Made fw-500 mb-5 ">Call Us</h3>
+              <p className="text-16 text-black"><img className="icon-phone-5 mr-10 " src="/img/featureIcons/1/call-yellow.png" />+91 77789 02229</p>
             </div>
-            <div className="mt-60">
-              <h3 className="text-30 Made fw-500 mb-10">Email</h3>  
-              <p className="text-16 "><img className="icon-phone-5 mr-10 " src="/img/general/call icon.png" /> <a href="mailto:" className="text-black">emailid@gmail.com</a> </p>
+            <div className="mt-40">
+              <h3 className="text-30 Made fw-500 mb-5">Email</h3>  
+              <p className="text-16 "><img className="icon-phone-5 mr-10 " src="/img/featureIcons/1/Email.png" /> <a href="mailto:" className="text-black">emailid@gmail.com</a> </p>
             </div>
-            <div className="mt-60">
+            <div className="mt-40">
                 <h5 className="text-30 Made fw-500 mb-10">
                   Follow us
                 </h5>

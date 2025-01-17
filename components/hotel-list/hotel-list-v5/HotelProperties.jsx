@@ -42,7 +42,7 @@ const HotelProperties = () => {
 
   return (
     <>
-      {hotelsData.slice(0, 12).map((item) => (
+      {hotelsData.slice(0, 8).map((item) => (
         <div
           className="col-lg-3 col-sm-6"
           key={item?.id}
@@ -102,7 +102,7 @@ const HotelProperties = () => {
               <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
                 <span>{item?.title}</span>
               </h4>
-              <p className="text-black lh-14 text-14">
+              <p className="text-black lh-14 text-14 fw-500">
                 {item?.location}
               </p>
               <div className="d-flex items-center">
@@ -111,7 +111,7 @@ const HotelProperties = () => {
                 </div>
               </div>
               
-                <div className="fw-500 mt-5">
+                <div className="fw-600 mb-5">
                   Starting from{" "}
                   <span className="text-black">{item?.price}/-</span>
                 </div>
