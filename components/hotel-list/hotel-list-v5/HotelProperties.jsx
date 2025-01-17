@@ -98,7 +98,7 @@ const HotelProperties = () => {
                 </div>
               </div>
             </div>
-            <div className="hotelsCard__content">
+            <div className="hotelsCard__content pt-20 pl-5">
               <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
                 <span>{item?.title}</span>
               </h4>

@@ -11,13 +11,13 @@ export default function FilterHotels4() {
   return (
     <div className="tabs -pills-2">
     <div className="tabs__content pt-40">
-      <div className="row y-gap-30">
+      <div className="row">
         <FilterHotels2/>
       </div>
     </div>
     {/* End .tabs__content */}
 
-    <div className="row justify-center pt-60">
+    <div className="row justify-center">
       <div className="col-auto">
       <Link
                   href="/hotel-list-v5"

@@ -80,10 +80,10 @@ const index = () => {
             </div>
             {/* End col-auto */}
 
-            <div className="border-top-light mt-30"></div>
+            <div className="border-top-light mt-30 mb-30"></div>
             {/* End border-top */}
 
-            <div className="row y-gap-30">
+            <div className="row">
               <HotelProperties />
             </div>
             {/* End .row 
