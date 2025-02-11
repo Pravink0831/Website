@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       res.status(201).json({ message: 'Partner added successfully!' });
     } catch (error) {
       console.error("Error adding partner:", error);
-      res.status(500).json({ message: 'Failed to add partner.' });
+      res.status(500).json({ message: 'Failed to add partner.', error: error.message });
     }
   } else if (req.method === 'PUT') {
     const { id, firstname, lastname, email, phone, location, propertytype, amenities, additionalinfo } = req.body;
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
       res.status(200).json({ message: 'Partner updated successfully!', updatedPartner });
     } catch (error) {
       console.error("Error updating partner:", error);
-      res.status(500).json({ message: 'Failed to update partner.' });
+      res.status(500).json({ message: 'Failed to update partner.', error: error.message });
     }
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
       res.status(200).json({ message: 'Partner deleted successfully!' });
     } catch (error) {
       console.error("Error deleting partner:", error);
-      res.status(500).json({ message: 'Failed to delete partner.' });
+      res.status(500).json({ message: 'Failed to delete partner.', error: error.message });
     }
   } else if (req.method === 'GET') {
     try {
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
       res.status(200).json(partners);
     } catch (error) {
       console.error("Error fetching partners:", error);
-      res.status(500).json({ message: 'Failed to fetch partners.' });
+      res.status(500).json({ message: 'Failed to fetch partners.', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed.' });
