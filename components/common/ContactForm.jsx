@@ -7,7 +7,6 @@ const ContactForm = () => {
     name: "",
     phone: "",
     email: "",
-   
     message: ""
   });
 
@@ -31,7 +30,8 @@ const ContactForm = () => {
       });
 
       if (response.ok) {
-        alert('Contact added successfully!');
+        const data = await response.json();
+        alert(data.message);
         setFormValues({
           name: "",
           phone: "",
@@ -39,26 +39,29 @@ const ContactForm = () => {
           message: ""
         });
       } else {
-        console.error('Error submitting data:', await response.json());
+        const errorData = await response.json();
+        console.error('Error submitting data:', errorData);
+        alert(errorData.message || 'An error occurred.');
       }
     } catch (error) {
       console.error('Error submitting data:', error);
+      alert('An error occurred while submitting the form.');
     }
   };
 
   return (
     <form className="row y-gap-20 pt-20 text-12" onSubmit={handleSubmit}>
-      {Object.keys(formValues).map((key) => (
+      {Object.entries(formValues).map(([key, value]) => (
         <div className="col-12" key={key}>
           <div className="form-input">
             {key === 'message' ? (
-              <textarea id={key} value={formValues[key]} onChange={handleChange} required rows="4"></textarea>
+              <textarea id={key} value={value} onChange={handleChange} required rows="4"></textarea>
             ) : (
-              <input type={key === 'email' ? 'email' : 'text'} id={key} value={formValues[key]} onChange={handleChange} required />
+              <input type={key === 'email' ? 'email' : 'text'} id={key} value={value} onChange={handleChange} required />
             )}
             <label htmlFor={key} className="lh-1 text-12 text-black">
               {key === 'message' ? 'Write your query here' : key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
-              {formValues[key] === "" && <span style={{ color: 'red' }}>*</span>}
+              {value === "" && <span style={{ color: 'red' }}>*</span>}
             </label>
           </div>
         </div>
