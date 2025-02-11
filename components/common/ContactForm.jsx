@@ -41,11 +41,11 @@ const ContactForm = () => {
       } else {
         const errorData = await response.json();
         console.error('Error submitting data:', errorData);
-        alert(errorData.message || 'An error occurred.');
+        alert(`Error: ${response.status} - ${errorData.message || 'An error occurred.'}`);
       }
     } catch (error) {
       console.error('Error submitting data:', error);
-      alert('An error occurred while submitting the form.');
+      alert(`An error occurred while submitting the form: ${error.message}`);
     }
   };
 
