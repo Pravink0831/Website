@@ -1,26 +1,49 @@
-'use client'
+'use client';
 
 import React, { useState } from "react";
 
 const ContactForm = () => {
   const [formValues, setFormValues] = useState({
     name: "",
+    phone: "",
     email: "",
-    subject: "",
+   
     message: ""
   });
 
-  const handleChange = (event) => {
-    const { id, value } = event.target;
+  const handleChange = (e) => {
+    const { id, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
       [id]: value
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // handle form submission logic here
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        alert('Contact added successfully!');
+        setFormValues({
+          name: "",
+          phone: "",
+          email: "",
+          message: ""
+        });
+      } else {
+        console.error('Error submitting data:', await response.json());
+      }
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
   };
 
   return (
@@ -34,7 +57,7 @@ const ContactForm = () => {
               <input type={key === 'email' ? 'email' : 'text'} id={key} value={formValues[key]} onChange={handleChange} required />
             )}
             <label htmlFor={key} className="lh-1 text-12 text-black">
-              {key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
+              {key === 'message' ? 'Write your query here' : key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}
               {formValues[key] === "" && <span style={{ color: 'red' }}>*</span>}
             </label>
           </div>
@@ -45,7 +68,7 @@ const ContactForm = () => {
           type="submit"
           className="button rounded-60 px-24 h-50 -yellow-1 bg-black text-white"
         >
-          Submit <div className="icon-arrow-right ml-15"></div>
+          Submit <div className="icon-arrow-right ml-15" />
         </button>
       </div>
     </form>

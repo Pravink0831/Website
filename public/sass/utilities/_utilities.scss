@@ -129,6 +129,31 @@
   }
 }
 
+.custom-select {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0 15px;
+  padding-top: 24px;
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.custom-select:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow:0 0 0 0.04rem rgba(0, 0, 0, 1);
+}
+
+.form-input select:focus ~ label,
+.form-input select:not([value=""]) ~ label {
+  top: 10px; /* New top value when select is focused */
+  transform: translateY(-0.3rem); /* Adjust if necessary */
+  font-size: 0.85rem;
+  color: #000000;
+}
+
+
+
+
 .bg-egg-1{
   background-color: #fff7e5;
 }

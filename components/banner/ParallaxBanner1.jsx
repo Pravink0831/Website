@@ -15,7 +15,7 @@ const ParallaxBanner = () => {
       <div className="section-bg layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row justify-center text-center text-black">
-            <div className="col-xl-9" data-aos="fade">
+            <div className="col-xl-12" data-aos="fade">
             <div className="sectionTitle -md">
                       <h2 className="sectionTitle__title text-80 Made">Grow With Us – Partner for Success</h2>
                       <div className="d-flex justify-center mb-20">

@@ -64,7 +64,7 @@ const Counter = ({ name, defaultValue, onCounterChange }) => {
 const GuestSearch = () => {
   const [guestCounts, setGuestCounts] = useState({
     Adults: 2,
-    Children: 0,
+    Children: 1,
     Rooms: 1,
   });
   const handleCounterChange = (name, value) => {

@@ -1,66 +1,37 @@
 import { connect } from '../../../lib/mongodb';
 import { Property } from '../../../lib/hotels';
+import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
   await connect();
 
   if (req.method === 'POST') {
-    const { id, tag, slideImg, img, title, location, ratings, numberOfReviews, price, delayAnimation, city } = req.body;
-
     try {
-      console.log('Received Data:', req.body); // Log the received data
-
-      const newProperty = new Property({
-        id,
-        tag,
-        slideImg,
-        img,
-        title,
-        location,
-        ratings,
-        numberOfReviews,
-        price,
-        delayAnimation,
-        city,
-      });
-
+      // No need to transform the data as it's already in the correct structure
+      const newProperty = new Property(req.body);
       await newProperty.save();
-      res.status(201).json({ message: 'Hotel added successfully!' });
+      res.status(201).json({ message: 'Villa added successfully!' });
     } catch (error) {
-      console.error("Error adding hotel:", error);
-      res.status(500).json({ message: 'Failed to add hotel.' });
+      console.error("Error adding villa:", error);
+      res.status(500).json({ message: 'Failed to add villa.' });
     }
   } else if (req.method === 'PUT') {
-    const { id, tag, slideImg, img, title, location, ratings, numberOfReviews, price, delayAnimation, city } = req.body;
-
+    const { id, ...updateData } = req.body;
     try {
-      console.log('Received Data:', req.body); // Log the received data
-
       const updatedProperty = await Property.findOneAndUpdate(
-        { id },
-        {
-          tag,
-          slideImg,
-          img,
-          title,
-          location,
-          ratings,
-          numberOfReviews,
-          price,
-          delayAnimation,
-          city,
-        },
+        { _id: new ObjectId(id) },
+        updateData,
         { new: true }
       );
 
       if (!updatedProperty) {
-        return res.status(404).json({ message: 'Hotel not found.' });
+        return res.status(404).json({ message: 'Villa not found.' });
       }
 
-      res.status(200).json({ message: 'Hotel updated successfully!', updatedProperty });
+      res.status(200).json({ message: 'Villa updated successfully!', updatedProperty });
     } catch (error) {
-      console.error("Error updating hotel:", error);
-      res.status(500).json({ message: 'Failed to update hotel.' });
+      console.error("Error updating villa:", error);
+      res.status(500).json({ message: 'Failed to update villa.' });
     }
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
@@ -68,16 +39,25 @@ export default async function handler(req, res) {
     try {
       console.log('Received Data:', req.body); // Log the received data
 
-      const deletedProperty = await Property.findOneAndDelete({ id });
+      const deletedProperty = await Property.findOneAndDelete({ _id: new ObjectId(id) });
 
       if (!deletedProperty) {
-        return res.status(404).json({ message: 'Hotel not found.' });
+        return res.status(404).json({ message: 'Villa not found.' });
       }
 
-      res.status(200).json({ message: 'Hotel deleted successfully!' });
+      res.status(200).json({ message: 'Villa deleted successfully!' });
     } catch (error) {
-      console.error("Error deleting hotel:", error);
-      res.status(500).json({ message: 'Failed to delete hotel.' });
+      console.error("Error deleting villa:", error);
+      res.status(500).json({ message: 'Failed to delete villa.' });
+    }
+  } else if (req.method === 'GET') {
+    try {
+      const properties = await Property.find({}, '_id title price checkin checkout rooms location city');
+      console.log('Fetched Properties:', properties); // Log the fetched properties
+      res.status(200).json(properties);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      res.status(500).json({ message: 'Failed to fetch properties.' });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed.' });

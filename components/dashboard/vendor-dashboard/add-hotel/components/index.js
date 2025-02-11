@@ -11,24 +11,14 @@ import AttributesTabContent from "./AttributesTabContent";
 const Index = () => {
   const tabs = [
     {
-      label: "Content",
+      label: "Add Villa",
       labelNo: 1,
       content: <ContentTabContent />,
     },
     {
-      label: "Location",
+      label: "Update/Delete Villa",
       labelNo: 2,
       content: <LocationTabContent />,
-    },
-    {
-      label: "Pricing",
-      labelNo: 3,
-      content: <PricingTabContent />,
-    },
-    {
-      label: "Attributes",
-      labelNo: 4,
-      content: <AttributesTabContent />,
     },
   ];
 
@@ -44,7 +34,7 @@ const Index = () => {
         {tabs.map((tab, index) => (
           <Tab key={index} className="col-auto">
             <button className="tabs__button text-18 lg:text-16 text-light-1 fw-500 pb-5 lg:pb-0 js-tabs-button">
-              {tab.labelNo}. {tab.label}
+              {tab.label}
             </button>
           </Tab>
         ))}

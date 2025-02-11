@@ -5,22 +5,9 @@ import Header7 from "@/components/header/header-7";
 import Overview from "@/components/hotel-single/Overview";
 import PopularFacilities from "@/components/hotel-single/PopularFacilities";
 import PropertyHighlights from "@/components/hotel-single/PropertyHighlights";
-import RatingTag from "@/components/hotel-single/RatingTag";
-import StickyHeader from "@/components/hotel-single/StickyHeader";
 import Hero1 from "@/components/hero/hero-1";
 import SidebarRight from "@/components/hotel-single/SidebarRight";
-import AvailableRooms from "@/components/hotel-single/AvailableRooms";
-import ReviewProgress from "@/components/hotel-single/guest-reviews/ReviewProgress";
-import DetailsReview from "@/components/hotel-single/guest-reviews/DetailsReview";
-import ReplyForm from "@/components/hotel-single/ReplyForm";
-import ReplyFormReview from "@/components/hotel-single/ReplyFormReview";
 import Facilities from "@/components/hotel-single/Facilities";
-import Image from "next/image";
-import Surroundings from "@/components/hotel-single/Surroundings";
-import HelpfulFacts from "@/components/hotel-single/HelpfulFacts";
-import Faq from "@/components/faq/Faq";
-import Hotels2 from "@/components/hotels/Hotels2";
-import CallToActions from "@/components/common/CallToActions";
 import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 import Destinations from "@/components/destinations/TopDestinations2";
@@ -59,9 +46,9 @@ const HotelSingleV1Dynamic = ({ params }) => {
 
 
       <section className="pt-30">
-        <div className="container ">
-          <div className="row y-gap-30 d-flex relative" >
-            <div className="col-xl-7" >
+        <div className="container">
+          <div className="row y-gap-30 d-flex relative">
+            <div className="col-xl-7">
               <div className="row y-gap-40">
                 <div className="col-12">
                   <h3 className="text-80 Made fw-500">Property Highlights</h3>
@@ -145,11 +132,11 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
 
                 <div className="col-12">
-                  <h3 className="text-20 fw-500 pt-20">
+                  <h3 className="text-20 fw-500">
                   Nearest points
                   </h3>
                   <div className="row y-gap-10">
-                  <ul className="mt-3 list text-neutral-500 dark:text-neutral-400 space-y-2 mb-10">
+                  <ul className="mt-3 list text-neutral-500 dark:text-neutral-400 space-y-2 mb-20">
                       <li>
                       Candolim Beach - 2.4 kms</li>
                       <li>Calangute Beach - 3.2 kms</li>
@@ -170,9 +157,9 @@ const HotelSingleV1Dynamic = ({ params }) => {
               </div>
               {/* End .row */}
             </div>
-            {/* End .col-xl-8 */}
+            {/* End .col-xl-7 */}
 
-            <div className="col-xl-4" style={{display:'block',flexGrow:1}}><div  style={{ position: 'sticky', top: '40px' }}>
+            <div className="col-xl-4" style={{display:'block',flexGrow:1}}><div className="sticky-sidebar">
               <SidebarRight hotel={hotel} /></div>
             </div>
             {/* End .col-xl-4 */}
@@ -389,6 +376,4 @@ const HotelSingleV1Dynamic = ({ params }) => {
   );
 };
 
-export default dynamic(() => Promise.resolve(HotelSingleV1Dynamic), {
-  ssr: false,
-});
+export default dynamic(() => Promise.resolve(HotelSingleV1Dynamic), { ssr: false });

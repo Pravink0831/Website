@@ -34,9 +34,6 @@ const index = () => {
               </div>
               {/* End .col-auto */}
 
-              <div className="col-auto">
-                <FilterBox />
-              </div>
             </div>
             {/* End .row */}
 

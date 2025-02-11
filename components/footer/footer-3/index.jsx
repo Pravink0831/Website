@@ -18,7 +18,7 @@ const index = () => {
         <div className="pt-30 pb-20">
           <div className="row y-gap-40 justify-between xl:justify-start">
             <div className="col-xl-4 col-lg-6">
-              <img src="/img/general/VillaMLogo.png" alt="image" />
+              <img className="footerImg" src="/img/general/VillaMLogo.png" alt="image" />
               <div className="row y-gap-30 justify-between pt-30">
               <p className="sectionTitle__text text-18 text-white mt-5 sm:mt-0">
               At Villa M Goa, we specialize in offering

@@ -1,15 +1,49 @@
-
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Pagination from "../../common/Pagination";
 import ActionsButton from "../components/ActionsButton";
 
 const BookingTable = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [partners, setPartners] = useState([]);
+
+  useEffect(() => {
+    fetchPartners();
+  }, []);
+
+  const fetchPartners = async () => {
+    try {
+      const response = await fetch('/api/partner');
+      const data = await response.json();
+      setPartners(data);
+    } catch (error) {
+      console.error('Error fetching partners:', error);
+    }
+  };
 
   const handleTabClick = (index) => {
     setActiveTab(index);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch('/api/partner', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      if (response.ok) {
+        fetchPartners();
+      } else {
+        console.error('Error deleting partner:', await response.json());
+      }
+    } catch (error) {
+      console.error('Error deleting partner:', error);
+    }
   };
 
   const tabItems = [
@@ -21,7 +55,7 @@ const BookingTable = () => {
     "Paid",
     "Unpaid",
     "Partial Payment",
-  ];
+  ]; 
 
   return (
     <>
@@ -48,444 +82,46 @@ const BookingTable = () => {
               <table className="table-4 -border-bottom col-12">
                 <thead className="bg-light-2">
                   <tr>
-                    <th>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </th>
                     <th>Name</th>
                     <th>Location</th>
-                    <th>Author</th>
-                    <th>Status</th>
-                    <th>Reviews</th>
-                    <th>Date</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Property Type</th>
+              
                     <th>Action</th>
                   </tr>
                 </thead>
-                {/* End theade */}
+                {/* End thead */}
                 <tbody>
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
+                  {partners.map((partner) => (
+                    <tr key={partner.id}>
+                      <td className="text-blue-1 fw-500">{partner.firstname} {partner.lastname}</td>
+                      <td>{partner.location}</td>
+                      <td>{partner.email}</td>
+                      <td>{partner.phone}</td>
+                      <td>{partner.propertytype}</td>
+                      
+                      <td>
+                        <div className="row x-gap-10 y-gap-10 items-center">
+                          <div className="col-auto">
+                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                              <i className="icon-eye text-16 text-light-1" />
+                            </button>
+                          </div>
+                          <div className="col-auto">
+                            <button className="flex-center bg-light-2 rounded-4 size-35">
+                              <i className="icon-edit text-16 text-light-1" />
+                            </button>
+                          </div>
+                          <div className="col-auto">
+                            <button className="flex-center bg-light-2 rounded-4 size-35" onClick={() => handleDelete(partner.id)}>
+                              <i className="icon-trash-2 text-16 text-light-1" />
+                            </button>
                           </div>
                         </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-
-                    <td>London</td>
-
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
-                        Pending
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
-                        Confirmed
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
-                        Pending
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
-                        Confirmed
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
-                        Confirmed
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-blue-1-05 text-blue-1">
-                        Confirmed
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-red-3 text-red-2">
-                        Rejected
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
-
-                  <tr>
-                    <td>
-                      <div className="d-flex items-center">
-                        <div className="form-checkbox ">
-                          <input type="checkbox" name="name" />
-                          <div className="form-checkbox__mark">
-                            <div className="form-checkbox__icon icon-check" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className="text-blue-1 fw-500">Crowne Plaza Hotel</td>
-                    <td>London</td>
-                    <td>Ali Tufan</td>
-
-                    <td>
-                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-red-3 text-red-2">
-                        Rejected
-                      </span>
-                    </td>
-
-                    <td>
-                      <div className="rounded-4 size-35 bg-blue-1 text-white flex-center text-12 fw-600">
-                        4.8
-                      </div>
-                    </td>
-
-                    <td>04/04/2022</td>
-
-                    <td>
-                      <div className="row x-gap-10 y-gap-10 items-center">
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-eye text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-edit text-16 text-light-1" />
-                          </button>
-                        </div>
-                        <div className="col-auto">
-                          <button className="flex-center bg-light-2 rounded-4 size-35">
-                            <i className="icon-trash-2 text-16 text-light-1" />
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  {/* End tr */}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
                 {/* End tbody */}
               </table>

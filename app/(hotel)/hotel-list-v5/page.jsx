@@ -37,13 +37,13 @@ const index = () => {
               >
                 Explore All Villas
               </h1>
-              <p
+              <div
                 className="text-black text-20 mt-6 md:mt-10"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
                <MainFilterSearchBox />
-              </p>
+              </div>
             </div>
           </div>
         </div>

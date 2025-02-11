@@ -35,20 +35,13 @@ const index = () => {
               </div>
               {/* End .col-auto */}
 
-              <div className="col-auto">
-                <Link
-                  href="#"
-                  className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-                >
-                  Add Hotels <div className="icon-arrow-top-right ml-15"></div>
-                </Link>
-              </div>
+              
             </div>
             {/* End .row */}
 
             <div className="py-30 px-30 rounded-4 bg-white shadow-3">
               <BookingTable />
-              {/* End tabs */}
+              {/* End tabs */} 
             </div>
 
             <Footer />

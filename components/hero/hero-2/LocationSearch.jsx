@@ -1,43 +1,23 @@
-
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const LocationSearch = () => {
+const LocationSearch = ({ locations, onChange }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const locationSearchContent = [
-    {
-      id: 1,
-      name: "Calungute",
-      address: "Goa",
-    },
-    {
-      id: 2,
-      name: "Panjim",
-      address: "Goa",
-    },
-    {
-      id: 3,
-      name: "Baga",
-      address: "Goa",
-    },
-    {
-      id: 4,
-      name: "candolim",
-      address: "Goa",
-    },
-    {
-      id: 5,
-      name: "margao",
-      address: "Goa",
-    },
-  ];
+  const locationSearchContent = locations.map((loc, index) => ({
+    id: index + 1,
+    name: loc.location,
+    address: loc.city,
+  }));
 
   const handleOptionClick = (item) => {
     setSearchValue(item.name);
     setSelectedItem(item);
+    if (onChange) {
+      onChange(item.name, item.address);
+    }
   };
 
   return (

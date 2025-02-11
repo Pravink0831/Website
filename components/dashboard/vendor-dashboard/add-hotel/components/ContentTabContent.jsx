@@ -1,5 +1,4 @@
 import HotelContent from "./content/HotelContent";
-import HotelPolicy from "./content/HotelPolicy";
 import BannerUploader from "./content/BannerUploader";
 import GalleryUploader from "./content/GalleryUploader";
 import { useState } from "react";
@@ -12,16 +11,49 @@ const ContentTabContent = () => {
     img: "",
     title: "",
     location: "",
-    ratings: "",
-    numberOfReviews: "",
+    checkin: "",
+    checkout: "",
+    rooms: "",
+    adults: "",
+    description: "",
     price: "",
     delayAnimation: "",
     city: "",
+    overviewTitle: "",
+    overviewDescription: "",
+    popularFacilities: [{
+      popularFacilitiesTitle: '',
+      popularFacilitiesDescription: ''
+    }],
+    housePolicies: [{
+      housePoliciesTitle: '',
+      housePolicies: ''
+    }],
+    destinations: [{
+      destinationLocation: '',
+      destinationImg: ''
+    }],
+    facilities: [{
+      facilitiesTitle: '',
+      facilitiesIcon: ''
+    }]
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name.includes('.')) {
+      // Handle dynamic fields updates
+      const [section, index, field] = name.split('.');
+      setFormData(prev => ({
+        ...prev,
+        [section]: prev[section].map((item, i) => 
+          i === parseInt(index) ? { ...item, [field]: value } : item
+        )
+      }));
+    } else {
+      // Handle regular fields
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleFormSubmit = async (e) => {
@@ -51,11 +83,32 @@ const ContentTabContent = () => {
         img: "",
         title: "",
         location: "",
-        ratings: "",
-        numberOfReviews: "",
+        checkin: "",
+        checkout: "",
+        rooms: "",
+        adults: "",
+        description: "",
         price: "",
         delayAnimation: "",
         city: "",
+        overviewTitle: "",
+        overviewDescription: "",
+        popularFacilities: [{
+          popularFacilitiesTitle: '',
+          popularFacilitiesDescription: ''
+        }],
+        housePolicies: [{
+          housePoliciesTitle: '',
+          housePolicies: ''
+        }],
+        destinations: [{
+          destinationLocation: '',
+          destinationImg: ''
+        }],
+        facilities: [{
+          facilitiesTitle: '',
+          facilitiesIcon: ''
+        }]
       });
     } catch (error) {
       console.error("Error adding hotel:", error.message); // Log the error message
@@ -67,8 +120,8 @@ const ContentTabContent = () => {
     <form onSubmit={handleFormSubmit}>
       <input type="hidden" name="id" value={formData.id} />
       <div className="col-xl-10">
-        <div className="text-18 fw-500 mb-10">Hotel Content</div>
-        <HotelContent formData={formData} handleInputChange={handleInputChange} />
+        <div className="text-18 fw-500 mb-10">Villa Details</div>
+        <HotelContent handleInputChange={handleInputChange} fields={formData.fields} />
         {/* End HotelContent */}
 
         <div className="mt-30">
@@ -81,13 +134,9 @@ const ContentTabContent = () => {
           <div className="fw-500">Gallery</div>
           <GalleryUploader images={formData.slideImg} setImages={(slideImg) => setFormData({ ...formData, slideImg })} />
         </div>
-        {/* End GalleryUploader 
+        {/* End GalleryUploader */}
 
         <div className="border-top-light mt-30 mb-30" />
-
-        <div className="text-18 fw-500 mb-10">Hotel Policy</div>
-        <HotelPolicy />
-        {/* End HotelPolicy */}
 
         <div className="d-inline-block pt-30">
           <button type="submit" className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
