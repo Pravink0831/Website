@@ -1,32 +1,7 @@
 [build]
-  command = "next build"
-  publish = ".next"
-
-[[redirects]]
-  from = "/api/upload"
-  to = "/.netlify/functions/api-upload"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/images/*"
-  to = "/.netlify/functions/api-images/:splat"
-  status = 200
-  force = true
+  functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
-  to = "/api/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
-
-[functions]
-  directory = "pages/api"
-  node_bundler = "esbuild"
-  external_node_modules = ["formidable"]
-
-[functions.api-upload]
-  memory = 1024
-  timeout = 30
-
-[build.environment]
-  NODE_VERSION = "18"

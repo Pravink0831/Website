@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       res.status(200).json(contact);
     } catch (error) {
       console.error("Error fetching contact:", error);
-      res.status(500).json({ message: 'Failed to fetch contact.' });
+      res.status(500).json({ message: 'Failed to fetch contact.', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed.' });

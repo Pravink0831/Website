@@ -29,10 +29,14 @@ const BannerUploader = ({ images, setImages }) => {
               },
             });
 
-            setImages(response.data.imgUrl);
-            setError("");
+            if (response.data && response.data.imgUrl) {
+              setImages(response.data.imgUrl);
+              setError("");
+            } else {
+              setError("Image upload failed: " + (response.data ? response.data.message : "Unknown error"));
+            }
           } catch (err) {
-            setError("Image upload failed.");
+            setError("Image upload failed: " + err.message);
           }
         }
       };
