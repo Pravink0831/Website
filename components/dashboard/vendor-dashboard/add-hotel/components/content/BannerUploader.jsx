@@ -23,20 +23,16 @@ const BannerUploader = ({ images, setImages }) => {
             const formData = new FormData();
             formData.append("img", file);
 
-            const response = await axios.post("/api/upload", formData, {
+            const response = await axios.post("http://localhost:3000/api/upload", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
             });
 
-            if (response.data && response.data.imgUrl) {
-              setImages(response.data.imgUrl);
-              setError("");
-            } else {
-              setError("Image upload failed: " + (response.data ? response.data.message : "Unknown error"));
-            }
+            setImages(response.data.imgUrl);
+            setError("");
           } catch (err) {
-            setError("Image upload failed: " + err.message);
+            setError("Image upload failed.");
           }
         }
       };
