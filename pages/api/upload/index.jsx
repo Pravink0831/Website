@@ -1,8 +1,9 @@
 import { connect } from '../../../lib/mongodb';
-import { ImageUpload } from '../../../lib/schema'; // Add this schema
+import { ImageUpload } from '../../../lib/schema';
 import formidable from 'formidable';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 export const config = {
   api: {
@@ -11,59 +12,64 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  await connect();
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const form = new formidable.IncomingForm();
-  form.uploadDir = path.join(process.cwd(), 'public/uploads');
-  
-  // Create uploads directory if it doesn't exist
-  if (!fs.existsSync(form.uploadDir)) {
-    fs.mkdirSync(form.uploadDir, { recursive: true });
-  }
-
   try {
-    const { fields, files } = await new Promise((resolve, reject) => {
+    await connect();
+
+    const form = formidable({
+      uploadDir: os.tmpdir(), // Use system temp directory
+      keepExtensions: true,
+      maxFileSize: 5 * 1024 * 1024, // 5MB limit
+    });
+
+    const { files } = await new Promise((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         if (err) reject(err);
-        resolve({ fields, files });
+        resolve({ files });
       });
     });
 
     const imageUrls = [];
-    const isProduction = process.env.NODE_ENV === 'production';
-
-    // Handle multiple files
     const fileArray = Object.values(files);
+
     for (const file of fileArray) {
-      if (isProduction) {
-        // In production, store as base64 in MongoDB
-        const imageBuffer = fs.readFileSync(file.filepath);
-        const base64Image = imageBuffer.toString('base64');
-        const imageDoc = await ImageUpload.create({
-          data: base64Image,
-          contentType: file.mimetype
-        });
-        imageUrls.push(`/api/images/${imageDoc._id}`);
-      } else {
-        // In development, move file to uploads directory
-        const filename = `${Date.now()}-${file.originalFilename}`;
-        const newPath = path.join(form.uploadDir, filename);
-        fs.renameSync(file.filepath, newPath);
-        imageUrls.push(`/uploads/${filename}`);
-      }
+      // Read the file and convert to base64
+      const imageBuffer = fs.readFileSync(file.filepath);
+      const base64Image = imageBuffer.toString('base64');
+
+      // Save to MongoDB
+      const imageDoc = await ImageUpload.create({
+        data: base64Image,
+        contentType: file.mimetype,
+        filename: file.originalFilename
+      });
+
+      imageUrls.push(`/api/images/${imageDoc._id}`);
+
+      // Clean up temp file
+      fs.unlinkSync(file.filepath);
     }
 
     res.status(200).json({
       message: 'Upload successful',
-      imgUrl: imageUrls[0], // For single image upload
-      slideImgUrls: imageUrls // For multiple images
+      imgUrl: imageUrls[0],
+      slideImgUrls: imageUrls
     });
+
   } catch (error) {
     console.error('Upload error:', error);
-    res.status(500).json({ message: 'Error uploading file', error: error.message });
+    res.status(500).json({ 
+      message: 'Error uploading file', 
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 }

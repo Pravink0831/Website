@@ -4,5 +4,13 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/api/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
+
+[functions]
+  included_files = ["public/**/*"]
+  node_bundler = "esbuild"
+  external_node_modules = ["formidable"]
+
+[build.environment]
+  NODE_VERSION = "18"
