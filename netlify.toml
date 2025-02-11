@@ -10,12 +10,11 @@
 [functions]
   node_bundler = "esbuild"
   external_node_modules = ["formidable"]
+  included_files = ["public/uploads/**"]
 
-[functions."api/upload"]
-  included_files = []
-  excluded_files = ["public/**/*"]
+[functions.upload]
+  memory = 1024
+  timeout = 30
 
 [build.environment]
   NODE_VERSION = "18"
-  AWS_LAMBDA_FUNCTION_MEMORY_SIZE = "1024"
-  AWS_LAMBDA_FUNCTION_TIMEOUT = "30"
