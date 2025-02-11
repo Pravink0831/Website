@@ -6,58 +6,61 @@ import axios from "axios";
 const GalleryUploader = ({ images, setImages }) => {
   const [error, setError] = useState("");
 
-  const handleFileUpload = async (event) => {
-    const fileList = event.target.files;
-    const newImages = [];
-    const maxSize = 800; // in pixels
-
-    for (let i = 0; i < fileList.length; i++) {
-      const file = fileList[i];
-      const reader = new FileReader();
-
-      reader.onloadend = async () => {
-        const img = new Image();
-        img.onload = async () => {
-          if (img.width > maxSize || img.height > maxSize) {
-            setError(`Image ${file.name} exceeds the maximum size of ${maxSize}px.`);
-          } else if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
-            setError(`Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`);
-          } else {
-            try {
-              const formData = new FormData();
-              formData.append("slideImg", file);
-
-              const response = await axios.post("http://localhost:3000/api/upload", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              });
-
-              // Use the returned imgUrl from the response
-              if (response.data.slideImgUrls) {
-                response.data.slideImgUrls.forEach(url => {
-                  newImages.push(url);
-                });
-              } else {
-                newImages.push(response.data.imgUrl);
-              }
-              
-              if (newImages.length === fileList.length) {
-                setImages([...images, ...newImages]);
-                setError("");
-              }
-            } catch (err) {
-              setError("Image upload failed.");
-            }
-          }
-        };
-        img.onerror = () => {
-          setError(`Image ${file.name} could not be loaded.`);
-        };
-        img.src = reader.result;
+  const validateImage = (file, maxSize) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width > maxSize || img.height > maxSize) {
+          reject(`Image ${file.name} exceeds the maximum size of ${maxSize}px.`);
+        } else if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
+          reject(`Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`);
+        } else {
+          resolve();
+        }
       };
+      img.onerror = () => {
+        reject(`Image ${file.name} could not be loaded.`);
+      };
+      img.src = URL.createObjectURL(file); // Use createObjectURL for faster loading
+    });
+  };
 
-      reader.readAsDataURL(file);
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("slideImg", file);
+
+    try {
+      const response = await axios.post("/api/upload", formData, { // Use relative URL
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data.slideImgUrls || [response.data.imgUrl]; // Handle both single and multiple image responses
+    } catch (err) {
+      throw new Error(err.response?.data?.message || "Image upload failed."); // Propagate the error
+    }
+  };
+
+  const handleFileUpload = async (event) => {
+    const fileList = Array.from(event.target.files); // Convert FileList to Array
+    const maxSize = 1800; // in pixels
+
+    setError(""); // Clear previous errors
+
+    try {
+      // Validate all images first
+      await Promise.all(fileList.map(file => validateImage(file, maxSize)));
+
+      // Upload all images in parallel
+      const imageUrlsArrays = await Promise.all(fileList.map(uploadImage));
+
+      // Flatten the array of arrays into a single array of URLs
+      const imageUrls = imageUrlsArrays.flat();
+
+      // Update the state with the new images
+      setImages(prevImages => [...prevImages, ...imageUrls]);
+    } catch (err) {
+      setError(err.message || "Image upload failed.");
     }
   };
 

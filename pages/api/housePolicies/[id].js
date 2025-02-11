@@ -15,7 +15,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(policies);
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error fetching policies:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -25,7 +26,8 @@ export default async function handler(req, res) {
         await newPolicies.save();
         res.status(201).json({ message: "Policies added successfully!" });
       } catch (error) {
-        res.status(500).json({ message: "Failed to add policies." });
+        console.error("Error adding policies:", error);
+        res.status(500).json({ message: "Failed to add policies.", error: error.message });
       }
       break;
 
@@ -37,7 +39,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(updatedPolicies);
       } catch (error) {
-        res.status (500).json({ message: "Server error" });
+        console.error("Error updating policies:", error);
+        res.status (500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -49,7 +52,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json({ message: "Policies deleted successfully" });
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error deleting policies:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 

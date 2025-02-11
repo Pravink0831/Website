@@ -15,7 +15,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(facilities);
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error fetching facilities:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -25,7 +26,8 @@ export default async function handler(req, res) {
         await newFacilities.save();
         res.status(201).json({ message: "Facilities added successfully!" });
       } catch (error) {
-        res.status(500).json({ message: "Failed to add facilities." });
+        console.error("Error adding facilities:", error);
+        res.status(500).json({ message: "Failed to add facilities.", error: error.message });
       }
       break;
 
@@ -37,7 +39,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(updatedFacilities);
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error updating facilities:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -49,7 +52,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json({ message: "Facilities deleted successfully" });
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error deleting facilities:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 

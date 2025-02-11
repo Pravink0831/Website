@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       res.status(201).json({ message: 'Villa added successfully!' });
     } catch (error) {
       console.error("Error adding villa:", error);
-      res.status(500).json({ message: 'Failed to add villa.' });
+      res.status(500).json({ message: 'Failed to add villa.', error: error.message });
     }
   } else if (req.method === 'PUT') {
     const { id, ...updateData } = req.body;
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       res.status(200).json({ message: 'Villa updated successfully!', updatedProperty });
     } catch (error) {
       console.error("Error updating villa:", error);
-      res.status(500).json({ message: 'Failed to update villa.' });
+      res.status(500).json({ message: 'Failed to update villa.', error: error.message });
     }
   } else if (req.method === 'DELETE') {
     const { id } = req.body;
@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       res.status(200).json({ message: 'Villa deleted successfully!' });
     } catch (error) {
       console.error("Error deleting villa:", error);
-      res.status(500).json({ message: 'Failed to delete villa.' });
+      res.status(500).json({ message: 'Failed to delete villa.', error: error.message });
     }
   } else if (req.method === 'GET') {
     try {
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
       res.status(200).json(properties);
     } catch (error) {
       console.error("Error fetching properties:", error);
-      res.status(500).json({ message: 'Failed to fetch properties.' });
+      res.status(500).json({ message: 'Failed to fetch properties.', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed.' });

@@ -15,7 +15,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(overview);
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error fetching overview:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -25,7 +26,8 @@ export default async function handler(req, res) {
         await newOverview.save();
         res.status(201).json({ message: "Overview added successfully!" });
       } catch (error) {
-        res.status(500).json({ message: "Failed to add overview." });
+        console.error("Error adding overview:", error);
+        res.status(500).json({ message: "Failed to add overview.", error: error.message });
       }
       break;
 
@@ -37,7 +39,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json(updatedOverview);
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error updating overview:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 
@@ -49,7 +52,8 @@ export default async function handler(req, res) {
         }
         res.status(200).json({ message: "Overview deleted successfully" });
       } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        console.error("Error deleting overview:", error);
+        res.status(500).json({ message: "Server error", error: error.message });
       }
       break;
 

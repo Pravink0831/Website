@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       res.status(200).json(property);
     } catch (error) {
       console.error("Error fetching hotel:", error);
-      res.status(500).json({ message: 'Failed to fetch hotel.' });
+      res.status(500).json({ message: 'Failed to fetch hotel.', error: error.message });
     }
   } else if (req.method === 'PUT') {
     try {
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       res.status(200).json(updatedProperty);
     } catch (error) {
       console.error("Error updating hotel:", error);
-      res.status(500).json({ message: 'Failed to update hotel' });
+      res.status(500).json({ message: 'Failed to update hotel', error: error.message });
     }
   } else if (req.method === 'DELETE') {
     try {
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
       res.status(200).json({ message: 'Hotel deleted successfully' });
     } catch (error) {
       console.error("Error deleting hotel:", error);
-      res.status(500).json({ message: 'Failed to delete hotel.' });
+      res.status(500).json({ message: 'Failed to delete hotel.', error: error.message });
     }
   } else {
     res.status(405).json({ message: 'Method not allowed.' });
