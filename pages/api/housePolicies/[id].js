@@ -1,5 +1,5 @@
-import dbConnect from "@/lib/dbConnect";
-import { HousePolicies } from "@/lib/schema";
+import dbConnect from "../../../lib/mongodb";
+import { HousePolicies } from "../../../lib/schema";
 
 export default async function handler(req, res) {
   const { id } = req.query;

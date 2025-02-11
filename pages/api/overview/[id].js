@@ -1,5 +1,5 @@
-import dbConnect from "@/lib/dbConnect";
-import { Overview } from "@/lib/schema";
+import dbConnect from "../../../lib/mongodb";
+import { Overview } from "../../../lib/schema";
 
 export default async function handler(req, res) {
   const { id } = req.query;
