@@ -1,6 +1,7 @@
 import { connect } from '../../../lib/mongodb';
 import { ImageUpload } from '../../../lib/schema';
 import { ObjectId } from 'mongodb';
+import fs from 'fs/promises';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -15,9 +16,10 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: 'Image not found' });
     }
 
-    const buffer = Buffer.from(image.data, 'base64');
+    const imageBuffer = await fs.readFile(image.path);
     res.setHeader('Content-Type', image.contentType);
-    res.send(buffer);
+    res.setHeader('Cache-Control', 'public, max-age=31536000');
+    res.send(imageBuffer);
   } catch (error) {
     console.error('Error serving image:', error);
     res.status(500).json({ message: 'Error serving image' });

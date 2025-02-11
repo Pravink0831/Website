@@ -8,9 +8,14 @@
   status = 200
 
 [functions]
-  included_files = ["public/**/*"]
   node_bundler = "esbuild"
   external_node_modules = ["formidable"]
 
+[functions."api/upload"]
+  included_files = []
+  excluded_files = ["public/**/*"]
+
 [build.environment]
   NODE_VERSION = "18"
+  AWS_LAMBDA_FUNCTION_MEMORY_SIZE = "1024"
+  AWS_LAMBDA_FUNCTION_TIMEOUT = "30"
