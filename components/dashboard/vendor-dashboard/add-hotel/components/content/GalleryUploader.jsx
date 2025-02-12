@@ -38,41 +38,44 @@ const GalleryUploader = ({ images, setImages }) => {
       });
       console.log("Upload response:", response.data);
 
-      let imageUrls = [];
-      if (Array.isArray(response.data.slideImgUrls)) {
-        imageUrls = response.data.slideImgUrls;
+      // Handle multiple image URLs from response
+      if (response.data.slideImgUrls && Array.isArray(response.data.slideImgUrls)) {
+        return response.data.slideImgUrls; // Return array of URLs
       } else if (response.data.imgUrl) {
-        imageUrls = [response.data.imgUrl];
+        return [response.data.imgUrl]; // Return single URL as array
       } else {
-        console.warn("Unexpected response structure:", response.data);
-        throw new Error("Unexpected response structure from upload API");
+        console.warn("No valid image URLs in response:", response.data);
+        throw new Error("No valid image URLs in response");
       }
-
-      return imageUrls;
     } catch (err) {
-      console.error("Upload error:", err.response?.data?.message || "Image upload failed.");
-      throw new Error(err.response?.data?.message || "Image upload failed.");
+      console.error("Upload error:", err);
+      throw new Error(err.message || "Image upload failed.");
     }
   };
 
   const handleFileUpload = async (event) => {
-    const fileList = Array.from(event.target.files || []); // Ensure we have an array
+    const fileList = Array.from(event.target.files || []); // Convert FileList to Array
     const maxSize = 1800;
 
     setError("");
 
     try {
+      // Validate all images first
       await Promise.all(fileList.map(file => validateImage(file, maxSize)));
-      const imageUrlsArrays = await Promise.all(fileList.map(uploadImage));
-      const imageUrls = imageUrlsArrays.flat().filter(Boolean); // Ensure we have valid URLs
+      
+      // Upload all images and get arrays of URLs
+      const imageUrlArrays = await Promise.all(fileList.map(uploadImage));
+      
+      // Flatten the arrays of URLs and filter out any invalid values
+      const allImageUrls = imageUrlArrays.flat().filter(Boolean);
+      console.log("All processed image URLs:", allImageUrls);
 
-      console.log("Uploaded image URLs:", imageUrls);
-
-      // Ensure we're working with arrays
-      setImages(prevImages => {
-        const previousImages = Array.isArray(prevImages) ? prevImages : [];
-        return [...previousImages, ...imageUrls];
-      });
+      if (allImageUrls.length > 0) {
+        setImages(prevImages => {
+          const previousImages = Array.isArray(prevImages) ? prevImages : [];
+          return [...previousImages, ...allImageUrls];
+        });
+      }
     } catch (err) {
       setError(err.message || "Image upload failed.");
     }
@@ -94,7 +97,14 @@ const GalleryUploader = ({ images, setImages }) => {
               <div className="text-blue-1 fw-500">Upload Images</div>
             </div>
           </label>
-          <input type="file" id="galleryUpload" multiple accept="image/png, image/jpeg" className="d-none" onChange={handleFileUpload} />
+          <input 
+            type="file" 
+            id="galleryUpload" 
+            multiple // This attribute allows multiple file selection
+            accept="image/png, image/jpeg" 
+            className="d-none" 
+            onChange={handleFileUpload} 
+          />
           <div className="text-start mt-10 text-14 text-light-1">PNG or JPG no bigger than 800px wide and tall.</div>
         </div>
       </div>
