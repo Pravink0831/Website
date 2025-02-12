@@ -71,6 +71,9 @@ const GalleryUploader = ({ images, setImages }) => {
       // Flatten the array of arrays into a single array of URLs
       const imageUrls = imageUrlsArrays.flat();
 
+      // Log the image URLs to verify
+      console.log("Uploaded image URLs:", imageUrls);
+
       // Update the state with the new images
       setImages(prevImages => [...prevImages, ...imageUrls]);
     } catch (err) {

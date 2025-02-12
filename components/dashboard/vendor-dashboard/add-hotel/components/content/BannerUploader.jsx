@@ -1,10 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const BannerUploader = ({ bannerImage, setBannerImage }) => {
   const [error, setError] = useState("");
+  const [isClient, setIsClient] = useState(false); // Track client-side rendering
+
+  useEffect(() => {
+    setIsClient(true); // Set to true after component mounts on client
+  }, []);
 
   const validateImage = (file) => {
     return new Promise((resolve, reject) => {
@@ -34,18 +39,31 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
       const formData = new FormData();
       formData.append("img", file);
 
-      console.log("Uploading banner image:", file.name); // Add this line
+      console.log("Uploading banner image:", file.name);
       const response = await axios.post("/api/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("Banner upload response:", response.data); // Add this line
-      setBannerImage(response.data.imgUrl);
-      setError("");
+      console.log("Banner upload response:", response.data);
+      
+      // Check if response.data exists and contains imgUrl
+      if (response.data && typeof response.data.imgUrl === 'string') {
+        console.log("Setting banner image URL:", response.data.imgUrl);
+        setBannerImage(response.data.imgUrl);
+        setError("");
+      } else {
+        console.error("Invalid response structure:", response.data);
+        setError("Upload failed: Invalid response from server");
+      }
     } catch (err) {
-      console.error("Banner upload error:", err); // Add this line
+      console.error("Banner upload error:", err);
       setError(err.message || "Upload failed");
     }
+  };
+
+  const handleRemoveImage = () => {
+    console.log("Removing banner image");
+    setBannerImage(null);
   };
 
   return (
@@ -68,13 +86,13 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
         </div>
       </div>
 
-      {bannerImage && (
+      {bannerImage && isClient && (
         <div className="col-auto">
           <div className="d-flex ratio ratio-1:1 w-200">
             <img src={bannerImage} alt="banner" className="img-ratio rounded-4" />
             <div
               className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute"
-              onClick={() => setBannerImage(null)}
+              onClick={handleRemoveImage}
             >
               <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
                 <i className="icon-trash text-16" />
