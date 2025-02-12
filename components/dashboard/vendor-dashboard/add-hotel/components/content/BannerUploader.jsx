@@ -23,7 +23,10 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (!file) return;
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
 
     try {
       await validateImage(file);
@@ -31,13 +34,16 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
       const formData = new FormData();
       formData.append("img", file);
 
+      console.log("Uploading banner image:", file.name); // Add this line
       const response = await axios.post("/api/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+      console.log("Banner upload response:", response.data); // Add this line
       setBannerImage(response.data.imgUrl);
       setError("");
     } catch (err) {
+      console.error("Banner upload error:", err); // Add this line
       setError(err.message || "Upload failed");
     }
   };

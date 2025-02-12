@@ -31,16 +31,27 @@ const GalleryUploader = ({ images, setImages }) => {
 
     try {
       console.log("Uploading image:", file.name);
-      const response = await axios.post("/api/upload", formData, { // Use relative URL
+      const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       console.log("Upload response:", response.data);
-      return response.data.slideImgUrls || [response.data.imgUrl]; // Handle both single and multiple image responses
+
+      let imageUrls = [];
+      if (Array.isArray(response.data.slideImgUrls)) {
+        imageUrls = response.data.slideImgUrls;
+      } else if (response.data.imgUrl) {
+        imageUrls = [response.data.imgUrl];
+      } else {
+        console.warn("Unexpected response structure:", response.data);
+        throw new Error("Unexpected response structure from upload API");
+      }
+
+      return imageUrls;
     } catch (err) {
       console.error("Upload error:", err.response?.data?.message || "Image upload failed.");
-      throw new Error(err.response?.data?.message || "Image upload failed."); // Propagate the error
+      throw new Error(err.response?.data?.message || "Image upload failed.");
     }
   };
 
