@@ -126,13 +126,25 @@ const ContentTabContent = () => {
 
         <div className="mt-30">
           <div className="fw-500">Banner Image</div>
-          <BannerUploader images={formData.img} setImages={(img) => setFormData({ ...formData, img })} />
+          <BannerUploader 
+            bannerImage={formData.img} 
+            setBannerImage={(url) => {
+              console.log('Setting banner image:', url);
+              setFormData(prev => ({ ...prev, img: url }));
+            }} 
+          />
         </div>
         {/* End BannerUploader */}
 
         <div className="mt-30">
           <div className="fw-500">Gallery</div>
-          <GalleryUploader images={formData.slideImg} setImages={(slideImg) => setFormData({ ...formData, slideImg })} />
+          <GalleryUploader 
+            images={formData.slideImg} 
+            setImages={(urls) => {
+              console.log('Setting gallery images:', urls);
+              setFormData(prev => ({ ...prev, slideImg: urls }));
+            }} 
+          />
         </div>
         {/* End GalleryUploader */}
 

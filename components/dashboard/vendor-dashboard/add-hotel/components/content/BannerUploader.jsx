@@ -46,10 +46,15 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
       console.log("Banner upload response:", response.data);
       
-      // Check if response.data exists and contains imgUrl
-      if (response.data && typeof response.data.imgUrl === 'string') {
-        console.log("Setting banner image URL:", response.data.imgUrl);
-        setBannerImage(response.data.imgUrl);
+      // Modify this section to handle the URL correctly
+      if (response.data && response.data.imgUrl) {
+        const imageUrl = response.data.imgUrl;
+        console.log("Setting banner image URL:", imageUrl);
+        if (typeof setBannerImage === 'function') {
+          setBannerImage(imageUrl);
+        } else {
+          console.error("setBannerImage is not a function:", typeof setBannerImage);
+        }
         setError("");
       } else {
         console.error("Invalid response structure:", response.data);
