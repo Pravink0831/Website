@@ -58,6 +58,7 @@ const GalleryUploader = ({ images, setImages }) => {
     const maxSize = 1800;
 
     setError("");
+    console.log("Starting upload for files:", fileList.map(f => f.name));
 
     try {
       // Validate all images first
@@ -68,15 +69,16 @@ const GalleryUploader = ({ images, setImages }) => {
       
       // Flatten the arrays of URLs and filter out any invalid values
       const allImageUrls = imageUrlArrays.flat().filter(Boolean);
-      console.log("All processed image URLs:", allImageUrls);
+      console.log("Current images:", images);
+      console.log("New image URLs to add:", allImageUrls);
 
       if (allImageUrls.length > 0) {
-        setImages(prevImages => {
-          const previousImages = Array.isArray(prevImages) ? prevImages : [];
-          return [...previousImages, ...allImageUrls];
-        });
+        const updatedImages = [...(images || []), ...allImageUrls];
+        console.log("Final updated images array:", updatedImages);
+        setImages(updatedImages);
       }
     } catch (err) {
+      console.error("Upload error:", err);
       setError(err.message || "Image upload failed.");
     }
   };
@@ -110,10 +112,15 @@ const GalleryUploader = ({ images, setImages }) => {
       </div>
       {/* End uploader field */}
 
-      {images.map((image, index) => (
+      {Array.isArray(images) && images.map((image, index) => (
         <div className="col-auto" key={index}>
           <div className="d-flex ratio ratio-1:1 w-200">
-            <img src={image} alt="image" className="img-ratio rounded-4" />
+            <img 
+              src={image} 
+              alt={`Gallery image ${index + 1}`} 
+              className="img-ratio rounded-4"
+              onError={(e) => console.error(`Error loading image ${index}:`, image)} 
+            />
             <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute" onClick={() => handleRemoveImage(index)}>
               <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
                 <i className="icon-trash text-16" />
