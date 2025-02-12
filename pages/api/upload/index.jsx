@@ -1,16 +1,15 @@
+import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import { connect } from '../../../lib/mongodb';
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads'); // Directory to save the uploaded files
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
-
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 export const config = {
   api: {
@@ -19,23 +18,56 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
   await connect();
 
-  upload.fields([{ name: 'img', maxCount: 1 }, { name: 'slideImg', maxCount: 10 }])(req, res, async (err) => {
+  upload.fields([
+    { name: 'img', maxCount: 1 },
+    { name: 'slideImg', maxCount: 10 }
+  ])(req, res, async (err) => {
     if (err) {
-      console.error("Failed to upload images:", err);
-      return res.status(500).json({ message: 'Failed to upload images.', error: err.message });
+      return res.status(500).json({ error: err.message });
     }
 
     try {
-      const imgUrl = req.files.img ? `/uploads/${req.files.img[0].filename}` : null;
-      let slideImgUrls = req.files.slideImg ? req.files.slideImg.map(file => `/uploads/${file.filename}`) : [];
-      slideImgUrls = slideImgUrls.flat();
+      const uploadToCloudinary = async (buffer) => {
+        return new Promise((resolve, reject) => {
+          const uploadStream = cloudinary.uploader.upload_stream(
+            { resource_type: 'auto' },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          );
+          uploadStream.end(buffer);
+        });
+      };
 
-      res.status(200).json({ message: 'Images uploaded successfully!', imgUrl, slideImgUrls });
+      let imgUrl = null;
+      let slideImgUrls = [];
+
+      if (req.files.img) {
+        const result = await uploadToCloudinary(req.files.img[0].buffer);
+        imgUrl = result.secure_url;
+      }
+
+      if (req.files.slideImg) {
+        const uploads = req.files.slideImg.map(file => uploadToCloudinary(file.buffer));
+        const results = await Promise.all(uploads);
+        slideImgUrls = results.map(result => result.secure_url);
+      }
+
+      res.status(200).json({
+        message: 'Upload successful',
+        imgUrl,
+        slideImgUrls
+      });
     } catch (error) {
-      console.error("Error processing images:", error);
-      return res.status(500).json({ message: 'Error processing images.', error: error.message });
+      console.error('Upload error:', error);
+      res.status(500).json({ error: 'Upload failed' });
     }
   });
 }

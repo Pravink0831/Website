@@ -1,7 +1,10 @@
 [build]
-  functions = "netlify/functions"
+  command = "next build"
+  publish = ".next"
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/server/api/:splat"
-  status = 200
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "16"

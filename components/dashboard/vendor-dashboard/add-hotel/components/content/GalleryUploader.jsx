@@ -30,13 +30,16 @@ const GalleryUploader = ({ images, setImages }) => {
     formData.append("slideImg", file);
 
     try {
+      console.log("Uploading image:", file.name);
       const response = await axios.post("/api/upload", formData, { // Use relative URL
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log("Upload response:", response.data);
       return response.data.slideImgUrls || [response.data.imgUrl]; // Handle both single and multiple image responses
     } catch (err) {
+      console.error("Upload error:", err.response?.data?.message || "Image upload failed.");
       throw new Error(err.response?.data?.message || "Image upload failed."); // Propagate the error
     }
   };

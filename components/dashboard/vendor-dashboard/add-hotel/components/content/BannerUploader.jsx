@@ -3,46 +3,43 @@
 import { useState } from "react";
 import axios from "axios";
 
-const BannerUploader = ({ images, setImages }) => {
+const BannerUploader = ({ bannerImage, setBannerImage }) => {
   const [error, setError] = useState("");
+
+  const validateImage = (file) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
+          reject("Only PNG and JPEG files are allowed.");
+        } else {
+          resolve();
+        }
+      };
+      img.onerror = () => reject("Invalid image file");
+      img.src = URL.createObjectURL(file);
+    });
+  };
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    const maxSize = 800; // in pixels
+    if (!file) return;
 
-    reader.onloadend = async () => {
-      const img = new Image();
-      img.onload = async () => {
-        if (img.width > maxSize || img.height > maxSize) {
-          setError(`Image ${file.name} exceeds the maximum size of ${maxSize}px.`);
-        } else if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
-          setError(`Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`);
-        } else {
-          try {
-            const formData = new FormData();
-            formData.append("img", file);
+    try {
+      await validateImage(file);
 
-            const response = await axios.post("/api/upload", formData, { // Use relative URL
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
+      const formData = new FormData();
+      formData.append("img", file);
 
-            setImages(response.data.imgUrl);
-            setError("");
-          } catch (err) {
-            setError("Image upload failed.");
-          }
-        }
-      };
-      img.onerror = () => {
-        setError(`Image ${file.name} could not be loaded.`);
-      };
-      img.src = reader.result;
-    };
+      const response = await axios.post("/api/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    reader.readAsDataURL(file);
+      setBannerImage(response.data.imgUrl);
+      setError("");
+    } catch (err) {
+      setError(err.message || "Upload failed");
+    }
   };
 
   return (
@@ -52,19 +49,27 @@ const BannerUploader = ({ images, setImages }) => {
           <label htmlFor="bannerUpload" className="d-flex ratio ratio-1:1">
             <div className="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
               <div className="icon-upload-file text-40 text-blue-1 mb-10" />
-              <div className="text-blue-1 fw-500">Upload Image</div>
+              <div className="text-blue-1 fw-500">Upload Banner</div>
             </div>
           </label>
-          <input type="file" id="bannerUpload" accept="image/png, image/jpeg" className="d-none" onChange={handleFileUpload} />
-          <div className="text-start mt-10 text-14 text-light-1">PNG or JPG no bigger than 800px wide and tall.</div>
+          <input
+            type="file"
+            id="bannerUpload"
+            accept="image/png, image/jpeg"
+            className="d-none"
+            onChange={handleFileUpload}
+          />
         </div>
       </div>
 
-      {images && (
+      {bannerImage && (
         <div className="col-auto">
           <div className="d-flex ratio ratio-1:1 w-200">
-            <img src={images} alt="image" className="img-ratio rounded-4" />
-            <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+            <img src={bannerImage} alt="banner" className="img-ratio rounded-4" />
+            <div
+              className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute"
+              onClick={() => setBannerImage(null)}
+            >
               <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
                 <i className="icon-trash text-16" />
               </div>
@@ -73,7 +78,7 @@ const BannerUploader = ({ images, setImages }) => {
         </div>
       )}
 
-      {error && <div className="col-12 mb-10 text-red-1">{error}</div>}
+      {error && <div className="col-12 text-red-1">{error}</div>}
     </div>
   );
 };
