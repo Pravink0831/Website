@@ -56,26 +56,23 @@ const GalleryUploader = ({ images, setImages }) => {
   };
 
   const handleFileUpload = async (event) => {
-    const fileList = Array.from(event.target.files); // Convert FileList to Array
-    const maxSize = 1800; // in pixels
+    const fileList = Array.from(event.target.files || []); // Ensure we have an array
+    const maxSize = 1800;
 
-    setError(""); // Clear previous errors
+    setError("");
 
     try {
-      // Validate all images first
       await Promise.all(fileList.map(file => validateImage(file, maxSize)));
-
-      // Upload all images in parallel
       const imageUrlsArrays = await Promise.all(fileList.map(uploadImage));
+      const imageUrls = imageUrlsArrays.flat().filter(Boolean); // Ensure we have valid URLs
 
-      // Flatten the array of arrays into a single array of URLs
-      const imageUrls = imageUrlsArrays.flat();
-
-      // Log the image URLs to verify
       console.log("Uploaded image URLs:", imageUrls);
 
-      // Update the state with the new images
-      setImages(prevImages => [...prevImages, ...imageUrls]);
+      // Ensure we're working with arrays
+      setImages(prevImages => {
+        const previousImages = Array.isArray(prevImages) ? prevImages : [];
+        return [...previousImages, ...imageUrls];
+      });
     } catch (err) {
       setError(err.message || "Image upload failed.");
     }

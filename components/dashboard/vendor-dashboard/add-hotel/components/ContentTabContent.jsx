@@ -129,8 +129,13 @@ const ContentTabContent = () => {
           <BannerUploader 
             bannerImage={formData.img} 
             setBannerImage={(url) => {
-              console.log('Setting banner image:', url);
-              setFormData(prev => ({ ...prev, img: url }));
+              if (url !== undefined) {
+                console.log('Setting banner image:', url);
+                setFormData(prevData => ({
+                  ...prevData,
+                  img: url
+                }));
+              }
             }} 
           />
         </div>
@@ -139,10 +144,15 @@ const ContentTabContent = () => {
         <div className="mt-30">
           <div className="fw-500">Gallery</div>
           <GalleryUploader 
-            images={formData.slideImg} 
+            images={formData.slideImg || []} 
             setImages={(urls) => {
-              console.log('Setting gallery images:', urls);
-              setFormData(prev => ({ ...prev, slideImg: urls }));
+              if (Array.isArray(urls)) {
+                console.log('Setting gallery images:', urls);
+                setFormData(prevData => ({
+                  ...prevData,
+                  slideImg: urls
+                }));
+              }
             }} 
           />
         </div>
