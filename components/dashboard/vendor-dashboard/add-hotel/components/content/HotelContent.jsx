@@ -1,27 +1,37 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-const HotelContent = ({ handleInputChange }) => {
-  const [popularFacilities, setPopularFacilities] = useState([{ 
+const HotelContent = ({ handleInputChange, formData }) => {
+  const [popularFacilities, setPopularFacilities] = useState(formData?.popularFacilities || [{ 
     popularFacilitiesTitle: '', 
     popularFacilitiesDescription: '' 
   }]);
-  const [housePolicies, setHousePolicies] = useState([{
+  const [housePolicies, setHousePolicies] = useState(formData?.housePolicies || [{
     housePoliciesTitle: '',
     housePolicies: ''
   }]);
-  const [destinations, setDestinations] = useState([{
+  const [destinations, setDestinations] = useState(formData?.destinations || [{
     destinationLocation: '',
     destinationImg: ''
   }]);
-  const [facilities, setFacilities] = useState([{
+  const [facilities, setFacilities] = useState(formData?.facilities || [{
     facilitiesTitle: '',
     facilitiesIcon: ''
   }]);
   
   const [error, setError] = useState("");
   const fileInputRefs = useRef([]);
+
+  // Update local state when formData changes
+  useEffect(() => {
+    if (formData) {
+      if (formData.popularFacilities) setPopularFacilities(formData.popularFacilities);
+      if (formData.housePolicies) setHousePolicies(formData.housePolicies);
+      if (formData.destinations) setDestinations(formData.destinations);
+      if (formData.facilities) setFacilities(formData.facilities);
+    }
+  }, [formData]);
 
   const handleAdd = (section, setSection) => {
     setSection(prev => [...prev, getEmptyField(section)]);
@@ -65,45 +75,46 @@ const HotelContent = ({ handleInputChange }) => {
 
   const handleFileUpload = async (index, event, fieldName, section, setSection) => {
     const file = event.target.files[0];
-    const reader = new FileReader();
-    const maxSize = 800; // in pixels
+    if (!file) return;
 
-    reader.onloadend = async () => {
-      const img = new Image();
-      img.onload = async () => {
-        if (img.width > maxSize || img.height > maxSize) {
-          setError(`Image ${file.name} exceeds the maximum size of ${maxSize}px.`);
-        } else if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
-          setError(`Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`);
-        } else {
-          try {
-            const formData = new FormData();
-            formData.append("img", file);
+    try {
+      const formData = new FormData();
+      formData.append("img", file);
 
-            const response = await axios.post("http://localhost:3000/api/upload", formData, {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            });
+      const response = await axios.post("/api/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-            setSection(prev => {
-              const updated = [...prev];
-              updated[index][fieldName] = response.data.imgUrl;
-              return updated;
-            });
-            setError("");
-          } catch (err) {
-            setError("Image upload failed.");
+      if (response.data && response.data.imgUrl) {
+        console.log('Upload successful:', response.data);
+        setSection(prev => {
+          const updated = [...prev];
+          updated[index] = {
+            ...updated[index],
+            [fieldName]: response.data.imgUrl
+          };
+          return updated;
+        });
+
+        // Update parent component's state
+        handleInputChange({
+          target: {
+            name: `${section}.${index}.${fieldName}`,
+            value: response.data.imgUrl
           }
-        }
-      };
-      img.onerror = () => {
-        setError(`Image ${file.name} could not be loaded.`);
-      };
-      img.src = reader.result;
-    };
+        });
 
-    reader.readAsDataURL(file);
+        setError("");
+      } else {
+        console.error('Invalid response:', response.data);
+        setError("Upload failed: Invalid server response");
+      }
+    } catch (err) {
+      console.error("Upload error:", err.response?.data || err.message);
+      setError("Upload failed: " + (err.response?.data?.error || err.message));
+    }
   };
 
   const triggerFileInput = (index, type) => {
@@ -115,35 +126,106 @@ const HotelContent = ({ handleInputChange }) => {
     return url.replace('/uploads/', '');
   };
 
+  const renderImageUploader = (field, index, section, fieldName, label) => (
+    <div className="form-input col-6">
+      <button
+        type="button"
+        onClick={() => triggerFileInput(index, section)}
+        className="text-blue-1 fw-500 cursor-pointer"
+      >
+        {label}
+      </button>
+      <input
+        type="file"
+        ref={el => fileInputRefs.current[`${section}-${index}`] = el}
+        accept="image/png, image/jpeg"
+        className="d-none"
+        onChange={(event) => handleFileUpload(index, event, fieldName, section, 
+          section === 'destinations' ? setDestinations : setFacilities
+        )}
+      />
+      {field[fieldName] && (
+        <div className="mt-10">
+          <div className="d-flex align-items-center">
+            <img 
+              src={field[fieldName]} 
+              alt={label} 
+              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+              className="rounded-4 mr-10"
+            />
+            <a 
+              href={field[fieldName]} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-1"
+            >
+              View Image
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="row x-gap-20 y-gap-20">
       <div className="col-12">
         <div className="form-input">
-          <input type="text" name="title" required onChange={handleInputChange} />
+          <input 
+            type="text" 
+            name="title" 
+            value={formData?.title || ''} 
+            required 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">Villa Name</label>
         </div>
       </div>
       <div className="col-6">
         <div className="form-input">
-          <input type="text" name="location" required onChange={handleInputChange} />
+          <input 
+            type="text" 
+            name="location" 
+            value={formData?.location || ''} 
+            required 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">Location</label>
         </div>
       </div>
       <div className="col-6">
         <div className="form-input">
-          <input type="text" name="city" required onChange={handleInputChange} />
+          <input 
+            type="text" 
+            name="city" 
+            value={formData?.city || ''} 
+            required 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">City</label>
         </div>
       </div>
       <div className="col-6">
         <div className="form-input">
-          <input type="number" name="price" required onChange={handleInputChange} />
+          <input 
+            type="number" 
+            name="price" 
+            value={formData?.price || ''} 
+            required 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">Price</label>
         </div>
       </div>
       <div className="col-6">
         <div className="form-input">
-          <select className="custom-select" name="rooms" required onChange={handleInputChange}>
+          <select 
+            className="custom-select" 
+            name="rooms" 
+            value={formData?.rooms || ''} 
+            required 
+            onChange={handleInputChange}
+          >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -156,25 +238,46 @@ const HotelContent = ({ handleInputChange }) => {
       </div>
       <div className="col-6">
         <div className="form-input">
-          <input type="text" name="tag" onChange={handleInputChange} />
+          <input 
+            type="text" 
+            name="tag" 
+            value={formData?.tag || ''} 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">Tag</label>
         </div>
       </div>
       <div className="col-6">
         <div className="form-input">
-          <input type="number" name="adults" required onChange={handleInputChange} />
+          <input 
+            type="number" 
+            name="adults" 
+            value={formData?.adults || ''} 
+            required 
+            onChange={handleInputChange} 
+          />
           <label className="lh-1 text-16 text-black">Adults</label>
         </div>
       </div>
       <div className="col-12">
         <div className="form-input">
-          <textarea name="description" required onChange={handleInputChange}></textarea>
+          <textarea 
+            name="description" 
+            value={formData?.description || ''} 
+            required 
+            onChange={handleInputChange}
+          ></textarea>
           <label className="lh-1 text-16 text-black">Description</label>
         </div>
       </div>
       <div className="col-12">
         <div className="form-input">
-          <textarea name="overviewDescription" required onChange={handleInputChange}></textarea>
+          <textarea 
+            name="overviewDescription" 
+            value={formData?.overviewDescription || ''} 
+            required 
+            onChange={handleInputChange}
+          ></textarea>
           <label className="lh-1 text-16 text-black">Overview Description</label>
         </div>
       </div>
@@ -187,19 +290,19 @@ const HotelContent = ({ handleInputChange }) => {
             <div className="form-input col-4">
               <input
                 type="text"
-                name="popularFacilitiesTitle"
-                value={field.popularFacilitiesTitle || ''}
+                name={`popularFacilities.${index}.popularFacilitiesTitle`}
+                value={field.popularFacilitiesTitle}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'popularFacilities', setPopularFacilities)}
+                onChange={handleInputChange}
               />
               <label className="lh-1 text-16 text-black">Popular Facilities Title</label>
             </div>
             <div className="form-input pl-15 col-6">
               <textarea
-                name="popularFacilitiesDescription"
-                value={field.popularFacilitiesDescription || ''}
+                name={`popularFacilities.${index}.popularFacilitiesDescription`}
+                value={field.popularFacilitiesDescription}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'popularFacilities', setPopularFacilities)}
+                onChange={handleInputChange}
               ></textarea>
               <label className="lh-1 text-16 text-black">Popular Facilities Description</label>
             </div>
@@ -221,19 +324,19 @@ const HotelContent = ({ handleInputChange }) => {
             <div className="form-input col-4">
               <input
                 type="text"
-                name="housePoliciesTitle"
-                value={field.housePoliciesTitle || ''}
+                name={`housePolicies.${index}.housePoliciesTitle`}
+                value={field.housePoliciesTitle}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'housePolicies', setHousePolicies)}
+                onChange={handleInputChange}
               />
               <label className="lh-1 text-16 text-black">House Policies Title</label>
             </div>
             <div className="form-input pl-15 col-6">
               <textarea
-                name="housePolicies"
-                value={field.housePolicies || ''}
+                name={`housePolicies.${index}.housePolicies`}
+                value={field.housePolicies}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'housePolicies', setHousePolicies)}
+                onChange={handleInputChange}
               ></textarea>
               <label className="lh-1 text-16 text-black">House Policies</label>
             </div>
@@ -255,44 +358,40 @@ const HotelContent = ({ handleInputChange }) => {
             <div className="form-input col-4">
               <input
                 type="text"
-                name="destinationLocation"
-                value={field.destinationLocation || ''}
+                name={`destinations.${index}.destinationLocation`}
+                value={field.destinationLocation}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'destinations', setDestinations)}
+                onChange={(e) => handleFieldChange(index, e, 'destinations', setDestinations)}
               />
               <label className="lh-1 text-16 text-black">Destination Location</label>
             </div>
-            <div className="form-input col-6">
-              <button
-                type="button"
-                onClick={() => triggerFileInput(index, 'destination')}
-                className="text-blue-1 fw-500 cursor-pointer"
-              >
-                Upload Destination Image
-              </button>
-              <input
-                type="file"
-                ref={el => fileInputRefs.current[`destination-${index}`] = el}
-                accept="image/png, image/jpeg"
-                className="d-none"
-                onChange={(event) => handleFileUpload(index, event, 'destinationImg', 'destinations', setDestinations)}
-              />
-              {field.destinationImg && (
-                <div className="mt-10">
-                  <a href={field.destinationImg} target="_blank" rel="noopener noreferrer" title={field.destinationImg}>
-                    {shortenUrl(field.destinationImg)}
-                  </a>
-                </div>
-              )}
-            </div>
+            {renderImageUploader(
+              field, 
+              index, 
+              'destinations', 
+              'destinationImg', 
+              'Upload Destination Image'
+            )}
             {destinations.length > 1 && (
               <div className="col-2">
-                <button type="button" onClick={() => handleRemove(index, 'destinations', setDestinations)}>Remove</button>
+                <button 
+                  type="button" 
+                  className="btn btn-danger"
+                  onClick={() => handleRemove(index, 'destinations', setDestinations)}
+                >
+                  Remove
+                </button>
               </div>
             )}
           </div>
         ))}
-        <button type="button" onClick={() => handleAdd('destinations', setDestinations)}>Add Destination</button>
+        <button 
+          type="button" 
+          className="btn btn-success mt-10"
+          onClick={() => handleAdd('destinations', setDestinations)}
+        >
+          Add Destination
+        </button>
       </div>
 
       {/* Facilities Section */}
@@ -303,44 +402,40 @@ const HotelContent = ({ handleInputChange }) => {
             <div className="form-input col-4">
               <input
                 type="text"
-                name="facilitiesTitle"
-                value={field.facilitiesTitle || ''}
+                name={`facilities.${index}.facilitiesTitle`}
+                value={field.facilitiesTitle}
                 required
-                onChange={(event) => handleFieldChange(index, event, 'facilities', setFacilities)}
+                onChange={(e) => handleFieldChange(index, e, 'facilities', setFacilities)}
               />
               <label className="lh-1 text-16 text-black">Facilities Title</label>
             </div>
-            <div className="form-input col-6">
-              <button
-                type="button"
-                onClick={() => triggerFileInput(index, 'facility')}
-                className="text-blue-1 fw-500 cursor-pointer"
-              >
-                Upload Facility Icon
-              </button>
-              <input
-                type="file"
-                ref={el => fileInputRefs.current[`facility-${index}`] = el}
-                accept="image/png, image/jpeg"
-                className="d-none"
-                onChange={(event) => handleFileUpload(index, event, 'facilitiesIcon', 'facilities', setFacilities)}
-              />
-              {field.facilitiesIcon && (
-                <div className="mt-10">
-                  <a href={field.facilitiesIcon} target="_blank" rel="noopener noreferrer" title={field.facilitiesIcon}>
-                    {shortenUrl(field.facilitiesIcon)}
-                  </a>
-                </div>
-              )}
-            </div>
+            {renderImageUploader(
+              field, 
+              index, 
+              'facilities', 
+              'facilitiesIcon', 
+              'Upload Facility Icon'
+            )}
             {facilities.length > 1 && (
               <div className="col-2">
-                <button type="button" onClick={() => handleRemove(index, 'facilities', setFacilities)}>Remove</button>
+                <button 
+                  type="button" 
+                  className="btn btn-danger"
+                  onClick={() => handleRemove(index, 'facilities', setFacilities)}
+                >
+                  Remove
+                </button>
               </div>
             )}
           </div>
         ))}
-        <button type="button" onClick={() => handleAdd('facilities', setFacilities)}>Add Facility</button>
+        <button 
+          type="button" 
+          className="btn btn-success mt-10"
+          onClick={() => handleAdd('facilities', setFacilities)}
+        >
+          Add Facility
+        </button>
       </div>
 
       {error && <div className="col-12 mb-10 text-red-1">{error}</div>}

@@ -1,10 +1,10 @@
 import HotelContent from "./content/HotelContent";
 import BannerUploader from "./content/BannerUploader";
 import GalleryUploader from "./content/GalleryUploader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const ContentTabContent = () => {
-  const [formData, setFormData] = useState({
+const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) => {
+  const [formData, setFormData] = useState(initialData || {
     id: '',
     tag: "",
     slideImg: [],
@@ -39,6 +39,12 @@ const ContentTabContent = () => {
     }]
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name.includes('.')) {
@@ -58,61 +64,63 @@ const ContentTabContent = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting Data:', formData); // Log the form data before submission
+    
+    if (isEditing) {
+      await onSubmit(formData);
+    } else {
+      try {
+        const response = await fetch("/api/hotels", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-    try {
-      const response = await fetch("/api/hotels", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+        if (!response.ok) {
+          throw new Error(`Failed to add hotel. Status: ${response.status}`);
+        }
 
-      if (!response.ok) {
-        throw new Error(`Failed to add hotel. Status: ${response.status}`);
+        const data = await response.json();
+        alert("Hotel added successfully!");
+        setFormData({
+          id: '',
+          tag: "",
+          slideImg: [],
+          img: "",
+          title: "",
+          location: "",
+          checkin: "",
+          checkout: "",
+          rooms: "",
+          adults: "",
+          description: "",
+          price: "",
+          delayAnimation: "",
+          city: "",
+          overviewTitle: "",
+          overviewDescription: "",
+          popularFacilities: [{
+            popularFacilitiesTitle: '',
+            popularFacilitiesDescription: ''
+          }],
+          housePolicies: [{
+            housePoliciesTitle: '',
+            housePolicies: ''
+          }],
+          destinations: [{
+            destinationLocation: '',
+            destinationImg: ''
+          }],
+          facilities: [{
+            facilitiesTitle: '',
+            facilitiesIcon: ''
+          }]
+        });
+      } catch (error) {
+        console.error("Error adding hotel:", error.message);
+        alert(`Failed to add hotel. Error: ${error.message}`);
       }
-
-      const data = await response.json();
-      console.log('Server Response:', data); // Log the server response
-      alert("Hotel added successfully!");
-      setFormData({
-        id: '',
-        tag: "",
-        slideImg: [],
-        img: "",
-        title: "",
-        location: "",
-        checkin: "",
-        checkout: "",
-        rooms: "",
-        adults: "",
-        description: "",
-        price: "",
-        delayAnimation: "",
-        city: "",
-        overviewTitle: "",
-        overviewDescription: "",
-        popularFacilities: [{
-          popularFacilitiesTitle: '',
-          popularFacilitiesDescription: ''
-        }],
-        housePolicies: [{
-          housePoliciesTitle: '',
-          housePolicies: ''
-        }],
-        destinations: [{
-          destinationLocation: '',
-          destinationImg: ''
-        }],
-        facilities: [{
-          facilitiesTitle: '',
-          facilitiesIcon: ''
-        }]
-      });
-    } catch (error) {
-      console.error("Error adding hotel:", error.message); // Log the error message
-      alert(`Failed to add hotel. Error: ${error.message}`);
     }
   };
 
@@ -121,16 +129,18 @@ const ContentTabContent = () => {
       <input type="hidden" name="id" value={formData.id} />
       <div className="col-xl-10">
         <div className="text-18 fw-500 mb-10">Villa Details</div>
-        <HotelContent handleInputChange={handleInputChange} fields={formData.fields} />
+        <HotelContent 
+          handleInputChange={handleInputChange} 
+          formData={formData} // Pass the complete formData
+        />
         {/* End HotelContent */}
 
         <div className="mt-30">
           <div className="fw-500">Banner Image</div>
           <BannerUploader 
-            bannerImage={formData.img} 
+            bannerImage={formData.img} // Make sure this is passed
             setBannerImage={(url) => {
               if (url !== undefined) {
-                console.log('Setting banner image:', url);
                 setFormData(prevData => ({
                   ...prevData,
                   img: url
@@ -144,15 +154,13 @@ const ContentTabContent = () => {
         <div className="mt-30">
           <div className="fw-500">Gallery</div>
           <GalleryUploader 
-            images={formData.slideImg || []} 
+            images={formData.slideImg || []} // Make sure this is passed
             setImages={(urls) => {
-              console.log('Setting gallery images:', urls);
               setFormData(prevData => {
                 const newData = {
                   ...prevData,
                   slideImg: Array.isArray(urls) ? urls : []
                 };
-                console.log('Updated formData:', newData);
                 return newData;
               });
             }} 
@@ -164,7 +172,8 @@ const ContentTabContent = () => {
 
         <div className="d-inline-block pt-30">
           <button type="submit" className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
-            Save Changes <div className="icon-arrow-top-right ml-15" />
+            {isEditing ? 'Save Changes' : 'Add Hotel'} 
+            <div className="icon-arrow-top-right ml-15" />
           </button>
         </div>
       </div>

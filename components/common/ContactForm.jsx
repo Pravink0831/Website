@@ -57,7 +57,7 @@ const ContactForm = () => {
             {key === 'message' ? (
               <textarea id={key} value={value} onChange={handleChange} required rows="4"></textarea>
             ) : (
-              <input type={key === 'email' ? 'email' : 'text'} id={key} value={value} onChange={handleChange} required />
+              <input type={key === 'email' ? 'email' : 'text'} id={key} value={value} onChange={handleChange}/>
             )}
             <label htmlFor={key} className="lh-1 text-12 text-black">
               {key === 'message' ? 'Write your query here' : key.charAt(0).toUpperCase() + key.slice(1).replace('_', ' ')}

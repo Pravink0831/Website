@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import HotelContent from "../content/HotelContentEdit";
+import ContentTabContent from "../ContentTabContent";
 
-const Location = ({ onEdit, currentId, formData, handleInputChange, handleSubmit, isLoading }) => {
+const Location = () => {
   const [data, setData] = useState([]);
+  const [currentId, setCurrentId] = useState(null);
+  const [editFormData, setEditFormData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -40,6 +43,54 @@ const Location = ({ onEdit, currentId, formData, handleInputChange, handleSubmit
     }
   };
 
+  const handleEdit = async (id) => {
+    try {
+      setIsLoading(true);
+      // Fetch the complete hotel data for editing
+      const response = await fetch(`/api/hotels/${id}`);
+      const itemToEdit = await response.json();
+      
+      if (itemToEdit) {
+        console.log('Item to edit:', itemToEdit);
+        setEditFormData(itemToEdit);
+        setCurrentId(id);
+      }
+    } catch (error) {
+      console.error('Error setting up edit form:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleUpdate = async (updatedData) => {
+    try {
+      setIsLoading(true);
+      console.log('Updating with data:', updatedData);
+      
+      const response = await fetch('/api/hotels', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...updatedData, id: currentId }),
+      });
+
+      if (response.ok) {
+        alert('Villa updated successfully!');
+        setCurrentId(null);
+        setEditFormData(null);
+        await fetchData(); // Refresh the data
+      } else {
+        throw new Error('Failed to update villa');
+      }
+    } catch (error) {
+      console.error('Error updating data:', error);
+      alert('Failed to update villa');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="overflow-scroll scroll-bar-1 pt-30">
       <table className="table-2 col-12">
@@ -61,23 +112,36 @@ const Location = ({ onEdit, currentId, formData, handleInputChange, handleSubmit
                 <td>{row.location}</td>
                 <td className="fw-500">{row.price}</td>
                 <td>
-                  <button className="btn btn-primary me-2" onClick={() => onEdit(row._id)}>Edit</button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(row._id)}>Delete</button>
+                  <button 
+                    className="btn btn-primary me-2" 
+                    onClick={() => handleEdit(row._id)}
+                    disabled={isLoading}
+                  >
+                    {isLoading && currentId === row._id ? 'Loading...' : 'Edit'}
+                  </button>
+                  <button 
+                    className="btn btn-danger" 
+                    onClick={() => handleDelete(row._id)}
+                    disabled={isLoading}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
-              {currentId === row._id && (
+              {currentId === row._id && editFormData && (
                 <tr>
                   <td colSpan="6">
-                    {isLoading ? (
-                      <div>Loading...</div>
-                    ) : (
-                      <form onSubmit={handleSubmit}>
-                        <HotelContent handleInputChange={handleInputChange} formData={formData} />
-                        <button type="submit" className="button h-50 rounded-100 mt-20 px-24 -yellow-1 bg-black text-white">
-                          Save Changes
-                        </button>
-                      </form>
-                    )}
+                    <div className="px-30 py-30">
+                      {isLoading ? (
+                        <div>Loading...</div>
+                      ) : (
+                        <ContentTabContent 
+                          initialData={editFormData}
+                          onSubmit={handleUpdate}
+                          isEditing={true}
+                        />
+                      )}
+                    </div>
                   </td>
                 </tr>
               )}
