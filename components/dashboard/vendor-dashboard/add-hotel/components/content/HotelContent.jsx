@@ -34,11 +34,36 @@ const HotelContent = ({ handleInputChange, formData }) => {
   }, [formData]);
 
   const handleAdd = (section, setSection) => {
-    setSection(prev => [...prev, getEmptyField(section)]);
+    const newItem = getEmptyField(section);
+    setSection(prev => {
+      const updated = [...prev, newItem];
+      
+      // Update parent component's state
+      handleInputChange({
+        target: {
+          name: section,
+          value: updated
+        }
+      });
+      
+      return updated;
+    });
   };
 
   const handleRemove = (index, section, setSection) => {
-    setSection(prev => prev.filter((_, i) => i !== index));
+    setSection(prev => {
+      const updated = prev.filter((_, i) => i !== index);
+      
+      // Update parent component's state
+      handleInputChange({
+        target: {
+          name: section,
+          value: updated
+        }
+      });
+      
+      return updated;
+    });
   };
 
   const getEmptyField = (section) => {
@@ -128,13 +153,25 @@ const HotelContent = ({ handleInputChange, formData }) => {
 
   const renderImageUploader = (field, index, section, fieldName, label) => (
     <div className="form-input col-6">
-      <button
-        type="button"
-        onClick={() => triggerFileInput(index, section)}
-        className="text-blue-1 fw-500 cursor-pointer"
-      >
-        {label}
-      </button>
+      <div className="d-flex flex-column">
+        <button
+          type="button"
+          onClick={() => triggerFileInput(index, section)}
+          className="text-blue-1 fw-500 cursor-pointer mb-10"
+        >
+          {label}
+        </button>
+        {field[fieldName] && (
+          <div className="d-flex align-items-center">
+            <img 
+              src={field[fieldName]} 
+              alt={label} 
+              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+              className="rounded-4"
+            />
+          </div>
+        )}
+      </div>
       <input
         type="file"
         ref={el => fileInputRefs.current[`${section}-${index}`] = el}
@@ -144,26 +181,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
           section === 'destinations' ? setDestinations : setFacilities
         )}
       />
-      {field[fieldName] && (
-        <div className="mt-10">
-          <div className="d-flex align-items-center">
-            <img 
-              src={field[fieldName]} 
-              alt={label} 
-              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-              className="rounded-4 mr-10"
-            />
-            <a 
-              href={field[fieldName]} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-blue-1"
-            >
-              View Image
-            </a>
-          </div>
-        </div>
-      )}
     </div>
   );
 
@@ -354,11 +371,11 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
         <h3 className="text-16 fw-500">Destinations</h3>
         {destinations.map((field, index) => (
-          <div key={`dest-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+          <div key={`dest-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
             <div className="form-input col-4">
               <input
                 type="text"
-                name={`destinations.${index}.destinationLocation`}
+                name="destinationLocation"
                 value={field.destinationLocation}
                 required
                 onChange={(e) => handleFieldChange(index, e, 'destinations', setDestinations)}
@@ -372,22 +389,20 @@ const HotelContent = ({ handleInputChange, formData }) => {
               'destinationImg', 
               'Upload Destination Image'
             )}
-            {destinations.length > 1 && (
-              <div className="col-2">
-                <button 
-                  type="button" 
-                  className="btn btn-danger"
-                  onClick={() => handleRemove(index, 'destinations', setDestinations)}
-                >
-                  Remove
-                </button>
-              </div>
-            )}
+            <div className="col-2">
+              <button 
+                type="button" 
+                className="btn btn-danger"
+                onClick={() => handleRemove(index, 'destinations', setDestinations)}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
         <button 
           type="button" 
-          className="btn btn-success mt-10"
+          className="btn btn-success"
           onClick={() => handleAdd('destinations', setDestinations)}
         >
           Add Destination
@@ -398,11 +413,11 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
         <h3 className="text-16 fw-500">Facilities</h3>
         {facilities.map((field, index) => (
-          <div key={`fac-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+          <div key={`fac-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
             <div className="form-input col-4">
               <input
                 type="text"
-                name={`facilities.${index}.facilitiesTitle`}
+                name="facilitiesTitle"
                 value={field.facilitiesTitle}
                 required
                 onChange={(e) => handleFieldChange(index, e, 'facilities', setFacilities)}
@@ -416,22 +431,20 @@ const HotelContent = ({ handleInputChange, formData }) => {
               'facilitiesIcon', 
               'Upload Facility Icon'
             )}
-            {facilities.length > 1 && (
-              <div className="col-2">
-                <button 
-                  type="button" 
-                  className="btn btn-danger"
-                  onClick={() => handleRemove(index, 'facilities', setFacilities)}
-                >
-                  Remove
-                </button>
-              </div>
-            )}
+            <div className="col-2">
+              <button 
+                type="button" 
+                className="btn btn-danger"
+                onClick={() => handleRemove(index, 'facilities', setFacilities)}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
         <button 
           type="button" 
-          className="btn btn-success mt-10"
+          className="btn btn-success"
           onClick={() => handleAdd('facilities', setFacilities)}
         >
           Add Facility
