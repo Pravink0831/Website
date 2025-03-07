@@ -472,3 +472,11 @@
     border-bottom: 2px solid white;
 
 }
+
+.sticky-sidebar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  z-index: 1;
+}

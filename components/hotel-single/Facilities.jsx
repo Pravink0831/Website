@@ -5,7 +5,7 @@ const Facilities = ({ hotel }) => {
         <div className="col-xl-6 col-md-6" key={index}>
           <div className="row y-gap-30">
             {facilityGroup?.items?.map((item, itemIndex) => (
-              <div className="col-md-6 col-sm-6 col-6" key={itemIndex}>
+              <div className="col-md-12 col-sm-6" key={itemIndex}>
                 <div>
                   <div className="d-flex items-center text-16 fw-500">
                     <img

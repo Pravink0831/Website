@@ -164,7 +164,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
             </div>
             {/* End .col-xl-7 */}
 
-            <div className="col-xl-4" style={{display:'block',flexGrow:1}}><div className="sticky-sidebar">
+            <div className="col-xl-5"><div className="sticky-sidebar">
               <SidebarRight hotel={hotel} /></div>
             </div>
             {/* End .col-xl-4 */}
