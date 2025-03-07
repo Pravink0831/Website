@@ -1,34 +1,11 @@
-const PropertyHighlights2 = () => {
-  const highlightsContent = [
-    {
-      id: 1,
-      icon: "/img/featureIcons/1/People.png",
-      text: `15 Guests Capacity`,
-    },
-    {
-      id: 2,
-      icon: "/img/featureIcons/1/Bedrooms.png",
-      text: `5 Bedrooms`,
-    },
-    {
-      id: 3,
-      icon: "/img/featureIcons/1/Pool.png",
-      text: `Swimming Pool`,
-    },
-    {
-      id: 4,
-      icon: "/img/featureIcons/1/Bathroom.png",
-      text: `5 Bathrooms`,
-    },
-  ];
-
+const PropertyHighlights = ({ hotel }) => {
   return (
     <div className="row y-gap-20 pt-30">
-      {highlightsContent.map((item) => (
-        <div className="col-lg-3 col-6" key={item.id}>
+      {hotel?.propertyHighlights?.map((item, index) => (
+        <div className="col-lg-3 col-6" key={index}>
           <div className="text-center">
-          <img src={item.icon} className="js-lazy icon-hover icon-amendies-30" />
-            <div className="text-15 bold lh-1 mt-10">{item.text}</div>
+            <img src={item.highlightIcon} className="js-lazy icon-hover icon-amendies-30" />
+            <div className="text-15 bold lh-1 mt-10">{item.highlightTitle}</div>
           </div>
         </div>
       ))}
@@ -36,4 +13,4 @@ const PropertyHighlights2 = () => {
   );
 };
 
-export default PropertyHighlights2;
+export default PropertyHighlights;

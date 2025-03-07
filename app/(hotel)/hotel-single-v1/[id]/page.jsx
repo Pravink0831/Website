@@ -112,9 +112,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                       {/* HEADING */}
                       <div>
                         <span className="sectionTitle__text mt-10 text-16 text-black">
-                        Conveniently located in Calangute, Villa M - Savannah 7 offers easy access to North
-                Goa’s vibrant attractions. Beaches, supermarkets, restaurants, bars, and popular tourist
-                spots are just a short walk or drive away.
+                        {hotel?.locationDescription}
                         </span>
                       </div>
             
@@ -138,16 +136,15 @@ const HotelSingleV1Dynamic = ({ params }) => {
 
                 <div className="col-12">
                   <h3 className="text-20 fw-500">
-                  Nearest points
+                    Nearest points
                   </h3>
                   <div className="row y-gap-10">
-                  <ul className="mt-3 list text-neutral-500 dark:text-neutral-400 space-y-2 mb-20">
-                      <li>
-                      Candolim Beach - 2.4 kms</li>
-                      <li>Calangute Beach - 3.2 kms</li>
-                      <li>Baga Beach - 5.1 kms</li>
-                      <li>Anjuna Beach - 10.8 kms</li>
-                      <li>Chapora Fort - 11.5 kms</li>
+                    <ul className="mt-3 list text-neutral-500 dark:text-neutral-400 space-y-2 mb-20">
+                      {hotel?.nearestPoints?.map((point, index) => (
+                        <li key={index}>
+                          {point.pointName} - {point.distance}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>

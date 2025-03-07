@@ -21,13 +21,7 @@ const index = () => {
               <img className="footerImg" src="/img/general/VillaMLogo.png" alt="image" />
               <div className="row y-gap-30 justify-between pt-30">
               <p className="sectionTitle__text text-18 text-white mt-5 sm:mt-0">
-              At Villa M Goa, we specialize in offering
-exquisite villas in the heart of North Goa.
-Each villa is thoughtfully designed with
-modern amenities, private pools, lush
-gardens, and stylish interiors. Our mission is to provide a home away
-from home while letting you soak in the
-vibrant spirit of Goa.
+              At Villa M Goa, we offer a range of thoughtfully designed villas in the heart of North Goa. Each villa is equipped with modern amenities, lush gardens, and stylish interiors. Whether you’re enjoying a private pool or taking a dip in our shared pool, every moment at Villa M is about comfort and relaxation. Our mission is to provide a home away from home while letting you soak in the vibrant spirit of Goa.
                 </p>
               </div>
               {/* End .row */}

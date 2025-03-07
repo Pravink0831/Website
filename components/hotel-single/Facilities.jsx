@@ -7,7 +7,7 @@ const Facilities = ({ hotel }) => {
             {facilityGroup?.items?.map((item, itemIndex) => (
               <div className="col-md-12 col-sm-6" key={itemIndex}>
                 <div>
-                  <div className="d-flex items-center text-16 fw-500">
+                  <div className="d-flex items-center text-16 fw-600">
                     <img
                       src={item.icon}
                       className="js-lazy icon-hover icon-amendies-20 mr-10"

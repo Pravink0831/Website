@@ -21,9 +21,24 @@ const HotelContent = ({ handleInputChange, formData }) => {
       icon: ''
     }]
   }]);
+  const [propertyHighlights, setPropertyHighlights] = useState(formData?.propertyHighlights || [{
+    highlightTitle: '',
+    highlightIcon: ''
+  }]);
+  const [nearestPoints, setNearestPoints] = useState(formData?.nearestPoints || [{
+    pointName: '',
+    distance: ''
+  }]);
   
   const [error, setError] = useState("");
   const fileInputRefs = useRef([]);
+
+  // Add tag options array
+  const tagOptions = [
+    "breakfast included",
+    "best seller",
+    "top rated"
+  ];
 
   // Update local state when formData changes
   useEffect(() => {
@@ -32,6 +47,8 @@ const HotelContent = ({ handleInputChange, formData }) => {
       if (formData.housePolicies) setHousePolicies(formData.housePolicies);
       if (formData.destinations) setDestinations(formData.destinations);
       if (formData.facilities) setFacilities(formData.facilities);
+      if (formData.propertyHighlights) setPropertyHighlights(formData.propertyHighlights);
+      if (formData.nearestPoints) setNearestPoints(formData.nearestPoints);
     }
   }, [formData]);
 
@@ -104,6 +121,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
         return { housePoliciesTitle: '', housePolicies: '' };
       case 'destinations':
         return { destinationLocation: '', destinationImg: '' };
+      case 'propertyHighlights':
+        return { highlightTitle: '', highlightIcon: '' };
+      case 'nearestPoints':
+        return { pointName: '', distance: '' };
       default:
         return {};
     }
@@ -288,53 +309,68 @@ const HotelContent = ({ handleInputChange, formData }) => {
         <div className="form-input">
           <select 
             className="custom-select" 
-            name="rooms" 
-            value={formData?.rooms || ''} 
+            name="guests" 
+            value={formData?.guests || ''} 
             required 
             onChange={handleInputChange}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+            {[1,2,3,4,5,6,7,8,9,10].map(num => (
+              <option key={num} value={num}>{num}</option>
+            ))}
           </select>
-          <label className="lh-1 select-1 text-16 text-black">Rooms</label>
+          <label className="lh-1 select-1 text-16 text-black">Number of Guests</label>
         </div>
       </div>
+
       <div className="col-6">
         <div className="form-input">
-          <input 
-            type="text" 
-            name="tag" 
-            value={formData?.tag || ''} 
-            onChange={handleInputChange} 
-          />
-          <label className="lh-1 text-16 text-black">Tag</label>
-        </div>
-      </div>
-      <div className="col-6">
-        <div className="form-input">
-          <input 
-            type="number" 
-            name="adults" 
-            value={formData?.adults || ''} 
-            required 
-            onChange={handleInputChange} 
-          />
-          <label className="lh-1 text-16 text-black">Adults</label>
-        </div>
-      </div>
-      <div className="col-12">
-        <div className="form-input">
-          <textarea 
-            name="description" 
-            value={formData?.description || ''} 
+          <select 
+            className="custom-select" 
+            name="bedrooms" 
+            value={formData?.bedrooms || ''} 
             required 
             onChange={handleInputChange}
-          ></textarea>
-          <label className="lh-1 text-16 text-black">Description</label>
+          >
+            {[1,2,3,4,5,6].map(num => (
+              <option key={num} value={num}>{num}</option>
+            ))}
+          </select>
+          <label className="lh-1 select-1 text-16 text-black">Bedrooms</label>
+        </div>
+      </div>
+
+      <div className="col-6">
+        <div className="form-input">
+          <select 
+            className="custom-select" 
+            name="baths" 
+            value={formData?.baths || ''} 
+            required 
+            onChange={handleInputChange}
+          >
+            {[1,2,3,4,5,6].map(num => (
+              <option key={num} value={num}>{num}</option>
+            ))}
+          </select>
+          <label className="lh-1 select-1 text-16 text-black">Bathrooms</label>
+        </div>
+      </div>
+      <div className="col-6">
+        <div className="form-input">
+          <select 
+            className="custom-select" 
+            name="tag" 
+            value={formData?.tag || ''} 
+            onChange={handleInputChange}
+          >
+            <option value="">Select a tag</option>
+            {tagOptions.map((tag, index) => (
+              <option key={index} value={tag}>
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}
+              </option>
+            ))}
+          </select>
+          <label className="lh-1 select-1 text-16 text-black">Tag</label>
         </div>
       </div>
       <div className="col-12">
@@ -346,6 +382,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
             onChange={handleInputChange}
           ></textarea>
           <label className="lh-1 text-16 text-black">Overview Description</label>
+        </div>
+      </div>
+      <div className="col-12">
+        <div className="form-input">
+          <textarea 
+            name="locationDescription" 
+            value={formData?.locationDescription || ''} 
+            required 
+            onChange={handleInputChange}
+          ></textarea>
+          <label className="lh-1 text-16 text-black">Location Description</label>
         </div>
       </div>
       
@@ -513,6 +560,96 @@ const HotelContent = ({ handleInputChange, formData }) => {
         Add Facility Group
       </button>
     </div>
+
+      {/* Property Highlights Section */}
+      <div className="col-12">
+        <h3 className="text-16 fw-500">Property Highlights</h3>
+        {propertyHighlights.map((field, index) => (
+          <div key={`highlight-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
+            <div className="form-input col-4">
+              <input
+                type="text"
+                name={`propertyHighlights.${index}.highlightTitle`}
+                value={field.highlightTitle}
+                required
+                onChange={handleInputChange}
+              />
+              <label className="lh-1 text-16 text-black">Highlight Title</label>
+            </div>
+            {renderImageUploader(
+              field,
+              index,
+              'propertyHighlights',
+              'highlightIcon',
+              'Upload Highlight Icon'
+            )}
+            <div className="col-2">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => handleRemove(index, 'propertyHighlights', setPropertyHighlights)}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ))}
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => handleAdd('propertyHighlights', setPropertyHighlights)}
+        >
+          Add Property Highlight
+        </button>
+      </div>
+
+      {/* Nearest Points Section */}
+      <div className="col-12">
+        <h3 className="text-16 fw-500">Nearest Points</h3>
+        {nearestPoints.map((point, index) => (
+          <div key={`point-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+            <div className="form-input col-6">
+              <input
+                type="text"
+                name={`nearestPoints.${index}.pointName`}
+                value={point.pointName}
+                required
+                onChange={handleInputChange}
+              />
+              <label className="lh-1 text-16 text-black">Point Name</label>
+            </div>
+            <div className="form-input col-4">
+              <input
+                type="text"
+                name={`nearestPoints.${index}.distance`}
+                value={point.distance}
+                required
+                onChange={handleInputChange}
+                placeholder="e.g. 2.4 kms"
+              />
+              <label className="lh-1 text-16 text-black">Distance</label>
+            </div>
+            {nearestPoints.length > 1 && (
+              <div className="col-2">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => handleRemove(index, 'nearestPoints', setNearestPoints)}
+                >
+                  Remove
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => handleAdd('nearestPoints', setNearestPoints)}
+        >
+          Add Nearest Point
+        </button>
+      </div>
 
       {error && <div className="col-12 mb-10 text-red-1">{error}</div>}
       <input type="hidden" name="delayAnimation" value="400" onChange={handleInputChange} />

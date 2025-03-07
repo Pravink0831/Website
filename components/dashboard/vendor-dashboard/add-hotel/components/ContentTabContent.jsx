@@ -13,14 +13,14 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
     location: "",
     checkin: "",
     checkout: "",
-    rooms: "",
-    adults: "",
-    description: "",
     price: "",
+    guests: "",
+    bedrooms: "",
+    baths: "",
     delayAnimation: "",
     city: "",
-    overviewTitle: "",
     overviewDescription: "",
+    locationDescription: "", // Add this new field
     popularFacilities: [{
       popularFacilitiesTitle: '',
       popularFacilitiesDescription: ''
@@ -110,14 +110,14 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           location: "",
           checkin: "",
           checkout: "",
-          rooms: "",
-          adults: "",
-          description: "",
           price: "",
+          guests: "",
+          bedrooms: "",
+          baths: "",
           delayAnimation: "",
           city: "",
-          overviewTitle: "",
           overviewDescription: "",
+          locationDescription: "", // Add this new field
           popularFacilities: [{
             popularFacilitiesTitle: '',
             popularFacilitiesDescription: ''
