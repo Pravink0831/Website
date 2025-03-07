@@ -543,13 +543,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
               </div>
             </div>
           ))}
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={() => handleItemAdd(groupIndex, 'facilities', setFacilities)}
-          >
-            Add Facility Item
-          </button>
         </div>
       ))}
       <button
