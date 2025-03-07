@@ -1,27 +1,46 @@
-
 'use client'
 
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import { hotelsData } from "../../data/hotels";
 import isTextMatched from "../../utils/isTextMatched";
 import { useEffect, useState } from "react";
 
-
 const FilterHotels2 = () => {
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch('/api/hotels');
+        const data = await response.json();
+        setProperties(data);
+      } catch (error) {
+        console.error('Error fetching properties:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      {hotelsData.slice(0, 8).map((item) => (
+      {properties.slice(0, 8).map((item) => (
         <div
           className="col-xl-3 col-lg-3 col-sm-6"
-          key={item?.id}
+          key={item?._id}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}
         >
           <Link
-            href={`/hotel-single-v1/${item.id}`}
+            href={`/hotel-single-v1/${item._id}`}
             className="hotelsCard -type-1 hover-inside-slider" 
           >
             <div className="hotelsCard__image">
@@ -36,7 +55,7 @@ const FilterHotels2 = () => {
                           height={400}
                           className="rounded-4 col-12 js-lazy"
                           src={item?.img}
-                          alt="image"
+                          alt={item?.title}
                         />
                       </div>
                     </div>
@@ -79,7 +98,7 @@ const FilterHotels2 = () => {
               </p>
               <div className="d-flex items-center">
                 <div className="text-14 text-black fw-500">
-                15 Guests | 5 Bedrooms | 5 Baths
+                  {item?.guests} Guests | {item?.bedrooms} Bedrooms | {item?.baths} Baths
                 </div>
               </div>
               

@@ -1,13 +1,11 @@
-
 'use client'
 
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import { destinations4 } from "../../data/desinations";
 import Image from "next/image";
 
-const TopDestinations2 = () => {
+const TopDestinations2 = ({ hotel }) => {
   return (
     <>
       <Swiper
@@ -35,26 +33,24 @@ const TopDestinations2 = () => {
           },
         }}
       >
-        {destinations4.map((item) => (
-          <SwiperSlide key={item.id}>
+        {hotel?.destinations?.map((item) => (
+          <SwiperSlide key={item.destinationLocation}>
             <Link
               href="#"
               className="citiesCard -type-2"
-              data-aos="fade"
-              data-aos-delay={item.delayAnimation}
             >
               <div className="citiesCard__image rounded-4 ratio ratio-15:9">
                 <Image
                   width={191}
                   height={191}
                   className="img-ratio rounded-4 js-lazy"
-                  src={item.img}
+                  src={item.destinationImg}
                   alt="image"
                 />
               </div>
               <div className="citiesCard__content mt-10">
                 <h4 className="text-18 lh-13 fw-500 text-black text-capitalize">
-                  {item.location}
+                  {item.destinationLocation}
                 </h4>
                 <div className="text-14 text-light-1">
                   {/*{item.properties} properties */}

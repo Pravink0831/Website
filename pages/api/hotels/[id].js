@@ -8,7 +8,15 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const property = await Property.findById(new ObjectId(id));
+      const property = await Property.findById(new ObjectId(id))
+        .populate({
+          path: 'facilities',
+          populate: {
+            path: 'items',
+            model: 'FacilityItem' // Ensure this matches your model name
+          }
+        });
+
       if (!property) {
         return res.status(404).json({ message: 'Hotel not found.' });
       }

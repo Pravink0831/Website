@@ -1,10 +1,17 @@
+import Image from "next/image";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const index =({ title, location, img }) => {
+const Index = ({ title, location, img }) => {
   return (
     <section className="masthead -type-1 z-5">
       <div className="masthead__bg">
-        <img alt="image" src="/img/masthead/1/7.jpg" className="js-lazy" />
+        <Image
+          src={img}
+          alt={title}
+          width={1920}
+          height={700}
+          className="js-lazy"
+        />
       </div>
       <div className="container mt--10">
         <div className="row justify-center">
@@ -24,16 +31,7 @@ const index =({ title, location, img }) => {
                 {location}
               </p>
             </div>
-            {/* End hero title
-
-            <div
-              className="tabs -underline mt-60 js-tabs"
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              <MainFilterSearchBox />
-            </div>
-            {/* End tab-filter */}
+            {/* End hero title */}
           </div>
         </div>
       </div>
@@ -41,4 +39,4 @@ const index =({ title, location, img }) => {
   );
 };
 
-export default index;
+export default Index;

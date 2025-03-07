@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'GET') {
     try {
-      const properties = await Property.find({}, '_id title price checkin checkout rooms location city');
+      const properties = await Property.find({}, '_id title price checkin checkout rooms location city img slideImg tag numberOfReviews delayAnimation guests bedrooms baths');
       console.log('Fetched Properties:', properties); // Log the fetched properties
       res.status(200).json(properties);
     } catch (error) {

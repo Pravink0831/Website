@@ -16,8 +16,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
     destinationImg: ''
   }]);
   const [facilities, setFacilities] = useState(formData?.facilities || [{
-    facilitiesTitle: '',
-    facilitiesIcon: ''
+    items: [{
+      title: '',
+      icon: ''
+    }]
   }]);
   
   const [error, setError] = useState("");
@@ -33,35 +35,63 @@ const HotelContent = ({ handleInputChange, formData }) => {
     }
   }, [formData]);
 
-  const handleAdd = (section, setSection) => {
-    const newItem = getEmptyField(section);
+  const handleAdd = (section, setSection, itemType = null) => {
+    let newItem;
+    if (section === 'facilities') {
+      newItem = { items: [{ title: '', icon: '' }] };
+    } else {
+      newItem = getEmptyField(section);
+    }
+  
     setSection(prev => {
       const updated = [...prev, newItem];
-      
-      // Update parent component's state
       handleInputChange({
         target: {
           name: section,
           value: updated
         }
       });
-      
       return updated;
     });
   };
 
-  const handleRemove = (index, section, setSection) => {
+  const handleRemove = (groupIndex, section, setSection, itemIndex = null) => {
     setSection(prev => {
-      const updated = prev.filter((_, i) => i !== index);
-      
-      // Update parent component's state
+      const updated = prev.filter((_, i) => i !== groupIndex);
       handleInputChange({
         target: {
           name: section,
           value: updated
         }
       });
-      
+      return updated;
+    });
+  };
+
+  const handleItemAdd = (groupIndex, section, setSection) => {
+    setSection(prev => {
+      const updated = [...prev];
+      updated[groupIndex].items.push({ title: '', icon: '' });
+      handleInputChange({
+        target: {
+          name: `${section}.${groupIndex}.items`,
+          value: updated[groupIndex].items
+        }
+      });
+      return updated;
+    });
+  };
+
+  const handleItemRemove = (groupIndex, itemIndex, section, setSection) => {
+    setSection(prev => {
+      const updated = [...prev];
+      updated[groupIndex].items = updated[groupIndex].items.filter((_, i) => i !== itemIndex);
+      handleInputChange({
+        target: {
+          name: `${section}.${groupIndex}.items`,
+          value: updated[groupIndex].items
+        }
+      });
       return updated;
     });
   };
@@ -74,31 +104,36 @@ const HotelContent = ({ handleInputChange, formData }) => {
         return { housePoliciesTitle: '', housePolicies: '' };
       case 'destinations':
         return { destinationLocation: '', destinationImg: '' };
-      case 'facilities':
-        return { facilitiesTitle: '', facilitiesIcon: '' };
       default:
         return {};
     }
   };
 
-  const handleFieldChange = (index, event, section, setSection) => {
+  const handleFieldChange = (groupIndex, event, section, setSection, itemIndex = null) => {
     const { name, value } = event.target;
     setSection(prev => {
       const updated = [...prev];
-      updated[index] = { ...updated[index], [name]: value };
+      if (section === 'facilities' && itemIndex !== null) {
+        updated[groupIndex].items[itemIndex] = { ...updated[groupIndex].items[itemIndex], [name]: value };
+      } else {
+        updated[groupIndex] = { ...updated[groupIndex], [name]: value };
+      }
       return updated;
     });
     
-    // Modify event for parent component
+    let eventName = `${section}.${groupIndex}.${name}`;
+    if (section === 'facilities' && itemIndex !== null) {
+      eventName = `${section}.${groupIndex}.items.${itemIndex}.${name}`;
+    }
     handleInputChange({
       target: {
-        name: `${section}.${index}.${name}`,
+        name: eventName,
         value
       }
     });
   };
 
-  const handleFileUpload = async (index, event, fieldName, section, setSection) => {
+  const handleFileUpload = async (groupIndex, event, fieldName, section, setSection, itemIndex = null) => {
     const file = event.target.files[0];
     if (!file) return;
 
@@ -116,17 +151,27 @@ const HotelContent = ({ handleInputChange, formData }) => {
         console.log('Upload successful:', response.data);
         setSection(prev => {
           const updated = [...prev];
-          updated[index] = {
-            ...updated[index],
-            [fieldName]: response.data.imgUrl
-          };
+          if (section === 'facilities' && itemIndex !== null) {
+            updated[groupIndex].items[itemIndex] = {
+              ...updated[groupIndex].items[itemIndex],
+              [fieldName]: response.data.imgUrl
+            };
+          } else {
+            updated[groupIndex] = {
+              ...updated[groupIndex],
+              [fieldName]: response.data.imgUrl
+            };
+          }
           return updated;
         });
 
-        // Update parent component's state
+        let eventName = `${section}.${groupIndex}.${fieldName}`;
+        if (section === 'facilities' && itemIndex !== null) {
+          eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
+        }
         handleInputChange({
           target: {
-            name: `${section}.${index}.${fieldName}`,
+            name: eventName,
             value: response.data.imgUrl
           }
         });
@@ -142,21 +187,20 @@ const HotelContent = ({ handleInputChange, formData }) => {
     }
   };
 
-  const triggerFileInput = (index, type) => {
-    fileInputRefs.current[`${type}-${index}`]?.click();
+  const triggerFileInput = (groupIndex, section, itemIndex = null) => {
+    let refName = section;
+    if (section === 'facilities' && itemIndex !== null) {
+      refName = `${section}-${groupIndex}-${itemIndex}`;
+    }
+    fileInputRefs.current[refName]?.click();
   };
 
-  const shortenUrl = (url) => {
-    if (!url) return '';
-    return url.replace('/uploads/', '');
-  };
-
-  const renderImageUploader = (field, index, section, fieldName, label) => (
+  const renderImageUploader = (field, groupIndex, section, fieldName, label, itemIndex = null) => (
     <div className="form-input col-6">
       <div className="d-flex flex-column">
         <button
           type="button"
-          onClick={() => triggerFileInput(index, section)}
+          onClick={() => triggerFileInput(groupIndex, section, itemIndex)}
           className="text-blue-1 fw-500 cursor-pointer mb-10"
         >
           {label}
@@ -174,11 +218,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
       </div>
       <input
         type="file"
-        ref={el => fileInputRefs.current[`${section}-${index}`] = el}
+        ref={el => {
+          let refName = section;
+          if (section === 'facilities' && itemIndex !== null) {
+            refName = `${section}-${groupIndex}-${itemIndex}`;
+          }
+          fileInputRefs.current[refName] = el;
+        }}
         accept="image/png, image/jpeg"
         className="d-none"
-        onChange={(event) => handleFileUpload(index, event, fieldName, section, 
-          section === 'destinations' ? setDestinations : setFacilities
+        onChange={(event) => handleFileUpload(groupIndex, event, fieldName, section, 
+          section === 'destinations' ? setDestinations : setFacilities, itemIndex
         )}
       />
     </div>
@@ -375,10 +425,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
             <div className="form-input col-4">
               <input
                 type="text"
-                name="destinationLocation"
+                name={`destinations.${index}.destinationLocation`}
                 value={field.destinationLocation}
                 required
-                onChange={(e) => handleFieldChange(index, e, 'destinations', setDestinations)}
+                onChange={handleInputChange}
               />
               <label className="lh-1 text-16 text-black">Destination Location</label>
             </div>
@@ -411,45 +461,58 @@ const HotelContent = ({ handleInputChange, formData }) => {
 
       {/* Facilities Section */}
       <div className="col-12">
-        <h3 className="text-16 fw-500">Facilities</h3>
-        {facilities.map((field, index) => (
-          <div key={`fac-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
-            <div className="form-input col-4">
-              <input
-                type="text"
-                name="facilitiesTitle"
-                value={field.facilitiesTitle}
-                required
-                onChange={(e) => handleFieldChange(index, e, 'facilities', setFacilities)}
-              />
-              <label className="lh-1 text-16 text-black">Facilities Title</label>
+      <h3 className="text-16 fw-500">Facilities</h3>
+      {facilities.map((facilityGroup, groupIndex) => (
+        <div key={`facGroup-${groupIndex}`} className="mb-20">
+          <h4 className="text-14 fw-500">Facility Group {groupIndex + 1}</h4>
+          {facilityGroup.items.map((item, itemIndex) => (
+            <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20">
+              <div className="form-input col-4">
+                <input
+                  type="text"
+                  name={`facilities.${groupIndex}.items.${itemIndex}.title`}
+                  value={item.title}
+                  required
+                  onChange={handleInputChange}
+                />
+                <label className="lh-1 text-16 text-black">Facility Title</label>
+              </div>
+              {renderImageUploader(
+                item,
+                groupIndex,
+                'facilities',
+                'icon',
+                'Upload Facility Icon',
+                itemIndex
+              )}
+              <div className="col-2">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={() => handleItemRemove(groupIndex, itemIndex, 'facilities', setFacilities)}
+                >
+                  Remove
+                </button>
+              </div>
             </div>
-            {renderImageUploader(
-              field, 
-              index, 
-              'facilities', 
-              'facilitiesIcon', 
-              'Upload Facility Icon'
-            )}
-            <div className="col-2">
-              <button 
-                type="button" 
-                className="btn btn-danger"
-                onClick={() => handleRemove(index, 'facilities', setFacilities)}
-              >
-                Remove
-              </button>
-            </div>
-          </div>
-        ))}
-        <button 
-          type="button" 
-          className="btn btn-success"
-          onClick={() => handleAdd('facilities', setFacilities)}
-        >
-          Add Facility
-        </button>
-      </div>
+          ))}
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => handleItemAdd(groupIndex, 'facilities', setFacilities)}
+          >
+            Add Facility Item
+          </button>
+        </div>
+      ))}
+      <button
+        type="button"
+        className="btn btn-success"
+        onClick={() => handleAdd('facilities', setFacilities)}
+      >
+        Add Facility Group
+      </button>
+    </div>
 
       {error && <div className="col-12 mb-10 text-red-1">{error}</div>}
       <input type="hidden" name="delayAnimation" value="400" onChange={handleInputChange} />

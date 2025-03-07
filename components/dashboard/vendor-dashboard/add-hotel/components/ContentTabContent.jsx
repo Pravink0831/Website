@@ -34,8 +34,10 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
       destinationImg: ''
     }],
     facilities: [{
-      facilitiesTitle: '',
-      facilitiesIcon: ''
+      items: [{
+        icon: '',
+        title: ''
+      }]
     }]
   });
 
@@ -49,6 +51,21 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
     const { name, value } = e.target;
     if (name.includes('.')) {
       // Handle dynamic fields updates
+      const [section, groupIndex, key, itemIndex, field] = name.split('.');
+      if (section === 'facilities' && key === 'items') {
+        setFormData(prev => ({
+          ...prev,
+          [section]: prev[section].map((group, i) =>
+            i === parseInt(groupIndex) ? {
+              ...group,
+              [key]: group[key].map((item, j) =>
+                j === parseInt(itemIndex) ? { ...item, [field]: value } : item
+              )
+            } : group
+          )
+        }));
+      }
+      else {
       const [section, index, field] = name.split('.');
       setFormData(prev => ({
         ...prev,
@@ -56,6 +73,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           i === parseInt(index) ? { ...item, [field]: value } : item
         )
       }));
+    }
     } else {
       // Handle regular fields
       setFormData(prev => ({ ...prev, [name]: value }));
@@ -113,8 +131,10 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
             destinationImg: ''
           }],
           facilities: [{
-            facilitiesTitle: '',
-            facilitiesIcon: ''
+            items: [{
+              icon: '',
+              title: ''
+            }]
           }]
         });
       } catch (error) {
