@@ -186,16 +186,22 @@ const HotelContent = ({ handleInputChange, formData }) => {
           return updated;
         });
 
-        let eventName = `${section}.${groupIndex}.${fieldName}`;
-        if (section === 'facilities' && itemIndex !== null) {
-          eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
+        // Update this part to handle all sections with file uploads
+        const sectionHandler = {
+          destinations: setDestinations,
+          facilities: setFacilities,
+          propertyHighlights: setPropertyHighlights
+        };
+
+        if (sectionHandler[section]) {
+          let eventName = `${section}.${groupIndex}.${fieldName}`;
+          handleInputChange({
+            target: {
+              name: eventName,
+              value: response.data.imgUrl
+            }
+          });
         }
-        handleInputChange({
-          target: {
-            name: eventName,
-            value: response.data.imgUrl
-          }
-        });
 
         setError("");
       } else {
@@ -588,15 +594,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
               'highlightIcon',
               'Upload Highlight Icon'
             )}
-            <div className="col-2">
-              <button
-                type="button"
-                className={removeButtonStyle}
-                onClick={() => handleRemove(index, 'propertyHighlights', setPropertyHighlights)}
-              >
-                Remove
-              </button>
-            </div>
+            {propertyHighlights.length > 1 && (
+              <div className="col-2">
+                <button
+                  type="button"
+                  className={removeButtonStyle}
+                  onClick={() => handleRemove(index, 'propertyHighlights', setPropertyHighlights)}
+                >
+                  Remove
+                </button>
+              </div>
+            )}
           </div>
         ))}
         <button
