@@ -86,8 +86,8 @@ export default async function handler(req, res) {
                   console.error("Cloudinary upload error:", error);
                   reject(error);
                 } else {
-                  console.log("Cloudinary upload success, optimized size:", result.bytes);
-                  resolve(result);
+                  console.log("Cloudinary upload success:", result.secure_url);
+                  resolve(result.secure_url);
                 }
               }
             );
@@ -95,48 +95,29 @@ export default async function handler(req, res) {
           });
         };
 
-        let imgUrl = null;
-        let slideImgUrls = [];
+        let urls = [];
 
         if (req.files.img) {
-          try {
-            const result = await uploadToCloudinary(req.files.img[0].buffer);
-            imgUrl = result.secure_url;
-            console.log("Banner image URL:", imgUrl);
-          } catch (cloudinaryError) {
-            console.error("Error uploading banner image to Cloudinary:", cloudinaryError);
-            return res.status(500).json({ error: 'Cloudinary upload failed', details: cloudinaryError.message });
-          }
+          const url = await uploadToCloudinary(req.files.img[0].buffer);
+          urls.push(url);
+          res.status(200).json({
+            message: 'Upload successful',
+            imgUrl: url,
+            slideImgUrls: null
+          });
+        } else if (req.files.slideImg) {
+          const uploadPromises = req.files.slideImg.map(file => uploadToCloudinary(file.buffer));
+          urls = await Promise.all(uploadPromises);
+          res.status(200).json({
+            message: 'Upload successful',
+            imgUrl: null,
+            slideImgUrls: urls
+          });
         }
 
-        if (req.files.slideImg) {
-          try {
-            const uploads = req.files.slideImg.map(file => uploadToCloudinary(file.buffer));
-            const results = await Promise.all(uploads);
-            slideImgUrls = results.map(result => result.secure_url);
-            console.log("Gallery image URLs:", slideImgUrls);
-          } catch (cloudinaryError) {
-            console.error("Error uploading gallery images to Cloudinary:", cloudinaryError);
-            return res.status(500).json({ error: 'Cloudinary upload failed', details: cloudinaryError.message });
-          }
-        }
-
-        res.status(200).json({
-          message: 'Upload successful',
-          imgUrl,
-          slideImgUrls
-        });
       } catch (error) {
-        console.error('Upload error details:', {
-          message: error.message,
-          stack: error.stack,
-          code: error.code
-        });
-        return res.status(500).json({ 
-          error: 'Upload failed', 
-          details: error.message,
-          stack: error.stack 
-        });
+        console.error('Upload error:', error);
+        res.status(500).json({ error: 'Upload failed', details: error.message });
       }
     });
   } catch (error) {

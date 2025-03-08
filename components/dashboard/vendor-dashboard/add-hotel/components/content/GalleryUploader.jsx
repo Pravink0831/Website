@@ -42,7 +42,6 @@ const GalleryUploader = ({ images, setImages }) => {
       const formData = new FormData();
       formData.append("slideImg", compressedFile);
 
-      console.log("Uploading gallery image:", compressedFile.name);
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -51,14 +50,15 @@ const GalleryUploader = ({ images, setImages }) => {
       
       console.log("Gallery upload response:", response.data);
 
-      // Check both imgUrl and slideImgUrls in response
+      // Check slideImgUrls first since we're uploading as slideImg
+      if (response.data?.slideImgUrls?.[0]) {
+        return response.data.slideImgUrls[0];
+      }
+      // Fallback to imgUrl if slideImgUrls is not available
       if (response.data?.imgUrl) {
         return response.data.imgUrl;
-      } else if (response.data?.slideImgUrls?.[0]) {
-        return response.data.slideImgUrls[0];
-      } else {
-        throw new Error("No valid image URL in response");
       }
+      throw new Error("No valid image URL in response");
     } catch (err) {
       console.error("Upload error:", err);
       throw err;
@@ -71,26 +71,22 @@ const GalleryUploader = ({ images, setImages }) => {
     setLoading(true);
 
     try {
-      const uploadedUrls = [];
-      
-      // Upload files sequentially
-      for (const file of files) {
+      const uploadPromises = files.map(async (file) => {
         try {
           await validateGalleryImage(file);
-          const url = await uploadImage(file);
-          if (url) {
-            uploadedUrls.push(url);
-          }
-        } catch (uploadError) {
-          console.error("Error uploading file:", file.name, uploadError);
-          setError(`Error uploading ${file.name}: ${uploadError.message}`);
+          return await uploadImage(file);
+        } catch (err) {
+          console.error(`Error processing ${file.name}:`, err);
+          setError(`Error uploading ${file.name}: ${err.message}`);
+          return null;
         }
-      }
+      });
+
+      const uploadedUrls = (await Promise.all(uploadPromises)).filter(Boolean);
 
       if (uploadedUrls.length > 0) {
-        // Update the images state by combining existing and new URLs
-        setImages(prevImages => {
-          const newImages = [...(prevImages || []), ...uploadedUrls];
+        setImages(prev => {
+          const newImages = [...(prev || []), ...uploadedUrls];
           console.log("Updated gallery images:", newImages);
           return newImages;
         });
@@ -136,7 +132,7 @@ const GalleryUploader = ({ images, setImages }) => {
             onChange={handleFileUpload} 
             disabled={loading}
           />
-          <div className="text-start mt-10 text-14 text-light-1">PNG or JPG no bigger than 800px wide and tall.</div>
+          <div className="text-start mt-10 text-14 text-light-1">PNG or JPG.</div>
         </div>
       </div>
       {/* End uploader field */}
