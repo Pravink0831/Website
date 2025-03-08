@@ -27,7 +27,7 @@ const GalleryUploader = ({ images, setImages }) => {
 
   const validateGalleryImage = (file) => {
     return new Promise((resolve, reject) => {
-      // Only check file size (25MB)
+      // Check file size (25MB)
       const maxSize = 25 * 1024 * 1024;
       if (file.size > maxSize) {
         reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);

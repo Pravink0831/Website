@@ -5,7 +5,6 @@ import axios from "axios";
 
 const BannerUploader = ({ bannerImage, setBannerImage }) => {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [isClient, setIsClient] = useState(false); // Track client-side rendering
 
   useEffect(() => {
@@ -14,7 +13,7 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
   const validateImage = (file) => {
     return new Promise((resolve, reject) => {
-      // Only check file size (25MB)
+      // Check file size (25MB)
       const maxSize = 25 * 1024 * 1024; // 25MB in bytes
       if (file.size > maxSize) {
         reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
@@ -34,54 +33,43 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
     });
   };
 
-  const handleUpload = async (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (!file) return;
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
 
     try {
       await validateImage(file);
-      setLoading(true);
-      setError(""); // Clear any previous errors
 
       const formData = new FormData();
       formData.append("img", file);
 
-      try {
-        console.log('Uploading file:', {
-          name: file.name,
-          size: file.size,
-          type: file.type
-        });
+      console.log("Uploading banner image:", file.name);
+      const response = await axios.post("/api/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-        const response = await axios.post("/api/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          timeout: 30000, // Increase timeout to 30 seconds
-          onUploadProgress: (progressEvent) => {
-            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            console.log('Upload progress:', percentCompleted + '%');
-          }
-        });
-
-        if (response.data && response.data.imgUrl) {
-          console.log('Upload successful:', response.data);
-          setBannerImage(response.data.imgUrl);
+      console.log("Banner upload response:", response.data);
+      
+      // Modify this section to handle the URL correctly
+      if (response.data && response.data.imgUrl) {
+        const imageUrl = response.data.imgUrl;
+        console.log("Setting banner image URL:", imageUrl);
+        if (typeof setBannerImage === 'function') {
+          setBannerImage(imageUrl);
         } else {
-          throw new Error('Invalid response format');
+          console.error("setBannerImage is not a function:", typeof setBannerImage);
         }
-      } catch (err) {
-        console.error('Upload error details:', {
-          status: err.response?.status,
-          data: err.response?.data,
-          message: err.message
-        });
-        setError(`Upload failed: ${err.response?.data?.details || err.message}`);
+        setError("");
+      } else {
+        console.error("Invalid response structure:", response.data);
+        setError("Upload failed: Invalid response from server");
       }
     } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      console.error("Banner upload error:", err);
+      setError(err.message || "Upload failed");
     }
   };
 
@@ -96,26 +84,17 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
         <div className="w-200">
           <label htmlFor="bannerUpload" className="d-flex ratio ratio-1:1">
             <div className="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
-              {loading ? (
-                <div className="spinner-border text-primary" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              ) : (
-                <>
-                  <div className="icon-upload-file text-40 text-blue-1 mb-10" />
-                  <div className="text-blue-1 fw-500">Upload Banner</div>
-                </>
-              )}
+              <div className="icon-upload-file text-40 text-blue-1 mb-10" />
+              <div className="text-blue-1 fw-500">Upload Banner</div>
             </div>
-            <input
-              type="file"
-              id="bannerUpload"
-              accept="image/png, image/jpeg"
-              className="d-none"
-              onChange={handleUpload}
-              disabled={loading}
-            />
           </label>
+          <input
+            type="file"
+            id="bannerUpload"
+            accept="image/png, image/jpeg"
+            className="d-none"
+            onChange={handleFileUpload}
+          />
         </div>
       </div>
 

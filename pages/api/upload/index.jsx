@@ -74,7 +74,7 @@ export default async function handler(req, res) {
               { 
                 resource_type: 'auto',
                 transformation: [
-                  { width: 2000, crop: "scale" }, // Resize large images to max width 1000px
+                  { width: 1000, crop: "scale" }, // Resize large images to max width 1000px
                   { quality: "auto:good" }, // Automatic quality optimization
                   { fetch_format: "auto" }, // Automatic format optimization (webp when supported)
                   { flags: "lossy" } // Enable lossy compression
