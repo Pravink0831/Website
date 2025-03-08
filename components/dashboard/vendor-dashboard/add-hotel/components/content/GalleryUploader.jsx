@@ -2,35 +2,17 @@
 
 import { useState } from "react";
 import axios from "axios";
+import imageCompression from 'browser-image-compression';
 
 const GalleryUploader = ({ images, setImages }) => {
   const [error, setError] = useState("");
 
-  const validateImage = (file, maxSize) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        if (img.width > maxSize || img.height > maxSize) {
-          reject(`Image ${file.name} exceeds the maximum size of ${maxSize}px.`);
-        } else if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
-          reject(`Image ${file.name} is not a valid file type. Only PNG and JPEG are allowed.`);
-        } else {
-          resolve();
-        }
-      };
-      img.onerror = () => {
-        reject(`Image ${file.name} could not be loaded.`);
-      };
-      img.src = URL.createObjectURL(file); // Use createObjectURL for faster loading
-    });
-  };
-
-  const validateGalleryImage = (file) => {
-    return new Promise((resolve, reject) => {
-      // Check file size (25MB)
-      const maxSize = 25 * 1024 * 1024;
+  const validateGalleryImage = async (file) => {
+    return new Promise(async (resolve, reject) => {
+      // Check file size (10MB)
+      const maxSize = 10 * 1024 * 1024;
       if (file.size > maxSize) {
-        reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
+        reject(`File size must be less than 10MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
         return;
       }
 
@@ -48,11 +30,19 @@ const GalleryUploader = ({ images, setImages }) => {
   };
 
   const uploadImage = async (file) => {
-    const formData = new FormData();
-    formData.append("slideImg", file);
-
     try {
-      console.log("Uploading image:", file.name);
+      // Compress and resize image
+      const options = {
+        maxSizeMB: 1, // Max output file size in MB
+        maxWidthOrHeight: 4000, // Max width or height
+        useWebWorker: true
+      }
+      const compressedFile = await imageCompression(file, options);
+
+      const formData = new FormData();
+      formData.append("slideImg", compressedFile);
+
+      console.log("Uploading image:", compressedFile.name);
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -76,41 +66,28 @@ const GalleryUploader = ({ images, setImages }) => {
   };
 
   const handleFileUpload = async (event) => {
-    const fileList = Array.from(event.target.files || []); // Convert FileList to Array
+    const fileList = Array.from(event.target.files || []);
     setError("");
-    
+
     try {
-      // Validate all images
-      await Promise.all(fileList.map(validateGalleryImage));
-      
-      // Upload all images and get arrays of URLs
-      const imageUrlArrays = await Promise.all(fileList.map(uploadImage));
-      
-      // Flatten the arrays of URLs and filter out any invalid values
-      const allImageUrls = imageUrlArrays.flat().filter(Boolean);
-      
-      if (allImageUrls.length > 0) {
-        const updatedImages = [...(images || []), ...allImageUrls];
-        setImages(updatedImages);
+      const imageUrls = [];
+      for (const file of fileList) {
+        try {
+          await validateGalleryImage(file);
+          const urls = await uploadImage(file);
+          imageUrls.push(...urls);
+        } catch (uploadError) {
+          console.error("Error uploading file:", file.name, uploadError);
+          setError(`Error uploading ${file.name}: ${uploadError.message}`);
+        }
+      }
+
+      if (imageUrls.length > 0) {
+        setImages(prevImages => [...(prevImages || []), ...imageUrls]);
       }
     } catch (err) {
-      console.error("Upload error:", err);
+      console.error("Overall upload error:", err);
       setError(err.message || "Image upload failed.");
-    }
-  };
-
-  const handleUpload = async (event) => {
-    const files = Array.from(event.target.files);
-    
-    try {
-      // Validate all files first
-      await Promise.all(files.map(validateGalleryImage));
-      
-      // Then proceed with upload if all validations pass
-      setLoading(true);
-      // ... rest of the upload logic
-    } catch (err) {
-      setError(err.message || "Upload failed");
     }
   };
 

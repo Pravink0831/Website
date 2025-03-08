@@ -6,7 +6,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage,
   limits: {
-    fileSize: 25 * 1024 * 1024, // 25MB limit
+    fileSize: 10 * 1024 * 1024, // 10MB limit
   },
   fileFilter: (req, file, cb) => {
     // Check file type
@@ -77,7 +77,7 @@ export default async function handler(req, res) {
                   { width: 1000, crop: "scale" }, // Resize large images to max width 1000px
                   { quality: "auto:good" }, // Automatic quality optimization
                   { fetch_format: "auto" }, // Automatic format optimization (webp when supported)
-                  { flags: "lossy" } // Enable lossy compression
+                  { flags: "lossy" } // Enable lossy compression }
                 ],
                 folder: 'villa-uploads'
               },

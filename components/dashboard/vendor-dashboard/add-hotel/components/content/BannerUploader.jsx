@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import imageCompression from 'browser-image-compression';
 
 const BannerUploader = ({ bannerImage, setBannerImage }) => {
   const [error, setError] = useState("");
@@ -11,12 +12,12 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
     setIsClient(true); // Set to true after component mounts on client
   }, []);
 
-  const validateImage = (file) => {
-    return new Promise((resolve, reject) => {
-      // Check file size (25MB)
-      const maxSize = 25 * 1024 * 1024; // 25MB in bytes
+  const validateImage = async (file) => {
+    return new Promise(async (resolve, reject) => {
+      // Check file size (10MB)
+      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
       if (file.size > maxSize) {
-        reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
+        reject(`File size must be less than 10MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
         return;
       }
 
@@ -43,10 +44,18 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
     try {
       await validateImage(file);
 
-      const formData = new FormData();
-      formData.append("img", file);
+      // Compress and resize image
+      const options = {
+        maxSizeMB: 1, // Max output file size in MB
+        maxWidthOrHeight: 4000, // Max width or height
+        useWebWorker: true
+      }
+      const compressedFile = await imageCompression(file, options);
 
-      console.log("Uploading banner image:", file.name);
+      const formData = new FormData();
+      formData.append("img", compressedFile);
+
+      console.log("Uploading banner image:", compressedFile.name, compressedFile.size);
       const response = await axios.post("/api/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
