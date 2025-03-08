@@ -16,12 +16,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
     destinationLocation: '',
     destinationImg: ''
   }]);
-  const [facilities, setFacilities] = useState(formData?.facilities || [{
-    items: [{
-      title: '',
-      icon: ''
-    }]
-  }]);
+  const [facilities, setFacilities] = useState(() => {
+    if (formData?.facilities && formData.facilities.length > 0) {
+      return formData.facilities;
+    }
+    return [{
+      items: [{
+        title: '',
+        icon: ''
+      }]
+    }];
+  });
   const [propertyHighlights, setPropertyHighlights] = useState(formData?.propertyHighlights || [{
     highlightTitle: '',
     highlightIcon: ''
@@ -265,14 +270,14 @@ const HotelContent = ({ handleInputChange, formData }) => {
       }
     };
 
-    // Add console.log to debug image display
-    console.log('Rendering image uploader:', {
+    // Add debug logging
+    console.log('Rendering uploader:', {
       section,
       groupIndex,
       itemIndex,
-      field,
       fieldName,
-      hasImage: field[fieldName]
+      hasImage: field?.[fieldName],
+      field
     });
 
     return (
@@ -285,13 +290,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
           >
             {label}
           </button>
-          {field && field[fieldName] && (
+          {field && typeof field[fieldName] === 'string' && field[fieldName].length > 0 && (
             <div className="d-flex align-items-center">
               <img 
                 src={field[fieldName]}
                 alt={label} 
                 style={{ width: '100px', height: '100px', objectFit: 'cover' }}
                 className="rounded-4"
+                onError={(e) => {
+                  console.error(`Error loading image for ${section} ${groupIndex}:`, field[fieldName]);
+                  e.target.style.display = 'none';
+                }}
               />
             </div>
           )}

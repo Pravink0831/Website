@@ -32,10 +32,9 @@ const GalleryUploader = ({ images, setImages }) => {
 
   const uploadImage = async (file) => {
     try {
-      // Compress and resize image
       const options = {
-        maxSizeMB: 1, // Max output file size in MB
-        maxWidthOrHeight: 4000, // Max width or height
+        maxSizeMB: 1,
+        maxWidthOrHeight: 4000,
         useWebWorker: true
       }
       const compressedFile = await imageCompression(file, options);
@@ -52,10 +51,13 @@ const GalleryUploader = ({ images, setImages }) => {
       
       console.log("Gallery upload response:", response.data);
 
-      if (response.data && response.data.imgUrl) {
-        return response.data.imgUrl; // Return single URL
+      // Check both imgUrl and slideImgUrls in response
+      if (response.data?.imgUrl) {
+        return response.data.imgUrl;
+      } else if (response.data?.slideImgUrls?.[0]) {
+        return response.data.slideImgUrls[0];
       } else {
-        throw new Error("Invalid response from server");
+        throw new Error("No valid image URL in response");
       }
     } catch (err) {
       console.error("Upload error:", err);
