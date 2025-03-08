@@ -73,14 +73,20 @@ export default async function handler(req, res) {
             const uploadStream = cloudinary.uploader.upload_stream(
               { 
                 resource_type: 'auto',
-                chunk_size: 6000000 // Increase chunk size for large files
+                transformation: [
+                  { width: 2000, crop: "scale" }, // Resize large images to max width 1000px
+                  { quality: "auto:good" }, // Automatic quality optimization
+                  { fetch_format: "auto" }, // Automatic format optimization (webp when supported)
+                  { flags: "lossy" } // Enable lossy compression
+                ],
+                folder: 'villa-uploads'
               },
               (error, result) => {
                 if (error) {
                   console.error("Cloudinary upload error:", error);
                   reject(error);
                 } else {
-                  console.log("Cloudinary upload success");
+                  console.log("Cloudinary upload success, optimized size:", result.bytes);
                   resolve(result);
                 }
               }
