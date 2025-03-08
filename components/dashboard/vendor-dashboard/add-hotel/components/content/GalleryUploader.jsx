@@ -27,7 +27,7 @@ const GalleryUploader = ({ images, setImages }) => {
 
   const validateGalleryImage = (file) => {
     return new Promise((resolve, reject) => {
-      // Check file size (25MB)
+      // Only check file size (25MB)
       const maxSize = 25 * 1024 * 1024;
       if (file.size > maxSize) {
         reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
@@ -36,21 +36,10 @@ const GalleryUploader = ({ images, setImages }) => {
 
       const img = new Image();
       img.onload = () => {
-        // Check dimensions
-        if (img.width < 800 || img.height < 600) {
-          reject("Image dimensions must be at least 800x600 pixels");
-          return;
-        }
-        if (img.width > 4000 || img.height > 4000) {
-          reject("Image dimensions must not exceed 4000x4000 pixels");
-          return;
-        }
-
         if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
           reject("Only PNG and JPEG files are allowed");
           return;
         }
-
         resolve();
       };
       img.onerror = () => reject("Invalid image file");
@@ -88,26 +77,20 @@ const GalleryUploader = ({ images, setImages }) => {
 
   const handleFileUpload = async (event) => {
     const fileList = Array.from(event.target.files || []); // Convert FileList to Array
-    const maxSize = 1800;
-
     setError("");
-    console.log("Starting upload for files:", fileList.map(f => f.name));
-
+    
     try {
-      // Validate all images first
-      await Promise.all(fileList.map(file => validateImage(file, maxSize)));
+      // Validate all images
+      await Promise.all(fileList.map(validateGalleryImage));
       
       // Upload all images and get arrays of URLs
       const imageUrlArrays = await Promise.all(fileList.map(uploadImage));
       
       // Flatten the arrays of URLs and filter out any invalid values
       const allImageUrls = imageUrlArrays.flat().filter(Boolean);
-      console.log("Current images:", images);
-      console.log("New image URLs to add:", allImageUrls);
-
+      
       if (allImageUrls.length > 0) {
         const updatedImages = [...(images || []), ...allImageUrls];
-        console.log("Final updated images array:", updatedImages);
         setImages(updatedImages);
       }
     } catch (err) {

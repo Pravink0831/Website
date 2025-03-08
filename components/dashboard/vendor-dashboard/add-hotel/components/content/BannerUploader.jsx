@@ -14,7 +14,7 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
   const validateImage = (file) => {
     return new Promise((resolve, reject) => {
-      // Check file size (25MB)
+      // Only check file size (25MB)
       const maxSize = 25 * 1024 * 1024; // 25MB in bytes
       if (file.size > maxSize) {
         reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
@@ -23,21 +23,10 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
       const img = new Image();
       img.onload = () => {
-        // Check dimensions
-        if (img.width < 800 || img.height < 600) {
-          reject("Image dimensions must be at least 800x600 pixels");
-          return;
-        }
-        if (img.width > 4000 || img.height > 4000) {
-          reject("Image dimensions must not exceed 4000x4000 pixels");
-          return;
-        }
-        
         if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
           reject("Only PNG and JPEG files are allowed");
           return;
         }
-        
         resolve();
       };
       img.onerror = () => reject("Invalid image file");

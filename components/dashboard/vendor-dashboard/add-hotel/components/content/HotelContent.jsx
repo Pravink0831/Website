@@ -542,59 +542,52 @@ const HotelContent = ({ handleInputChange, formData }) => {
 
       {/* Facilities Section */}
       <div className="col-12">
-      <h3 className="text-16 fw-500">Facilities</h3>
-      {facilities.map((facilityGroup, groupIndex) => (
-        <div key={`facGroup-${groupIndex}`} className="mb-30 border-bottom-light pb-30">
-          <h4 className="text-14 fw-500 mb-15">Facility Group {groupIndex + 1}</h4>
-          {facilityGroup.items.map((item, itemIndex) => (
-            <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
-              <div className="form-input col-4">
-                <input
-                  type="text"
-                  name="title"
-                  value={item.title || ''}
-                  required
-                  onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, itemIndex)}
-                />
-                <label className="lh-1 text-16 text-black">Facility Title</label>
-              </div>
-              {renderImageUploader(
-                item,
-                groupIndex,
-                'facilities',
-                'icon',
-                'Upload Facility Icon',
-                itemIndex
-              )}
-              <div className="col-2">
-                <button 
-                  type="button"
-                  className={removeButtonStyle}
-                  onClick={() => handleItemRemove(groupIndex, itemIndex, 'facilities', setFacilities)}
-                >
-                  Remove
-                </button>
-              </div>
+        <h3 className="text-16 fw-500">Facilities</h3>
+        {facilities.map((facilityGroup, groupIndex) => (
+          <div key={`facGroup-${groupIndex}`} className="mb-30 border-bottom-light pb-30">
+            <div className="d-flex justify-between">
+              <h4 className="text-14 fw-500 mb-15">Facility Group {groupIndex + 1}</h4>
+              <button 
+                type="button"
+                className={removeButtonStyle}
+                onClick={() => handleRemove(groupIndex, 'facilities', setFacilities)}
+              >
+                Remove
+              </button>
             </div>
-          ))}
-          {/* Remove or comment out the Add Facility Item button */}
-          {/* <button
-            type="button" 
-            className={addButtonStyle}
-            onClick={() => handleItemAdd(groupIndex, 'facilities', setFacilities)}
-          >
-            Add Facility Item
-          </button> */}
-        </div>
-      ))}
-      <button 
-        type="button" 
-        className={addButtonStyle}
-        onClick={() => handleAdd('facilities', setFacilities)}
-      >
-        Add Facility Group
-      </button>
-    </div>
+            {facilityGroup.items.map((item, itemIndex) => (
+              <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
+                <div className="form-input col-4">
+                  <input
+                    type="text"
+                    name="title"
+                    value={item.title || ''}
+                    required
+                    onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, itemIndex)}
+                  />
+                  <label className="lh-1 text-16 text-black">Facility Title</label>
+                </div>
+                {renderImageUploader(
+                  item,
+                  groupIndex,
+                  'facilities',
+                  'icon',
+                  'Upload Facility Icon',
+                  itemIndex
+                )}
+                {/* Remove the item remove button */}
+              </div>
+            ))}
+          </div>
+        ))}
+        <button 
+          type="button" 
+          className={addButtonStyle}
+          onClick={() => handleAdd('facilities', setFacilities)}
+        >
+          Add Facility
+        </button>
+      </div>
 
       {/* Property Highlights Section */}
       <div className="col-12">
