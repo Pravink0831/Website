@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 
 const HotelContent = ({ handleInputChange, formData }) => {
   const [popularFacilities, setPopularFacilities] = useState(formData?.popularFacilities || [{ 
@@ -152,17 +153,43 @@ const HotelContent = ({ handleInputChange, formData }) => {
   const handleFileUpload = async (groupIndex, event, fieldName, section, setSection, itemIndex = null) => {
     const file = event.target.files[0];
     if (!file) return;
-
+  
     try {
+      // Validate image
+      const validateImage = async (file) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
+              reject("Only PNG and JPEG files are allowed");
+              return;
+            }
+            resolve();
+          };
+          img.onerror = () => reject("Invalid image file");
+          img.src = URL.createObjectURL(file);
+        });
+      };
+  
+      await validateImage(file);
+  
+      // Compress and resize image
+      const options = {
+        maxSizeMB: 1, // Max output file size in MB
+        maxWidthOrHeight: 2000, // Max width or height
+        useWebWorker: true
+      }
+      const compressedFile = await imageCompression(file, options);
+  
       const formData = new FormData();
-      formData.append("img", file);
-
+      formData.append("img", compressedFile);
+  
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
+  
       if (response.data && response.data.imgUrl) {
         console.log('Upload successful:', response.data);
         
@@ -188,7 +215,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           }
           return updated;
         });
-
+  
         // Update form data
         let eventName = `${section}.${groupIndex}.${fieldName}`;
         if (section === 'facilities' && itemIndex !== null) {
@@ -201,7 +228,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
             value: response.data.imgUrl
           }
         });
-
+  
         setError("");
       } else {
         console.error('Invalid response:', response.data);
