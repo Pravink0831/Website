@@ -166,16 +166,20 @@ const HotelContent = ({ handleInputChange, formData }) => {
       if (response.data && response.data.imgUrl) {
         console.log('Upload successful:', response.data);
         
+        // Update local state
         setSection(prev => {
           const updated = [...prev];
           if (section === 'facilities' && itemIndex !== null) {
-            const facility = updated[groupIndex];
-            if (facility && facility.items && facility.items[itemIndex]) {
-              facility.items[itemIndex] = {
-                ...facility.items[itemIndex],
-                [fieldName]: response.data.imgUrl
-              };
+            if (!updated[groupIndex].items) {
+              updated[groupIndex].items = [];
             }
+            if (!updated[groupIndex].items[itemIndex]) {
+              updated[groupIndex].items[itemIndex] = {};
+            }
+            updated[groupIndex].items[itemIndex] = {
+              ...updated[groupIndex].items[itemIndex],
+              [fieldName]: response.data.imgUrl
+            };
           } else {
             updated[groupIndex] = {
               ...updated[groupIndex],
@@ -185,6 +189,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           return updated;
         });
 
+        // Update form data
         let eventName = `${section}.${groupIndex}.${fieldName}`;
         if (section === 'facilities' && itemIndex !== null) {
           eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
@@ -243,10 +248,11 @@ const HotelContent = ({ handleInputChange, formData }) => {
           >
             {label}
           </button>
-          {field[fieldName] && (
+          {/* Fix the image display condition for facilities */}
+          {(section === 'facilities' ? field[fieldName] : field[fieldName]) && (
             <div className="d-flex align-items-center">
               <img 
-                src={field[fieldName]} 
+                src={field[fieldName]}
                 alt={label} 
                 style={{ width: '100px', height: '100px', objectFit: 'cover' }}
                 className="rounded-4"
