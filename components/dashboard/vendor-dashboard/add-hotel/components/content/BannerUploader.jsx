@@ -40,37 +40,48 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
 
     try {
       await validateImage(file);
+      setLoading(true);
+      setError(""); // Clear any previous errors
 
       const formData = new FormData();
       formData.append("img", file);
 
-      setLoading(true);
       try {
+        console.log('Uploading file:', {
+          name: file.name,
+          size: file.size,
+          type: file.type
+        });
+
         const response = await axios.post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-          // Add timeout and retry logic
-          timeout: 10000,
-          maxRetries: 3
+          timeout: 30000, // Increase timeout to 30 seconds
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            console.log('Upload progress:', percentCompleted + '%');
+          }
         });
 
         if (response.data && response.data.imgUrl) {
+          console.log('Upload successful:', response.data);
           setBannerImage(response.data.imgUrl);
-          setError("");
         } else {
-          setError("Invalid response from server");
-          console.error("Invalid upload response:", response.data);
+          throw new Error('Invalid response format');
         }
       } catch (err) {
-        setError("Upload failed: " + (err.response?.data?.message || err.message));
-        console.error("Banner upload error:", err);
-      } finally {
-        setLoading(false);
+        console.error('Upload error details:', {
+          status: err.response?.status,
+          data: err.response?.data,
+          message: err.message
+        });
+        setError(`Upload failed: ${err.response?.data?.details || err.message}`);
       }
     } catch (err) {
-      console.error("Banner upload error:", err);
-      setError(err.message || "Upload failed");
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
