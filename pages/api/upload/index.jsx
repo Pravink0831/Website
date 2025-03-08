@@ -99,19 +99,17 @@ export default async function handler(req, res) {
 
         if (req.files.img) {
           const url = await uploadToCloudinary(req.files.img[0].buffer);
-          urls.push(url);
           res.status(200).json({
             message: 'Upload successful',
             imgUrl: url,
             slideImgUrls: null
           });
         } else if (req.files.slideImg) {
-          const uploadPromises = req.files.slideImg.map(file => uploadToCloudinary(file.buffer));
-          urls = await Promise.all(uploadPromises);
+          const url = await uploadToCloudinary(req.files.slideImg[0].buffer);
           res.status(200).json({
             message: 'Upload successful',
             imgUrl: null,
-            slideImgUrls: urls
+            slideImgUrls: [url] // Always return as array
           });
         }
 

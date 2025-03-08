@@ -51,8 +51,13 @@ const GalleryUploader = ({ images, setImages }) => {
       
       console.log("Gallery upload response:", response.data);
 
-      if (response.data?.slideImgUrls?.[0]) {
+      // First check slideImgUrls array
+      if (response.data?.slideImgUrls?.length > 0) {
         return response.data.slideImgUrls[0];
+      }
+      // Fallback to imgUrl if available
+      if (response.data?.imgUrl) {
+        return response.data.imgUrl;
       }
       throw new Error("No valid image URL in response");
     } catch (err) {
@@ -69,25 +74,23 @@ const GalleryUploader = ({ images, setImages }) => {
     setLoading(true);
 
     try {
-      const uploadedUrls = [];
-      
-      // Process files sequentially to prevent too many concurrent uploads
       for (const file of files) {
         try {
           await validateGalleryImage(file);
           const url = await uploadImage(file);
           if (url) {
-            uploadedUrls.push(url);
             // Update images immediately after each successful upload
-            setImages(prev => [...(prev || []), url]);
+            setImages(prev => {
+              const newImages = [...(prev || []), url];
+              console.log("Updated gallery images:", newImages);
+              return newImages;
+            });
           }
         } catch (uploadError) {
           console.error(`Error uploading ${file.name}:`, uploadError);
           setError(`Error uploading ${file.name}: ${uploadError.message}`);
         }
       }
-
-      console.log("All uploads completed:", uploadedUrls);
     } catch (err) {
       console.error("Overall upload error:", err);
       setError(err.message || "Image upload failed.");

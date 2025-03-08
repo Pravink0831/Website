@@ -244,15 +244,12 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
         <div className="mt-30">
           <div className="fw-500">Gallery</div>
           <GalleryUploader 
-            images={formData.slideImg || []} // Make sure this is passed
+            images={formData.slideImg || []} 
             setImages={(urls) => {
-              setFormData(prevData => {
-                const newData = {
-                  ...prevData,
-                  slideImg: Array.isArray(urls) ? urls : []
-                };
-                return newData;
-              });
+              setFormData(prev => ({
+                ...prev,
+                slideImg: Array.isArray(urls) ? urls : []
+              }));
             }} 
           />
         </div>
