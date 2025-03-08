@@ -25,6 +25,39 @@ const GalleryUploader = ({ images, setImages }) => {
     });
   };
 
+  const validateGalleryImage = (file) => {
+    return new Promise((resolve, reject) => {
+      // Check file size (25MB)
+      const maxSize = 25 * 1024 * 1024;
+      if (file.size > maxSize) {
+        reject(`File size must be less than 25MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
+        return;
+      }
+
+      const img = new Image();
+      img.onload = () => {
+        // Check dimensions
+        if (img.width < 800 || img.height < 600) {
+          reject("Image dimensions must be at least 800x600 pixels");
+          return;
+        }
+        if (img.width > 4000 || img.height > 4000) {
+          reject("Image dimensions must not exceed 4000x4000 pixels");
+          return;
+        }
+
+        if (!["image/png", "image/jpeg"].includes(file.type.toLowerCase())) {
+          reject("Only PNG and JPEG files are allowed");
+          return;
+        }
+
+        resolve();
+      };
+      img.onerror = () => reject("Invalid image file");
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("slideImg", file);
@@ -80,6 +113,21 @@ const GalleryUploader = ({ images, setImages }) => {
     } catch (err) {
       console.error("Upload error:", err);
       setError(err.message || "Image upload failed.");
+    }
+  };
+
+  const handleUpload = async (event) => {
+    const files = Array.from(event.target.files);
+    
+    try {
+      // Validate all files first
+      await Promise.all(files.map(validateGalleryImage));
+      
+      // Then proceed with upload if all validations pass
+      setLoading(true);
+      // ... rest of the upload logic
+    } catch (err) {
+      setError(err.message || "Upload failed");
     }
   };
 
