@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import imageCompression from 'browser-image-compression';
 
@@ -30,7 +30,7 @@ const GalleryUploader = ({ images, setImages }) => {
     });
   };
 
-  const uploadImage = async (file) => {
+  const uploadImage = useCallback(async (file) => {
     try {
       const options = {
         maxSizeMB: 1,
@@ -42,6 +42,7 @@ const GalleryUploader = ({ images, setImages }) => {
       const formData = new FormData();
       formData.append("slideImg", compressedFile);
 
+      console.log("Uploading gallery image:", compressedFile.name);
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -50,60 +51,54 @@ const GalleryUploader = ({ images, setImages }) => {
       
       console.log("Gallery upload response:", response.data);
 
-      // Check slideImgUrls first since we're uploading as slideImg
       if (response.data?.slideImgUrls?.[0]) {
         return response.data.slideImgUrls[0];
-      }
-      // Fallback to imgUrl if slideImgUrls is not available
-      if (response.data?.imgUrl) {
-        return response.data.imgUrl;
       }
       throw new Error("No valid image URL in response");
     } catch (err) {
       console.error("Upload error:", err);
       throw err;
     }
-  };
+  }, []);
 
-  const handleFileUpload = async (event) => {
+  const handleFileUpload = useCallback(async (event) => {
     const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+
     setError("");
     setLoading(true);
 
     try {
-      const uploadPromises = files.map(async (file) => {
+      const uploadedUrls = [];
+      
+      // Process files sequentially to prevent too many concurrent uploads
+      for (const file of files) {
         try {
           await validateGalleryImage(file);
-          return await uploadImage(file);
-        } catch (err) {
-          console.error(`Error processing ${file.name}:`, err);
-          setError(`Error uploading ${file.name}: ${err.message}`);
-          return null;
+          const url = await uploadImage(file);
+          if (url) {
+            uploadedUrls.push(url);
+            // Update images immediately after each successful upload
+            setImages(prev => [...(prev || []), url]);
+          }
+        } catch (uploadError) {
+          console.error(`Error uploading ${file.name}:`, uploadError);
+          setError(`Error uploading ${file.name}: ${uploadError.message}`);
         }
-      });
-
-      const uploadedUrls = (await Promise.all(uploadPromises)).filter(Boolean);
-
-      if (uploadedUrls.length > 0) {
-        setImages(prev => {
-          const newImages = [...(prev || []), ...uploadedUrls];
-          console.log("Updated gallery images:", newImages);
-          return newImages;
-        });
       }
+
+      console.log("All uploads completed:", uploadedUrls);
     } catch (err) {
       console.error("Overall upload error:", err);
       setError(err.message || "Image upload failed.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [uploadImage, setImages]);
 
-  const handleRemoveImage = (index) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
-    setImages(newImages);
-  };
+  const handleRemoveImage = useCallback((index) => {
+    setImages(prev => prev.filter((_, i) => i !== index));
+  }, [setImages]);
 
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
@@ -126,33 +121,35 @@ const GalleryUploader = ({ images, setImages }) => {
           <input 
             type="file" 
             id="galleryUpload" 
-            multiple // This attribute allows multiple file selection
+            multiple
             accept="image/png, image/jpeg" 
             className="d-none" 
             onChange={handleFileUpload} 
             disabled={loading}
           />
-          <div className="text-start mt-10 text-14 text-light-1">PNG or JPG.</div>
         </div>
       </div>
-      {/* End uploader field */}
 
       {Array.isArray(images) && images.length > 0 && (
         <div className="col-12">
           <div className="row x-gap-20 y-gap-20">
             {images.map((image, index) => (
-              <div className="col-auto" key={index}>
+              <div className="col-auto" key={`gallery-${index}`}>
                 <div className="d-flex ratio ratio-1:1 w-200">
                   <img 
                     src={image} 
-                    alt={`Gallery image ${index + 1}`} 
+                    alt={`Gallery ${index + 1}`} 
                     className="img-ratio rounded-4"
-                    onError={(e) => console.error(`Error loading image ${index}:`, image)} 
+                    style={{ objectFit: 'cover' }}
                   />
-                  <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute" onClick={() => handleRemoveImage(index)}>
-                    <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
+                  <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+                    <button
+                      type="button"
+                      className="size-40 bg-white rounded-4 flex-center cursor-pointer"
+                      onClick={() => handleRemoveImage(index)}
+                    >
                       <i className="icon-trash text-16" />
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>

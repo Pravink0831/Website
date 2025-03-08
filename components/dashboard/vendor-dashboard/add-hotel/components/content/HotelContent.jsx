@@ -246,11 +246,11 @@ const HotelContent = ({ handleInputChange, formData }) => {
   };
 
   const triggerFileInput = (groupIndex, section, itemIndex = null) => {
-    let refName = section;
-    if (section === 'facilities' && itemIndex !== null) {
-      refName = `${section}-${groupIndex}-${itemIndex}`;
+    const refKey = itemIndex !== null ? `${section}-${groupIndex}-${itemIndex}` : `${section}-${groupIndex}`;
+    if (!fileInputRefs.current[refKey]) {
+      fileInputRefs.current[refKey] = React.createRef();
     }
-    fileInputRefs.current[refName]?.click();
+    fileInputRefs.current[refKey]?.click();
   };
 
   const removeButtonStyle = "button -sm bg-red-1 text-white mt-15";
@@ -270,14 +270,13 @@ const HotelContent = ({ handleInputChange, formData }) => {
       }
     };
 
-    // Add debug logging
-    console.log('Rendering uploader:', {
-      section,
+    const refKey = itemIndex !== null ? `${section}-${groupIndex}-${itemIndex}` : `${section}-${groupIndex}`;
+    
+    console.log('Rendering facility uploader:', {
       groupIndex,
       itemIndex,
-      fieldName,
-      hasImage: field?.[fieldName],
-      field
+      refKey,
+      hasImage: field?.[fieldName]
     });
 
     return (
@@ -290,7 +289,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           >
             {label}
           </button>
-          {field && typeof field[fieldName] === 'string' && field[fieldName].length > 0 && (
+          {field && field[fieldName] && (
             <div className="d-flex align-items-center">
               <img 
                 src={field[fieldName]}
@@ -308,11 +307,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
         <input
           type="file"
           ref={el => {
-            let refName = section;
-            if (section === 'facilities' && itemIndex !== null) {
-              refName = `${section}-${groupIndex}-${itemIndex}`;
-            }
-            fileInputRefs.current[refName] = el;
+            fileInputRefs.current[refKey] = el;
           }}
           accept="image/png, image/jpeg"
           className="d-none"
@@ -601,7 +596,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
               </button>
             </div>
             {facilityGroup.items.map((item, itemIndex) => (
-              <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
+              <div key={`facItem-${groupIndex}-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
                 <div className="form-input col-4">
                   <input
                     type="text"
