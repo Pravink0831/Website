@@ -20,7 +20,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
     delayAnimation: "",
     city: "",
     overviewDescription: "",
-    locationDescription: "", // Add this new field
+    locationDescription: "",
     popularFacilities: [{
       popularFacilitiesTitle: '',
       popularFacilitiesDescription: ''
@@ -38,12 +38,49 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
         icon: '',
         title: ''
       }]
+    }],
+    propertyHighlights: [{
+      highlightTitle: '',
+      highlightIcon: ''
+    }],
+    nearestPoints: [{
+      pointName: '',
+      distance: ''
     }]
   });
 
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
+      const processedData = {
+        ...initialData,
+        popularFacilities: initialData.popularFacilities || [{
+          popularFacilitiesTitle: '',
+          popularFacilitiesDescription: ''
+        }],
+        housePolicies: initialData.housePolicies || [{
+          housePoliciesTitle: '',
+          housePolicies: ''
+        }],
+        destinations: initialData.destinations || [{
+          destinationLocation: '',
+          destinationImg: ''
+        }],
+        facilities: initialData.facilities || [{
+          items: [{
+            title: '',
+            icon: ''
+          }]
+        }],
+        propertyHighlights: initialData.propertyHighlights || [{
+          highlightTitle: '',
+          highlightIcon: ''
+        }],
+        nearestPoints: initialData.nearestPoints || [{
+          pointName: '',
+          distance: ''
+        }]
+      };
+      setFormData(processedData);
     }
   }, [initialData]);
 
@@ -98,8 +135,18 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     
+    const submissionData = {
+      ...formData,
+      popularFacilities: formData.popularFacilities.filter(f => f.popularFacilitiesTitle || f.popularFacilitiesDescription),
+      housePolicies: formData.housePolicies.filter(p => p.housePoliciesTitle || p.housePolicies),
+      destinations: formData.destinations.filter(d => d.destinationLocation || d.destinationImg),
+      facilities: formData.facilities.filter(f => f.items.some(item => item.title || item.icon)),
+      propertyHighlights: formData.propertyHighlights.filter(h => h.highlightTitle || h.highlightIcon),
+      nearestPoints: formData.nearestPoints.filter(p => p.pointName || p.distance)
+    };
+
     if (isEditing) {
-      await onSubmit(formData);
+      await onSubmit(submissionData);
     } else {
       try {
         const response = await fetch("/api/hotels", {
@@ -107,7 +154,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(submissionData),
         });
 
         if (!response.ok) {
@@ -132,7 +179,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           delayAnimation: "",
           city: "",
           overviewDescription: "",
-          locationDescription: "", // Add this new field
+          locationDescription: "",
           popularFacilities: [{
             popularFacilitiesTitle: '',
             popularFacilitiesDescription: ''
@@ -150,6 +197,14 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
               icon: '',
               title: ''
             }]
+          }],
+          propertyHighlights: [{
+            highlightTitle: '',
+            highlightIcon: ''
+          }],
+          nearestPoints: [{
+            pointName: '',
+            distance: ''
           }]
         });
       } catch (error) {

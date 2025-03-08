@@ -139,18 +139,13 @@ const HotelContent = ({ handleInputChange, formData }) => {
       } else {
         updated[groupIndex] = { ...updated[groupIndex], [name]: value };
       }
+      handleInputChange({
+        target: {
+          name: section === 'facilities' ? `${section}.${groupIndex}.items.${itemIndex}.${name}` : `${section}.${groupIndex}.${name}`,
+          value
+        }
+      });
       return updated;
-    });
-    
-    let eventName = `${section}.${groupIndex}.${name}`;
-    if (section === 'facilities' && itemIndex !== null) {
-      eventName = `${section}.${groupIndex}.items.${itemIndex}.${name}`;
-    }
-    handleInputChange({
-      target: {
-        name: eventName,
-        value
-      }
     });
   };
 
@@ -170,6 +165,8 @@ const HotelContent = ({ handleInputChange, formData }) => {
 
       if (response.data && response.data.imgUrl) {
         console.log('Upload successful:', response.data);
+        
+        // Handle the state update
         setSection(prev => {
           const updated = [...prev];
           if (section === 'facilities' && itemIndex !== null) {
@@ -186,22 +183,18 @@ const HotelContent = ({ handleInputChange, formData }) => {
           return updated;
         });
 
-        // Update this part to handle all sections with file uploads
-        const sectionHandler = {
-          destinations: setDestinations,
-          facilities: setFacilities,
-          propertyHighlights: setPropertyHighlights
-        };
-
-        if (sectionHandler[section]) {
-          let eventName = `${section}.${groupIndex}.${fieldName}`;
-          handleInputChange({
-            target: {
-              name: eventName,
-              value: response.data.imgUrl
-            }
-          });
+        // Handle the form data update
+        let eventName = `${section}.${groupIndex}.${fieldName}`;
+        if (section === 'facilities' && itemIndex !== null) {
+          eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
         }
+        
+        handleInputChange({
+          target: {
+            name: eventName,
+            value: response.data.imgUrl
+          }
+        });
 
         setError("");
       } else {
@@ -225,45 +218,64 @@ const HotelContent = ({ handleInputChange, formData }) => {
   const removeButtonStyle = "button -sm bg-red-1 text-white mt-15";
   const addButtonStyle = "button -sm -outline-blue-1 text-blue-1 mt-15";
 
-  // Update the renderImageUploader function with better spacing
-  const renderImageUploader = (field, groupIndex, section, fieldName, label, itemIndex = null) => (
-    <div className="form-input col-6">
-      <div className="d-flex flex-column">
-        <button
-          type="button"
-          onClick={() => triggerFileInput(groupIndex, section, itemIndex)}
-          className="button -blue-1 bg-blue-1-05 text-blue-1 py-15 rounded-4 mb-10"
-        >
-          {label}
-        </button>
-        {field[fieldName] && (
-          <div className="d-flex align-items-center">
-            <img 
-              src={field[fieldName]} 
-              alt={label} 
-              style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-              className="rounded-4"
-            />
-          </div>
-        )}
+  const renderImageUploader = (field, groupIndex, section, fieldName, label, itemIndex = null) => {
+    const getSectionHandler = (section) => {
+      switch(section) {
+        case 'destinations':
+          return setDestinations;
+        case 'facilities':
+          return setFacilities;
+        case 'propertyHighlights':
+          return setPropertyHighlights;
+        default:
+          return setFacilities;
+      }
+    };
+
+    return (
+      <div className="form-input col-6">
+        <div className="d-flex flex-column">
+          <button
+            type="button"
+            onClick={() => triggerFileInput(groupIndex, section, itemIndex)}
+            className="button -blue-1 bg-blue-1-05 text-blue-1 py-15 rounded-4 mb-10"
+          >
+            {label}
+          </button>
+          {field[fieldName] && (
+            <div className="d-flex align-items-center">
+              <img 
+                src={field[fieldName]} 
+                alt={label} 
+                style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                className="rounded-4"
+              />
+            </div>
+          )}
+        </div>
+        <input
+          type="file"
+          ref={el => {
+            let refName = section;
+            if (section === 'facilities' && itemIndex !== null) {
+              refName = `${section}-${groupIndex}-${itemIndex}`;
+            }
+            fileInputRefs.current[refName] = el;
+          }}
+          accept="image/png, image/jpeg"
+          className="d-none"
+          onChange={(event) => handleFileUpload(
+            groupIndex, 
+            event, 
+            fieldName, 
+            section, 
+            getSectionHandler(section),
+            itemIndex
+          )}
+        />
       </div>
-      <input
-        type="file"
-        ref={el => {
-          let refName = section;
-          if (section === 'facilities' && itemIndex !== null) {
-            refName = `${section}-${groupIndex}-${itemIndex}`;
-          }
-          fileInputRefs.current[refName] = el;
-        }}
-        accept="image/png, image/jpeg"
-        className="d-none"
-        onChange={(event) => handleFileUpload(groupIndex, event, fieldName, section, 
-          section === 'destinations' ? setDestinations : setFacilities, itemIndex
-        )}
-      />
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="row x-gap-20 y-gap-20">
@@ -324,14 +336,13 @@ const HotelContent = ({ handleInputChange, formData }) => {
             required 
             onChange={handleInputChange}
           >
-            {[1,2,3,4,5,6,7,8,9,10].map(num => (
+            {[1,2,3,4,5,6,7,8,9,10].map(num => ( 
               <option key={num} value={num}>{num}</option>
             ))}
           </select>
           <label className="lh-1 select-1 text-16 text-black">Number of Guests</label>
         </div>
       </div>
-
       <div className="col-6">
         <div className="form-input">
           <select 
@@ -348,7 +359,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
           <label className="lh-1 select-1 text-16 text-black">Bedrooms</label>
         </div>
       </div>
-
       <div className="col-6">
         <div className="form-input">
           <select 
@@ -405,7 +415,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
           <label className="lh-1 text-16 text-black">Location Description</label>
         </div>
       </div>
-      
       {/* Popular Facilities Section */}
       <div className="col-12">
         <h3 className="text-16 fw-500">Popular Facilities</h3>
@@ -535,10 +544,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
               <div className="form-input col-4">
                 <input
                   type="text"
-                  name={`facilities.${groupIndex}.items.${itemIndex}.title`}
+                  name="title"
                   value={item.title}
                   required
-                  onChange={handleInputChange}
+                  onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, itemIndex)}
                 />
                 <label className="lh-1 text-16 text-black">Facility Title</label>
               </div>
@@ -551,7 +560,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 itemIndex
               )}
               <div className="col-2">
-                <button
+                <button 
                   type="button"
                   className={removeButtonStyle}
                   onClick={() => handleItemRemove(groupIndex, itemIndex, 'facilities', setFacilities)}
@@ -561,10 +570,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
               </div>
             </div>
           ))}
+          <button
+            type="button" 
+            className={addButtonStyle}
+            onClick={() => handleItemAdd(groupIndex, 'facilities', setFacilities)}
+          >
+            Add Facility Item
+          </button>
         </div>
       ))}
-      <button
-        type="button"
+      <button 
+        type="button" 
         className={addButtonStyle}
         onClick={() => handleAdd('facilities', setFacilities)}
       >
@@ -608,7 +624,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           </div>
         ))}
         <button
-          type="button"
+          type="button" 
           className={addButtonStyle}
           onClick={() => handleAdd('propertyHighlights', setPropertyHighlights)}
         >
@@ -656,7 +672,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           </div>
         ))}
         <button
-          type="button"
+          type="button" 
           className={addButtonStyle}
           onClick={() => handleAdd('nearestPoints', setNearestPoints)}
         >
