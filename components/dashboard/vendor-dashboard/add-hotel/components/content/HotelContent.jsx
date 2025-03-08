@@ -166,14 +166,16 @@ const HotelContent = ({ handleInputChange, formData }) => {
       if (response.data && response.data.imgUrl) {
         console.log('Upload successful:', response.data);
         
-        // Handle the state update
         setSection(prev => {
           const updated = [...prev];
           if (section === 'facilities' && itemIndex !== null) {
-            updated[groupIndex].items[itemIndex] = {
-              ...updated[groupIndex].items[itemIndex],
-              [fieldName]: response.data.imgUrl
-            };
+            const facility = updated[groupIndex];
+            if (facility && facility.items && facility.items[itemIndex]) {
+              facility.items[itemIndex] = {
+                ...facility.items[itemIndex],
+                [fieldName]: response.data.imgUrl
+              };
+            }
           } else {
             updated[groupIndex] = {
               ...updated[groupIndex],
@@ -183,7 +185,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
           return updated;
         });
 
-        // Handle the form data update
         let eventName = `${section}.${groupIndex}.${fieldName}`;
         if (section === 'facilities' && itemIndex !== null) {
           eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
@@ -545,7 +546,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 <input
                   type="text"
                   name="title"
-                  value={item.title}
+                  value={item.title || ''}
                   required
                   onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, itemIndex)}
                 />
@@ -570,13 +571,14 @@ const HotelContent = ({ handleInputChange, formData }) => {
               </div>
             </div>
           ))}
-          <button
+          {/* Remove or comment out the Add Facility Item button */}
+          {/* <button
             type="button" 
             className={addButtonStyle}
             onClick={() => handleItemAdd(groupIndex, 'facilities', setFacilities)}
           >
             Add Facility Item
-          </button>
+          </button> */}
         </div>
       ))}
       <button 
