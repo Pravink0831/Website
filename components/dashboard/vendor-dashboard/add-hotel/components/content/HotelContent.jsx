@@ -216,13 +216,17 @@ const HotelContent = ({ handleInputChange, formData }) => {
     fileInputRefs.current[refName]?.click();
   };
 
+  const removeButtonStyle = "button -sm bg-red-1 text-white mt-15";
+  const addButtonStyle = "button -sm -outline-blue-1 text-blue-1 mt-15";
+
+  // Update the renderImageUploader function with better spacing
   const renderImageUploader = (field, groupIndex, section, fieldName, label, itemIndex = null) => (
     <div className="form-input col-6">
       <div className="d-flex flex-column">
         <button
           type="button"
           onClick={() => triggerFileInput(groupIndex, section, itemIndex)}
-          className="text-blue-1 fw-500 cursor-pointer mb-10"
+          className="button -blue-1 bg-blue-1-05 text-blue-1 py-15 rounded-4 mb-10"
         >
           {label}
         </button>
@@ -400,7 +404,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
         <h3 className="text-16 fw-500">Popular Facilities</h3>
         {popularFacilities.map((field, index) => (
-          <div key={`pop-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+          <div key={`pop-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
               <input
                 type="text"
@@ -422,19 +426,23 @@ const HotelContent = ({ handleInputChange, formData }) => {
             </div>
             {popularFacilities.length > 1 && (
               <div className="col-2">
-                <button type="button" onClick={() => handleRemove(index, 'popularFacilities', setPopularFacilities)}>Remove</button>
+                <button type="button" className={removeButtonStyle} onClick={() => handleRemove(index, 'popularFacilities', setPopularFacilities)}>
+                  Remove
+                </button>
               </div>
             )}
           </div>
         ))}
-        <button type="button" onClick={() => handleAdd('popularFacilities', setPopularFacilities)}>Add Popular Facility</button>
+        <button type="button" className={addButtonStyle} onClick={() => handleAdd('popularFacilities', setPopularFacilities)}>
+          Add Popular Facility
+        </button>
       </div>
 
       {/* House Policies Section */}
       <div className="col-12">
         <h3 className="text-16 fw-500">House Policies</h3>
         {housePolicies.map((field, index) => (
-          <div key={`policy-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+          <div key={`policy-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
               <input
                 type="text"
@@ -456,19 +464,23 @@ const HotelContent = ({ handleInputChange, formData }) => {
             </div>
             {housePolicies.length > 1 && (
               <div className="col-2">
-                <button type="button" onClick={() => handleRemove(index, 'housePolicies', setHousePolicies)}>Remove</button>
+                <button type="button" className={removeButtonStyle} onClick={() => handleRemove(index, 'housePolicies', setHousePolicies)}>
+                  Remove
+                </button>
               </div>
             )}
           </div>
         ))}
-        <button type="button" onClick={() => handleAdd('housePolicies', setHousePolicies)}>Add House Policy</button>
+        <button type="button" className={addButtonStyle} onClick={() => handleAdd('housePolicies', setHousePolicies)}>
+          Add House Policy
+        </button>
       </div>
 
       {/* Destinations Section */}
       <div className="col-12">
         <h3 className="text-16 fw-500">Destinations</h3>
         {destinations.map((field, index) => (
-          <div key={`dest-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
+          <div key={`dest-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
               <input
                 type="text"
@@ -489,7 +501,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
             <div className="col-2">
               <button 
                 type="button" 
-                className="btn btn-danger"
+                className={removeButtonStyle}
                 onClick={() => handleRemove(index, 'destinations', setDestinations)}
               >
                 Remove
@@ -499,7 +511,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
         ))}
         <button 
           type="button" 
-          className="btn btn-success"
+          className={addButtonStyle}
           onClick={() => handleAdd('destinations', setDestinations)}
         >
           Add Destination
@@ -510,10 +522,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
       <h3 className="text-16 fw-500">Facilities</h3>
       {facilities.map((facilityGroup, groupIndex) => (
-        <div key={`facGroup-${groupIndex}`} className="mb-20">
-          <h4 className="text-14 fw-500">Facility Group {groupIndex + 1}</h4>
+        <div key={`facGroup-${groupIndex}`} className="mb-30 border-bottom-light pb-30">
+          <h4 className="text-14 fw-500 mb-15">Facility Group {groupIndex + 1}</h4>
           {facilityGroup.items.map((item, itemIndex) => (
-            <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20">
+            <div key={`facItem-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
               <div className="form-input col-4">
                 <input
                   type="text"
@@ -535,7 +547,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
               <div className="col-2">
                 <button
                   type="button"
-                  className="btn btn-danger"
+                  className={removeButtonStyle}
                   onClick={() => handleItemRemove(groupIndex, itemIndex, 'facilities', setFacilities)}
                 >
                   Remove
@@ -547,7 +559,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       ))}
       <button
         type="button"
-        className="btn btn-success"
+        className={addButtonStyle}
         onClick={() => handleAdd('facilities', setFacilities)}
       >
         Add Facility Group
@@ -558,7 +570,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
         <h3 className="text-16 fw-500">Property Highlights</h3>
         {propertyHighlights.map((field, index) => (
-          <div key={`highlight-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-20">
+          <div key={`highlight-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
               <input
                 type="text"
@@ -579,7 +591,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
             <div className="col-2">
               <button
                 type="button"
-                className="btn btn-danger"
+                className={removeButtonStyle}
                 onClick={() => handleRemove(index, 'propertyHighlights', setPropertyHighlights)}
               >
                 Remove
@@ -589,7 +601,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
         ))}
         <button
           type="button"
-          className="btn btn-success"
+          className={addButtonStyle}
           onClick={() => handleAdd('propertyHighlights', setPropertyHighlights)}
         >
           Add Property Highlight
@@ -600,7 +612,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       <div className="col-12">
         <h3 className="text-16 fw-500">Nearest Points</h3>
         {nearestPoints.map((point, index) => (
-          <div key={`point-${index}`} className="row x-gap-10 y-gap-10 pr-20">
+          <div key={`point-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-6">
               <input
                 type="text"
@@ -626,7 +638,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
               <div className="col-2">
                 <button
                   type="button"
-                  className="btn btn-danger"
+                  className={removeButtonStyle}
                   onClick={() => handleRemove(index, 'nearestPoints', setNearestPoints)}
                 >
                   Remove
@@ -637,7 +649,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
         ))}
         <button
           type="button"
-          className="btn btn-success"
+          className={addButtonStyle}
           onClick={() => handleAdd('nearestPoints', setNearestPoints)}
         >
           Add Nearest Point

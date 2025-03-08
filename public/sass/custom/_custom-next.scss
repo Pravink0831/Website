@@ -480,3 +480,39 @@
   height: fit-content;
   z-index: 1;
 }
+
+// Add these new styles for form layout improvements
+.form-input {
+  margin-bottom: 15px;
+  
+  textarea {
+    min-height: 120px;
+  }
+}
+
+.border-bottom-light {
+  border-bottom: 1px solid var(--color-border);
+}
+
+// Button styles
+.button {
+  &.-sm {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  &.bg-red-1 {
+    background-color: var(--color-red-1);
+    &:hover {
+      background-color: var(--color-red-2);
+    }
+  }
+
+  &.-outline-blue-1 {
+    border: 1px solid var(--color-blue-1);
+    &:hover {
+      background-color: var(--color-blue-1);
+      color: white !important;
+    }
+  }
+}
