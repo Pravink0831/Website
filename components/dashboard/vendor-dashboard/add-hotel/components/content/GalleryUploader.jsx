@@ -6,6 +6,7 @@ import imageCompression from 'browser-image-compression';
 
 const GalleryUploader = ({ images, setImages }) => {
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validateGalleryImage = async (file) => {
     return new Promise(async (resolve, reject) => {
@@ -42,52 +43,61 @@ const GalleryUploader = ({ images, setImages }) => {
       const formData = new FormData();
       formData.append("slideImg", compressedFile);
 
-      console.log("Uploading image:", compressedFile.name);
+      console.log("Uploading gallery image:", compressedFile.name);
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Upload response:", response.data);
+      
+      console.log("Gallery upload response:", response.data);
 
-      // Handle multiple image URLs from response
-      if (response.data.slideImgUrls && Array.isArray(response.data.slideImgUrls)) {
-        return response.data.slideImgUrls; // Return array of URLs
-      } else if (response.data.imgUrl) {
-        return [response.data.imgUrl]; // Return single URL as array
+      if (response.data && response.data.imgUrl) {
+        return response.data.imgUrl; // Return single URL
       } else {
-        console.warn("No valid image URLs in response:", response.data);
-        throw new Error("No valid image URLs in response");
+        throw new Error("Invalid response from server");
       }
     } catch (err) {
       console.error("Upload error:", err);
-      throw new Error(err.message || "Image upload failed.");
+      throw err;
     }
   };
 
   const handleFileUpload = async (event) => {
-    const fileList = Array.from(event.target.files || []);
+    const files = Array.from(event.target.files || []);
     setError("");
+    setLoading(true);
 
     try {
-      const imageUrls = [];
-      for (const file of fileList) {
+      const uploadedUrls = [];
+      
+      // Upload files sequentially
+      for (const file of files) {
         try {
           await validateGalleryImage(file);
-          const urls = await uploadImage(file);
-          imageUrls.push(...urls);
+          const url = await uploadImage(file);
+          if (url) {
+            uploadedUrls.push(url);
+          }
         } catch (uploadError) {
           console.error("Error uploading file:", file.name, uploadError);
           setError(`Error uploading ${file.name}: ${uploadError.message}`);
         }
       }
 
-      if (imageUrls.length > 0) {
-        setImages(prevImages => [...(prevImages || []), ...imageUrls]);
+      if (uploadedUrls.length > 0) {
+        // Update the images state by combining existing and new URLs
+        setImages(prevImages => {
+          const newImages = [...(prevImages || []), ...uploadedUrls];
+          console.log("Updated gallery images:", newImages);
+          return newImages;
+        });
       }
     } catch (err) {
       console.error("Overall upload error:", err);
       setError(err.message || "Image upload failed.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -103,8 +113,16 @@ const GalleryUploader = ({ images, setImages }) => {
         <div className="w-200">
           <label htmlFor="galleryUpload" className="d-flex ratio ratio-1:1">
             <div className="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
-              <div className="icon-upload-file text-40 text-blue-1 mb-10" />
-              <div className="text-blue-1 fw-500">Upload Images</div>
+              {loading ? (
+                <div className="spinner-border text-blue-1" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              ) : (
+                <>
+                  <div className="icon-upload-file text-40 text-blue-1 mb-10" />
+                  <div className="text-blue-1 fw-500">Upload Images</div>
+                </>
+              )}
             </div>
           </label>
           <input 
@@ -114,29 +132,36 @@ const GalleryUploader = ({ images, setImages }) => {
             accept="image/png, image/jpeg" 
             className="d-none" 
             onChange={handleFileUpload} 
+            disabled={loading}
           />
           <div className="text-start mt-10 text-14 text-light-1">PNG or JPG no bigger than 800px wide and tall.</div>
         </div>
       </div>
       {/* End uploader field */}
 
-      {Array.isArray(images) && images.map((image, index) => (
-        <div className="col-auto" key={index}>
-          <div className="d-flex ratio ratio-1:1 w-200">
-            <img 
-              src={image} 
-              alt={`Gallery image ${index + 1}`} 
-              className="img-ratio rounded-4"
-              onError={(e) => console.error(`Error loading image ${index}:`, image)} 
-            />
-            <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute" onClick={() => handleRemoveImage(index)}>
-              <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
-                <i className="icon-trash text-16" />
+      {Array.isArray(images) && images.length > 0 && (
+        <div className="col-12">
+          <div className="row x-gap-20 y-gap-20">
+            {images.map((image, index) => (
+              <div className="col-auto" key={index}>
+                <div className="d-flex ratio ratio-1:1 w-200">
+                  <img 
+                    src={image} 
+                    alt={`Gallery image ${index + 1}`} 
+                    className="img-ratio rounded-4"
+                    onError={(e) => console.error(`Error loading image ${index}:`, image)} 
+                  />
+                  <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute" onClick={() => handleRemoveImage(index)}>
+                    <div className="size-40 bg-white rounded-4 flex-center cursor-pointer">
+                      <i className="icon-trash text-16" />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
-      ))}
+      )}
 
       {error && <div className="col-12 mb-10 text-red-1">{error}</div>}
     </div>

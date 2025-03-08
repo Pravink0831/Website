@@ -45,23 +45,17 @@ const FilterHotels2 = () => {
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
-                <Slider
-                >
-                  {item?.slideImg?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-63:55" key={i}>
-                      <div className="cardImage__content">
-                        <Image
-                          width={300}
-                          height={400}
-                          className="rounded-4 col-12 js-lazy"
-                          src={item?.img}
-                          alt={item?.title}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-
+                <div className="cardImage ratio ratio-63:55">
+                  <div className="cardImage__content">
+                    <Image
+                      width={300}
+                      height={400}
+                      className="rounded-4 col-12 js-lazy"
+                      src={item?.img || ''}  // Use banner image
+                      alt={item?.title}
+                    />
+                  </div>
+                </div>
                 <div className="cardImage__leftBadge">
                   <div
                     className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${

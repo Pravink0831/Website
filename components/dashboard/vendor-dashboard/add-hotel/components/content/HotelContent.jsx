@@ -265,6 +265,16 @@ const HotelContent = ({ handleInputChange, formData }) => {
       }
     };
 
+    // Add console.log to debug image display
+    console.log('Rendering image uploader:', {
+      section,
+      groupIndex,
+      itemIndex,
+      field,
+      fieldName,
+      hasImage: field[fieldName]
+    });
+
     return (
       <div className="form-input col-6">
         <div className="d-flex flex-column">
@@ -275,8 +285,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           >
             {label}
           </button>
-          {/* Fix the image display condition for facilities */}
-          {(section === 'facilities' ? field[fieldName] : field[fieldName]) && (
+          {field && field[fieldName] && (
             <div className="d-flex align-items-center">
               <img 
                 src={field[fieldName]}
@@ -579,7 +588,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 className={removeButtonStyle}
                 onClick={() => handleRemove(groupIndex, 'facilities', setFacilities)}
               >
-                Remove
+                Remove Group
               </button>
             </div>
             {facilityGroup.items.map((item, itemIndex) => (
@@ -602,7 +611,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
                   'Upload Facility Icon',
                   itemIndex
                 )}
-                {/* Remove the item remove button */}
               </div>
             ))}
           </div>
@@ -612,7 +620,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           className={addButtonStyle}
           onClick={() => handleAdd('facilities', setFacilities)}
         >
-          Add Facility
+          Add Facility Group
         </button>
       </div>
 
