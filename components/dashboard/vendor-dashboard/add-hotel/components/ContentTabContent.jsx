@@ -49,34 +49,49 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Handle nested fields (e.g., popularFacilities.0.popularFacilitiesTitle)
     if (name.includes('.')) {
-      // Handle dynamic fields updates
-      const [section, groupIndex, key, itemIndex, field] = name.split('.');
-      if (section === 'facilities' && key === 'items') {
-        setFormData(prev => ({
-          ...prev,
-          [section]: prev[section].map((group, i) =>
-            i === parseInt(groupIndex) ? {
-              ...group,
-              [key]: group[key].map((item, j) =>
-                j === parseInt(itemIndex) ? { ...item, [field]: value } : item
-              )
-            } : group
-          )
-        }));
-      }
-      else {
       const [section, index, field] = name.split('.');
+      setFormData(prev => {
+        // Initialize the section as an empty array if it doesn't exist
+        if (!prev[section]) {
+          prev[section] = [];
+        }
+        
+        // Handle nested items for facilities
+        if (field && field.includes('items')) {
+          const [itemsField, itemIndex, itemProp] = field.split('.');
+          return {
+            ...prev,
+            [section]: prev[section].map((group, i) => {
+              if (i === parseInt(index)) {
+                return {
+                  ...group,
+                  items: group.items.map((item, j) => 
+                    j === parseInt(itemIndex) ? { ...item, [itemProp]: value } : item
+                  )
+                };
+              }
+              return group;
+            })
+          };
+        }
+
+        // Handle other nested fields
+        return {
+          ...prev,
+          [section]: prev[section].map((item, i) => 
+            i === parseInt(index) ? { ...item, [field]: value } : item
+          )
+        };
+      });
+    } else {
+      // Handle top-level fields
       setFormData(prev => ({
         ...prev,
-        [section]: prev[section].map((item, i) => 
-          i === parseInt(index) ? { ...item, [field]: value } : item
-        )
+        [name]: value
       }));
-    }
-    } else {
-      // Handle regular fields
-      setFormData(prev => ({ ...prev, [name]: value }));
     }
   };
 
