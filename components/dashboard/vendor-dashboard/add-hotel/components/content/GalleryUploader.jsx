@@ -7,6 +7,7 @@ import imageCompression from 'browser-image-compression';
 const GalleryUploader = ({ images = [], setImages }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [localImages, setLocalImages] = useState(images); // Add local state
 
   const validateImage = async (file) => {
     return new Promise(async (resolve, reject) => {
@@ -35,6 +36,7 @@ const GalleryUploader = ({ images = [], setImages }) => {
 
     setError("");
     setLoading(true);
+    const currentImages = [...localImages]; // Use local state
 
     try {
       for (const file of files) {
@@ -62,7 +64,9 @@ const GalleryUploader = ({ images = [], setImages }) => {
           if (response.data && response.data.imgUrl) {
             const imageUrl = response.data.imgUrl;
             console.log("Adding gallery image URL:", imageUrl);
-            setImages(prev => [...(prev || []), imageUrl]);
+            currentImages.push(imageUrl);
+            setLocalImages(currentImages); // Update local state
+            setImages(currentImages); // Update parent state
           } else {
             console.error("Invalid response structure:", response.data);
             setError("Upload failed: Invalid response from server");
@@ -81,7 +85,9 @@ const GalleryUploader = ({ images = [], setImages }) => {
   };
 
   const handleRemoveImage = (index) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    const newImages = localImages.filter((_, i) => i !== index);
+    setLocalImages(newImages);
+    setImages(newImages);
   };
 
   return (
@@ -114,10 +120,10 @@ const GalleryUploader = ({ images = [], setImages }) => {
         </div>
       </div>
 
-      {Array.isArray(images) && images.length > 0 && (
+      {localImages.length > 0 && ( // Use local state for rendering
         <div className="col-12">
           <div className="row x-gap-20 y-gap-20">
-            {images.map((image, index) => (
+            {localImages.map((image, index) => (
               <div className="col-auto" key={`gallery-${index}`}>
                 <div className="d-flex ratio ratio-1:1 w-200">
                   <img 
@@ -125,6 +131,10 @@ const GalleryUploader = ({ images = [], setImages }) => {
                     alt={`Gallery ${index + 1}`} 
                     className="img-ratio rounded-4"
                     style={{ objectFit: 'cover' }}
+                    onError={(e) => {
+                      console.error(`Failed to load image: ${image}`);
+                      e.target.src = '/img/placeholder.png'; // Add a placeholder image
+                    }}
                   />
                   <div className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
                     <button
