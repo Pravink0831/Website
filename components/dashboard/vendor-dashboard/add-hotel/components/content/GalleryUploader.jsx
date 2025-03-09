@@ -52,7 +52,7 @@ const GalleryUploader = ({ images = [], setImages }) => {
           const compressedFile = await imageCompression(file, options);
 
           const formData = new FormData();
-          formData.append("img", compressedFile);
+          formData.append("slideImg", compressedFile); // Use slideImg instead of img
 
           console.log("Uploading gallery image:", compressedFile.name);
           const response = await axios.post("/api/upload", formData, {
@@ -61,8 +61,8 @@ const GalleryUploader = ({ images = [], setImages }) => {
 
           console.log("Gallery upload response:", response.data);
 
-          if (response.data && response.data.imgUrl) {
-            const imageUrl = response.data.imgUrl;
+          if (response.data?.slideImgUrls?.[0]) {
+            const imageUrl = response.data.slideImgUrls[0];
             console.log("Adding gallery image URL:", imageUrl);
             currentImages.push(imageUrl);
             setLocalImages(currentImages); // Update local state

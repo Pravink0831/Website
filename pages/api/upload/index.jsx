@@ -61,39 +61,26 @@ export default async function handler(req, res) {
         });
       };
 
-      let imgUrl = null;
-      let slideImgUrls = [];
-
       if (req.files.img) {
-        try {
-          const result = await uploadToCloudinary(req.files.img[0].buffer);
-          imgUrl = result.secure_url;
-          console.log("Banner image URL:", imgUrl);
-        } catch (cloudinaryError) {
-          console.error("Error uploading banner image to Cloudinary:", cloudinaryError);
-          return res.status(500).json({ error: 'Cloudinary upload failed', details: cloudinaryError.message });
-        }
+        // Single banner image upload
+        const result = await uploadToCloudinary(req.files.img[0].buffer);
+        res.status(200).json({
+          message: 'Upload successful',
+          imgUrl: result.secure_url,
+          slideImgUrls: null
+        });
+      } else if (req.files.slideImg) {
+        // Gallery images upload - always return as array
+        const result = await uploadToCloudinary(req.files.slideImg[0].buffer);
+        res.status(200).json({
+          message: 'Upload successful',
+          imgUrl: null,
+          slideImgUrls: [result.secure_url] // Always return as array
+        });
       }
 
-      if (req.files.slideImg) {
-        try {
-          const uploads = req.files.slideImg.map(file => uploadToCloudinary(file.buffer));
-          const results = await Promise.all(uploads);
-          slideImgUrls = results.map(result => result.secure_url);
-          console.log("Gallery image URLs:", slideImgUrls);
-        } catch (cloudinaryError) {
-          console.error("Error uploading gallery images to Cloudinary:", cloudinaryError);
-          return res.status(500).json({ error: 'Cloudinary upload failed', details: cloudinaryError.message });
-        }
-      }
-
-      res.status(200).json({
-        message: 'Upload successful',
-        imgUrl,
-        slideImgUrls
-      });
     } catch (error) {
-      console.error('General upload error:', error);
+      console.error('Upload error:', error);
       res.status(500).json({ error: 'Upload failed', details: error.message });
     }
   });
