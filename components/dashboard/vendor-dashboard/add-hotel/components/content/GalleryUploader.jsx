@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import axios from "axios";
 import imageCompression from 'browser-image-compression';
 
@@ -8,10 +8,9 @@ const GalleryUploader = ({ images = [], setImages }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const validateGalleryImage = async (file) => {
+  const validateImage = async (file) => {
     return new Promise(async (resolve, reject) => {
-      // Check file size (10MB)
-      const maxSize = 10 * 1024 * 1024;
+      const maxSize = 10 * 1024 * 1024; // 10MB
       if (file.size > maxSize) {
         reject(`File size must be less than 10MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
         return;
@@ -30,56 +29,43 @@ const GalleryUploader = ({ images = [], setImages }) => {
     });
   };
 
-  const uploadImage = useCallback(async (file) => {
-    try {
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 4000,
-        useWebWorker: true
-      }
-      const compressedFile = await imageCompression(file, options);
-
-      const formData = new FormData();
-      formData.append("slideImg", compressedFile);
-
-      const response = await axios.post("/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Gallery upload response:", response.data);
-
-      // Handle the response
-      const imageUrl = response.data?.slideImgUrls?.[0] || response.data?.imgUrl;
-      if (!imageUrl) {
-        throw new Error("No image URL in response");
-      }
-      return imageUrl;
-
-    } catch (err) {
-      console.error("Upload error:", err);
-      throw err;
-    }
-  }, []);
-
-  const handleFileUpload = useCallback(async (event) => {
+  const handleFileUpload = async (event) => {
     const files = Array.from(event.target.files || []);
     if (!files.length) return;
 
     setError("");
     setLoading(true);
-    const currentImages = [...(images || [])];
 
     try {
       for (const file of files) {
         try {
-          await validateGalleryImage(file);
-          const url = await uploadImage(file);
-          if (url) {
-            currentImages.push(url);
-            // Update parent component's state
-            setImages(currentImages);
+          await validateImage(file);
+
+          // Compress image
+          const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 4000,
+            useWebWorker: true
+          };
+          const compressedFile = await imageCompression(file, options);
+
+          const formData = new FormData();
+          formData.append("img", compressedFile);
+
+          console.log("Uploading gallery image:", compressedFile.name);
+          const response = await axios.post("/api/upload", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          });
+
+          console.log("Gallery upload response:", response.data);
+
+          if (response.data && response.data.imgUrl) {
+            const imageUrl = response.data.imgUrl;
+            console.log("Adding gallery image URL:", imageUrl);
+            setImages(prev => [...(prev || []), imageUrl]);
+          } else {
+            console.error("Invalid response structure:", response.data);
+            setError("Upload failed: Invalid response from server");
           }
         } catch (uploadError) {
           console.error(`Error uploading ${file.name}:`, uploadError);
@@ -88,15 +74,15 @@ const GalleryUploader = ({ images = [], setImages }) => {
       }
     } catch (err) {
       console.error("Overall upload error:", err);
-      setError(err.message || "Image upload failed.");
+      setError(err.message || "Upload failed");
     } finally {
       setLoading(false);
     }
-  }, [uploadImage, setImages, images]);
+  };
 
-  const handleRemoveImage = useCallback((index) => {
+  const handleRemoveImage = (index) => {
     setImages(prev => prev.filter((_, i) => i !== index));
-  }, [setImages]);
+  };
 
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
