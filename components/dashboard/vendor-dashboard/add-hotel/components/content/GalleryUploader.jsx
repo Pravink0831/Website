@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import axios from "axios";
 import imageCompression from 'browser-image-compression';
 
-const GalleryUploader = ({ images, setImages }) => {
+const GalleryUploader = ({ images = [], setImages }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -42,24 +42,21 @@ const GalleryUploader = ({ images, setImages }) => {
       const formData = new FormData();
       formData.append("slideImg", compressedFile);
 
-      console.log("Uploading gallery image:", compressedFile.name);
       const response = await axios.post("/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      
+
       console.log("Gallery upload response:", response.data);
 
-      // First check slideImgUrls array
-      if (response.data?.slideImgUrls?.length > 0) {
-        return response.data.slideImgUrls[0];
+      // Handle the response
+      const imageUrl = response.data?.slideImgUrls?.[0] || response.data?.imgUrl;
+      if (!imageUrl) {
+        throw new Error("No image URL in response");
       }
-      // Fallback to imgUrl if available
-      if (response.data?.imgUrl) {
-        return response.data.imgUrl;
-      }
-      throw new Error("No valid image URL in response");
+      return imageUrl;
+
     } catch (err) {
       console.error("Upload error:", err);
       throw err;
@@ -72,6 +69,7 @@ const GalleryUploader = ({ images, setImages }) => {
 
     setError("");
     setLoading(true);
+    const currentImages = [...(images || [])];
 
     try {
       for (const file of files) {
@@ -79,12 +77,9 @@ const GalleryUploader = ({ images, setImages }) => {
           await validateGalleryImage(file);
           const url = await uploadImage(file);
           if (url) {
-            // Update images immediately after each successful upload
-            setImages(prev => {
-              const newImages = [...(prev || []), url];
-              console.log("Updated gallery images:", newImages);
-              return newImages;
-            });
+            currentImages.push(url);
+            // Update parent component's state
+            setImages(currentImages);
           }
         } catch (uploadError) {
           console.error(`Error uploading ${file.name}:`, uploadError);
@@ -97,7 +92,7 @@ const GalleryUploader = ({ images, setImages }) => {
     } finally {
       setLoading(false);
     }
-  }, [uploadImage, setImages]);
+  }, [uploadImage, setImages, images]);
 
   const handleRemoveImage = useCallback((index) => {
     setImages(prev => prev.filter((_, i) => i !== index));
