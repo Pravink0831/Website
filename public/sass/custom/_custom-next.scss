@@ -479,6 +479,11 @@
   top: 100px;
   height: fit-content;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    position: relative !important;
+    top: 0 !important;
+  }
 }
 
 // Add these new styles for form layout improvements

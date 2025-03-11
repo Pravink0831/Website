@@ -50,7 +50,7 @@ const Testimonial = () => {
                         <div className="icon-star text-yellow-1 text-10" />
                         <div className="icon-star text-yellow-1 text-10" />
                       </div>
-              <p className="testimonials__text lh-18 fw-500 text-dark-1 mt-20">
+              <p className="testimonials__text text-16 lh-18 fw-500 text-dark-1 mt-20">
                 {item.text}
               </p>
               <div className="pt-20 mt-28 border-top-light">

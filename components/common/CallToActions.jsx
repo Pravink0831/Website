@@ -17,7 +17,7 @@ const CallToActions = () => {
           </div>
           {/* End .col */}
 
-          <div className="col-lg-2 col-md-3">
+          <div className="col-lg-2 col-md-3 col-sm-9">
             <div className="single-field d-flex y-gap-20 justify-center">
               {/* End email input */}
 

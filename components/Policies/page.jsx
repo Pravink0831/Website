@@ -13,7 +13,7 @@ const HousePolicies = ({hotel}) => {
         <div className="container mt-4">
             <ol className="list-group border border-gray-2 rounded-10 p-2">
             {hotel?.housePolicies?.map((policy, index) => (
-                <li className="mb-20 lh-16" key={index}>
+                <li className="mb-20 text-18 lh-16" key={index}>
                     <strong>{policy.housePoliciesTitle}:</strong> {policy.housePolicies}
                 </li>
             ))}

@@ -13,6 +13,14 @@ const SidebarRight = ({ hotel }) => {
     const handleScroll = () => {
       if (!sidebar || !container || !footer) return;
 
+      // Disable sticky behavior for mobile screens
+      if (window.innerWidth <= 768) {
+        sidebar.style.position = 'relative';
+        sidebar.style.top = '0';
+        sidebar.style.width = '100%';
+        return;
+      }
+
       // Calculate middle position (half of viewport height minus half of sidebar height)
       const headerHeight = 80;
       const containerRect = container.getBoundingClientRect();

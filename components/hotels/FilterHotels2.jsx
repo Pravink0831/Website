@@ -84,7 +84,7 @@ const FilterHotels2 = () => {
               </div>
             </div>
             <div className="hotelsCard__content pt-20 pl-5">
-              <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
+              <h4 className="hotelsCard__title text-black text-20 lh-16 fw-600">
                 <span>{item?.title}</span>
               </h4>
               <p className="text-black lh-14 text-14 fw-500">
@@ -96,7 +96,7 @@ const FilterHotels2 = () => {
                 </div>
               </div>
               
-                <div className="fw-600 mb-5">
+                <div className="fw-600 lh-16 text-black text-14 mb-5">
                   Starting from{" "}
                   <span className="text-black text-14">{item?.price}/-</span>
                 </div>
