@@ -1,16 +1,24 @@
 import Image from "next/image";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
-const Index = ({ title, location, img }) => {
+const Index = ({ title, location, city, img }) => {
+  console.log('Hero props:', { title, location, city, img });
+
+  const imageUrl = img || '/img/masthead/1/5.jpg';
+
   return (
     <section className="masthead -type-1 z-5">
       <div className="masthead__bg">
         <Image
-          src={img}
-          alt={title}
+          src={imageUrl}
+          alt={title || 'Hotel Image'}
           width={1920}
           height={700}
           className="js-lazy"
+          onError={(e) => {
+            console.error('Image load error:', e);
+            e.target.src = '/img/masthead/1/5.jpg';
+          }}
         />
       </div>
       <div className="container mt--10">
@@ -21,17 +29,18 @@ const Index = ({ title, location, img }) => {
                 className="text-100 Made lg:text-80 md:text-40 text-white"
                 data-aos="fade-up"
               >
-                {title}
+                {title || 'Hotel Title'}
               </h1>
-              <p
-                className="text-white text-20 mt-6 md:mt-10"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                {location}
-              </p>
+              {(location || city) && (
+                <p
+                  className="text-white text-20 mt-6 md:mt-10"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  {location}{city && location ? `, ${city}` : city}
+                </p>
+              )}
             </div>
-            {/* End hero title */}
           </div>
         </div>
       </div>

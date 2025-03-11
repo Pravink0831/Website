@@ -27,6 +27,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
           throw new Error('Hotel not found');
         }
         const data = await response.json();
+        console.log('Fetched hotel data:', data); // Add debugging log
         setHotel(data);
       } catch (error) {
         console.error('Error fetching hotel:', error);
@@ -46,7 +47,12 @@ const HotelSingleV1Dynamic = ({ params }) => {
     <>
       <Header7 />
       
-      <Hero1 img={hotel.heroImg} title={hotel.title} location={hotel.location}/>
+      <Hero1 
+        img={hotel.heroImg}
+        title={hotel.title || ''} 
+        location={hotel.location || ''}
+        city={hotel.city || ''}
+      />
 
       <GalleryOne hotel={hotel} />
 
