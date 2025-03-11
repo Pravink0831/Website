@@ -26,7 +26,7 @@ const Home_1 = () => {
       <Header1 />
       {/* End Header 1 */}
 
-      <Hero1 />
+     {/* <Hero1 />
       {/* End Hero 1 */}
 
       <section className="layout-pt-lg layout-pb-md" data-aos="fade-up">
