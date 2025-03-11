@@ -4,18 +4,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import imageCompression from 'browser-image-compression';
 
-const BannerUploader = ({ bannerImage, setBannerImage }) => {
+const BannerUploader = ({ image, setImage, label = "Upload Image" }) => {
   const [error, setError] = useState("");
-  const [isClient, setIsClient] = useState(false); // Track client-side rendering
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Set to true after component mounts on client
+    setIsClient(true);
   }, []);
 
   const validateImage = async (file) => {
     return new Promise(async (resolve, reject) => {
-      // Check file size (10MB)
-      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+      const maxSize = 10 * 1024 * 1024;
       if (file.size > maxSize) {
         reject(`File size must be less than 10MB. Current size: ${(file.size / 1024 / 1024).toFixed(2)}MB`);
         return;
@@ -44,10 +43,9 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
     try {
       await validateImage(file);
 
-      // Compress and resize image
       const options = {
-        maxSizeMB: 1, // Max output file size in MB
-        maxWidthOrHeight: 4000, // Max width or height
+        maxSizeMB: 1,
+        maxWidthOrHeight: 4000,
         useWebWorker: true
       }
       const compressedFile = await imageCompression(file, options);
@@ -55,21 +53,20 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
       const formData = new FormData();
       formData.append("img", compressedFile);
 
-      console.log("Uploading banner image:", compressedFile.name, compressedFile.size);
+      console.log("Uploading image:", compressedFile.name, compressedFile.size);
       const response = await axios.post("/api/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("Banner upload response:", response.data);
+      console.log("Upload response:", response.data);
       
-      // Modify this section to handle the URL correctly
       if (response.data && response.data.imgUrl) {
         const imageUrl = response.data.imgUrl;
-        console.log("Setting banner image URL:", imageUrl);
-        if (typeof setBannerImage === 'function') {
-          setBannerImage(imageUrl);
+        console.log("Setting image URL:", imageUrl);
+        if (typeof setImage === 'function') {
+          setImage(imageUrl);
         } else {
-          console.error("setBannerImage is not a function:", typeof setBannerImage);
+          console.error("setImage is not a function:", typeof setImage);
         }
         setError("");
       } else {
@@ -77,29 +74,29 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
         setError("Upload failed: Invalid response from server");
       }
     } catch (err) {
-      console.error("Banner upload error:", err);
+      console.error("Upload error:", err);
       setError(err.message || "Upload failed");
     }
   };
 
   const handleRemoveImage = () => {
-    console.log("Removing banner image");
-    setBannerImage(null);
+    console.log("Removing image");
+    setImage(null);
   };
 
   return (
     <div className="row x-gap-20 y-gap-20 pt-15">
       <div className="col-auto">
         <div className="w-200">
-          <label htmlFor="bannerUpload" className="d-flex ratio ratio-1:1">
+          <label htmlFor={`upload-${label.replace(/\s+/g, '-')}`} className="d-flex ratio ratio-1:1">
             <div className="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
               <div className="icon-upload-file text-40 text-blue-1 mb-10" />
-              <div className="text-blue-1 fw-500">Upload Banner</div>
+              <div className="text-blue-1 fw-500">{label}</div>
             </div>
           </label>
           <input
             type="file"
-            id="bannerUpload"
+            id={`upload-${label.replace(/\s+/g, '-')}`}
             accept="image/png, image/jpeg"
             className="d-none"
             onChange={handleFileUpload}
@@ -107,10 +104,10 @@ const BannerUploader = ({ bannerImage, setBannerImage }) => {
         </div>
       </div>
 
-      {bannerImage && isClient && (
+      {image && isClient && (
         <div className="col-auto">
           <div className="d-flex ratio ratio-1:1 w-200">
-            <img src={bannerImage} alt="banner" className="img-ratio rounded-4" />
+            <img src={image} alt={label.toLowerCase()} className="img-ratio rounded-4" />
             <div
               className="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute"
               onClick={handleRemoveImage}

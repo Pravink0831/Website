@@ -9,6 +9,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
     tag: "",
     slideImg: [],
     img: "",
+    heroImg: "", // Add heroImg field
     title: "",
     location: "",
     checkin: "",
@@ -168,6 +169,7 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           tag: "",
           slideImg: [],
           img: "",
+          heroImg: "", // Add heroImg field
           title: "",
           location: "",
           checkin: "",
@@ -224,19 +226,34 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           formData={formData} // Pass the complete formData
         />
         {/* End HotelContent */}
-
+        <div className="mt-30">
+          <div className="fw-500">Hero Image</div>
+          <BannerUploader 
+            image={formData.heroImg}
+            setImage={(url) => {
+              if (url !== undefined) {
+                setFormData(prevData => ({
+                  ...prevData,
+                  heroImg: url
+                }));
+              }
+            }}
+            label="Upload Hero Image"
+          />
+        </div>
         <div className="mt-30">
           <div className="fw-500">Banner Image</div>
           <BannerUploader 
-            bannerImage={formData.img} // Make sure this is passed
-            setBannerImage={(url) => {
+            image={formData.img}
+            setImage={(url) => {
               if (url !== undefined) {
                 setFormData(prevData => ({
                   ...prevData,
                   img: url
                 }));
               }
-            }} 
+            }}
+            label="Upload Banner"
           />
         </div>
         {/* End BannerUploader */}

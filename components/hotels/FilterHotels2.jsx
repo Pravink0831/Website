@@ -48,8 +48,8 @@ const FilterHotels2 = () => {
                 <div className="cardImage ratio ratio-63:55">
                   <div className="cardImage__content">
                     <Image
-                      width={300}
-                      height={400}
+                      width={640}
+                      height={480}
                       className="rounded-4 col-12 js-lazy"
                       src={item?.img || ''}  // Use banner image
                       alt={item?.title}
