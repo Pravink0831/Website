@@ -145,7 +145,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                     Nearest points
                   </h3>
                   <div className="row y-gap-10">
-                    <ul className="mt-3 list text-18 text-neutral-500 dark:text-neutral-400 space-y-2 mb-20">
+                    <ul className="mt-3 list ml-20 text-18 text-neutral-500 dark:text-neutral-400 space-y-2 mb-20">
                       {hotel?.nearestPoints?.map((point, index) => (
                         <li key={index}>
                           {point.pointName} - {point.distance}

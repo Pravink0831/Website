@@ -105,7 +105,7 @@ const home_7 = () => {
                 <h2 className="sectionTitle__title text-80 Made">
                 Real Guests, Real Reviews
                 </h2>
-                <p className="sectionTitle__text text-20 lh-14 text-black mt-5 sm:mt-0">
+                <p className="sectionTitle__text text-20  text-black mt-5 sm:mt-0">
                 Honest reviews from guests who’ve stayed and loved their time with us
                 </p>
               </div>
@@ -130,7 +130,7 @@ const home_7 = () => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title Made text-80 lh-13">Core Comforts you Can Count On</h2>
-                <p className=" sectionTitle__text mt-20 text-20 lh-14 text-black sm:mt-10">
+                <p className=" sectionTitle__text mt-20 text-20  text-black sm:mt-10">
                   Our villas come fully equipped with modern amenties to make your stay effortless and relaxing
                 </p>
               </div>
