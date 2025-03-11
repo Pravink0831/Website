@@ -48,7 +48,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
       <Header7 />
       
       <Hero1 
-        img={hotel.heroImg}
+        img={hotel.heroImg} // Fallback to banner image if hero image is not available
         title={hotel.title || ''} 
         location={hotel.location || ''}
         city={hotel.city || ''}

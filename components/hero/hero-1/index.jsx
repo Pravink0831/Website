@@ -2,8 +2,9 @@ import Image from "next/image";
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
 const Index = ({ title, location, city, img }) => {
-  console.log('Hero props:', { title, location, city, img });
+  console.log('Hero props:', { title, location, city, img }); // Keep this debug log
 
+  // Make sure we have a default image path
   const imageUrl = img || '/img/masthead/1/5.jpg';
 
   return (
@@ -15,6 +16,7 @@ const Index = ({ title, location, city, img }) => {
           width={1920}
           height={700}
           className="js-lazy"
+          priority // Add priority to ensure faster loading
           onError={(e) => {
             console.error('Image load error:', e);
             e.target.src = '/img/masthead/1/5.jpg';
@@ -37,7 +39,7 @@ const Index = ({ title, location, city, img }) => {
                   data-aos="fade-up"
                   data-aos-delay="100"
                 >
-                  {location}{city && location ? `, ${city}` : city}
+                  {`${location || ''}${location && city ? ', ' : ''}${city || ''}`}
                 </p>
               )}
             </div>

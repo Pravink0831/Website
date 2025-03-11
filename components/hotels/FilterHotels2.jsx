@@ -88,7 +88,7 @@ const FilterHotels2 = () => {
                 <span>{item?.title}</span>
               </h4>
               <p className="text-black lh-14 text-14 fw-500">
-                {item?.location}
+                {item?.location}{item?.city ? `, ${item?.city}` : ''}
               </p>
               <div className="d-flex items-center">
                 <div className="text-14 text-black fw-500">
