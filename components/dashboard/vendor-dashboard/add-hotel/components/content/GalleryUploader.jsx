@@ -43,10 +43,18 @@ const GalleryUploader = ({ images = [], setImages }) => {
         try {
           await validateImage(file);
 
-          const formData = new FormData();
-          formData.append("slideImg", file);
+          // Compress image
+          const options = {
+            maxSizeMB: 5, 
+            maxWidthOrHeight: 4000,
+            useWebWorker: true
+          };
+          const compressedFile = await imageCompression(file, options);
 
-          console.log("Uploading gallery image:", file.name);
+          const formData = new FormData();
+          formData.append("slideImg", compressedFile); // Use slideImg instead of img
+
+          console.log("Uploading gallery image:", compressedFile.name);
           const response = await axios.post("/api/upload", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
