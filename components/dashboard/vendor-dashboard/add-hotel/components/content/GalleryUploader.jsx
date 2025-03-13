@@ -45,7 +45,7 @@ const GalleryUploader = ({ images = [], setImages }) => {
 
           // Compress image
           const options = {
-            maxSizeMB: 6, 
+            maxSizeMB: 5, 
             maxWidthOrHeight: 4000,
             useWebWorker: true
           };
