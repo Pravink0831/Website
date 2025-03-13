@@ -1,4 +1,3 @@
-
 'use client'
 
 import ModalVideo from "react-modal-video";
@@ -24,50 +23,25 @@ export default function GalleryOne({hotel}) {
             <div className="galleryGrid -type-1">
               
               <div className="galleryGrid__item relative">
-                <Item
-                  original={hotel?.slideImg[4]}
-                  thumbnail={hotel?.slideImg[4]}
-                  width={1100}
-                  height={700}
-                >
-                  {({ ref, open }) => (
-                    <img
-                      src={hotel?.slideImg[2]}
-                      ref={ref}
-                      onClick={open}
-                      alt="image"
-                      role="button"
-                      className="rounded-4"
-                    />
-                  )}
-                </Item>
-                
+                <img
+                  src={hotel?.slideImg[0]}
+                  alt="image"
+                  className="rounded-4"
+                />
               </div>
               {/* End .galleryGrid__item */}
 
               <div className="galleryGrid__item" style={{height: "38vh"}}>
-                <Item
-                  original={hotel?.slideImg[5]}
-                  thumbnail={hotel?.slideImg[5]}
-                  width={1100}
-                  height={700}
-                >
-                  {({ ref, open }) => (
-                    <img
-                      ref={ref}
-                      onClick={open}
-                      src={hotel?.slideImg[0]}
-                      alt="image"
-                      className="rounded-4"  
-                      role="button"
-                    />
-                  )}
-                </Item>
+                <img
+                  src={hotel?.slideImg[1]}
+                  alt="image"
+                  className="rounded-4"  
+                />
               </div>
 
               <div className="galleryGrid__item relative d-flex" style={{height: "38vh"}}>
                 <img
-                  src={hotel?.slideImg[1]}
+                  src={hotel?.slideImg[2]}
                   alt="image"
                   className="rounded-4"
                 />
