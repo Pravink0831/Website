@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import imageCompression from 'browser-image-compression';
 
 const BannerUploader = ({ image, setImage, label = "Upload Image" }) => {
   const [error, setError] = useState("");
@@ -43,17 +42,10 @@ const BannerUploader = ({ image, setImage, label = "Upload Image" }) => {
     try {
       await validateImage(file);
 
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 4000,
-        useWebWorker: true
-      }
-      const compressedFile = await imageCompression(file, options);
-
       const formData = new FormData();
-      formData.append("img", compressedFile);
+      formData.append("img", file);
 
-      console.log("Uploading image:", compressedFile.name, compressedFile.size);
+      console.log("Uploading image:", file.name, file.size);
       const response = await axios.post("/api/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
