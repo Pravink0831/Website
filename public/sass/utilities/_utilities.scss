@@ -52,9 +52,9 @@
   font-size: 40px;
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 480px) { 
   .text-100{
-    font-size: 60px !important;
+    font-size: 50px !important;
   }
   .text-80{
     font-size: 50px !important;
@@ -135,7 +135,7 @@
   width: 12% !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .sm-center {
     text-align: center;
   }

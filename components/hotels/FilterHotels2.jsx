@@ -51,7 +51,7 @@ const FilterHotels2 = () => {
                       width={640}
                       height={480}
                       className="rounded-4 col-12 js-lazy"
-                      src={item?.img || ''}  // Use banner image
+                      src={item?.img || ''}
                       alt={item?.title}
                     />
                   </div>
@@ -83,7 +83,7 @@ const FilterHotels2 = () => {
                 </div>
               </div>
             </div>
-            <div className="hotelsCard__content pt-20 pl-5">
+            <div className="hotelsCard__content pt-5 pl-5">
               <h4 className="hotelsCard__title text-black text-20 lh-16 fw-600">
                 <span>{item?.title}</span>
               </h4>
@@ -96,10 +96,18 @@ const FilterHotels2 = () => {
                 </div>
               </div>
               
-                <div className="fw-600 lh-16 text-black text-14 mb-5">
+              <div className="d-flex justify-between items-center">
+                <div className="fw-600 lh-16 text-black text-14">
                   Starting from{" "}
-                  <span className="text-black text-14">{item?.price}/-</span>
+                  <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
+                <Link 
+                  href={`/hotel-single-v1/${item._id}`}
+                  className="button -sm -outline-blue-1 text-blue-1 py-5 px-15"
+                >
+                  View
+                </Link>
+              </div>
               
             </div>
           </Link>
