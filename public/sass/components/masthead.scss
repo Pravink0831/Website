@@ -342,6 +342,10 @@
         right: 40px;
       }
 
+      @media (max-width: 480px) {
+        display: none;
+      }
+
       @include media-below(md) {
         top: unset;
         bottom: 30px;

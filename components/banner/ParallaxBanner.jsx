@@ -14,14 +14,14 @@ const ParallaxBanner = () => {
     >
       <div className="section-bg layout-pt-md layout-pb-md">
         <div className="container">
-          <div className="row justify-center text-center text-black">
+          <div className="row justify-center text-center text-black pd-20">
             <div className="col-xl-9" data-aos="fade">
             <div className="sectionTitle -md">
                       <h2 className="sectionTitle__title text-80 Made">Your Luxury Retreat in North Goa</h2>
                       <div className="d-flex justify-center mb-20">
                         <img src="/img/featureIcons/1/Palm.png" className="js-lazy" />
                       </div>
-                      <p className=" sectionTitle__text text-black text-20 mt-5 sm:mt-0">
+                      <p className=" sectionTitle__text text-black text-20 mt-5 sm:mt-0 lh-18">
                       At Villa M, we are passionate about creating vacations that perfectly balance relaxation,
 comfort, and convenience. Our mission is to make your stay more than just enjoyable—it
 should be truly unforgettable. Offering a curated selection of villas, from luxurious retreats to
