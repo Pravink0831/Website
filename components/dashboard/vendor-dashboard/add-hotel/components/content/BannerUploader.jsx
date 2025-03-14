@@ -45,7 +45,7 @@ const BannerUploader = ({ image, setImage, label = "Upload Image" }) => {
 
       const options = {
         maxSizeMB: 5,
-        maxWidthOrHeight: 4000,
+        maxWidthOrHeight: 5000,
         useWebWorker: true
       }
       const compressedFile = await imageCompression(file, options);
