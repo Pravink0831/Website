@@ -35,6 +35,10 @@ const HotelContent = ({ handleInputChange, formData }) => {
     pointName: '',
     distance: ''
   }]);
+  const [bookingPolicies, setBookingPolicies] = useState(formData?.bookingPolicies || [{
+    bookingPoliciesTitle: '',
+    bookingPolicies: ''
+  }]);
   
   const [error, setError] = useState("");
   const fileInputRefs = useRef([]);
@@ -55,6 +59,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       if (formData.facilities) setFacilities(formData.facilities);
       if (formData.propertyHighlights) setPropertyHighlights(formData.propertyHighlights);
       if (formData.nearestPoints) setNearestPoints(formData.nearestPoints);
+      if (formData.bookingPolicies) setBookingPolicies(formData.bookingPolicies);
     }
   }, [formData]);
 
@@ -91,34 +96,6 @@ const HotelContent = ({ handleInputChange, formData }) => {
     });
   };
 
-  const handleItemAdd = (groupIndex, section, setSection) => {
-    setSection(prev => {
-      const updated = [...prev];
-      updated[groupIndex].items.push({ title: '', icon: '' });
-      handleInputChange({
-        target: {
-          name: `${section}.${groupIndex}.items`,
-          value: updated[groupIndex].items
-        }
-      });
-      return updated;
-    });
-  };
-
-  const handleItemRemove = (groupIndex, itemIndex, section, setSection) => {
-    setSection(prev => {
-      const updated = [...prev];
-      updated[groupIndex].items = updated[groupIndex].items.filter((_, i) => i !== itemIndex);
-      handleInputChange({
-        target: {
-          name: `${section}.${groupIndex}.items`,
-          value: updated[groupIndex].items
-        }
-      });
-      return updated;
-    });
-  };
-
   const getEmptyField = (section) => {
     switch(section) {
       case 'popularFacilities':
@@ -131,6 +108,8 @@ const HotelContent = ({ handleInputChange, formData }) => {
         return { highlightTitle: '', highlightIcon: '' };
       case 'nearestPoints':
         return { pointName: '', distance: '' };
+      case 'bookingPolicies':
+        return { bookingPoliciesTitle: '', bookingPolicies: '' };
       default:
         return {};
     }
@@ -138,21 +117,27 @@ const HotelContent = ({ handleInputChange, formData }) => {
 
   const handleFieldChange = (groupIndex, event, section, setSection, itemIndex = null) => {
     const { name, value } = event.target;
-    setSection(prev => {
-      const updated = [...prev];
-      if (section === 'facilities' && itemIndex !== null) {
-        updated[groupIndex].items[itemIndex] = { ...updated[groupIndex].items[itemIndex], [name]: value };
-      } else {
-        updated[groupIndex] = { ...updated[groupIndex], [name]: value };
-      }
-      handleInputChange({
-        target: {
-          name: section === 'facilities' ? `${section}.${groupIndex}.items.${itemIndex}.${name}` : `${section}.${groupIndex}.${name}`,
-          value
+    if (section === 'facilities' && itemIndex !== null) {
+      setFacilities(prev => {
+        const updated = [...prev];
+        if (!updated[groupIndex].items) {
+          updated[groupIndex].items = [];
         }
+        updated[groupIndex].items[itemIndex] = {
+          ...updated[groupIndex].items[itemIndex],
+          [name]: value
+        };
+        
+        // Update parent form data
+        handleInputChange({
+          target: {
+            name: 'facilities',
+            value: updated
+          }
+        });
+        return updated;
       });
-      return updated;
-    });
+    }
   };
 
   const handleFileUpload = async (groupIndex, event, fieldName, section, setSection, itemIndex = null) => {
@@ -196,44 +181,27 @@ const HotelContent = ({ handleInputChange, formData }) => {
       });
   
       if (response.data && response.data.imgUrl) {
-        console.log('Upload successful:', response.data);
-        
-        // Update local state
-        setSection(prev => {
-          const updated = [...prev];
-          if (section === 'facilities' && itemIndex !== null) {
+        if (section === 'facilities' && itemIndex !== null) {
+          setFacilities(prev => {
+            const updated = [...prev];
             if (!updated[groupIndex].items) {
               updated[groupIndex].items = [];
             }
             if (!updated[groupIndex].items[itemIndex]) {
               updated[groupIndex].items[itemIndex] = {};
             }
-            updated[groupIndex].items[itemIndex] = {
-              ...updated[groupIndex].items[itemIndex],
-              [fieldName]: response.data.imgUrl
-            };
-          } else {
-            updated[groupIndex] = {
-              ...updated[groupIndex],
-              [fieldName]: response.data.imgUrl
-            };
-          }
-          return updated;
-        });
-  
-        // Update form data
-        let eventName = `${section}.${groupIndex}.${fieldName}`;
-        if (section === 'facilities' && itemIndex !== null) {
-          eventName = `${section}.${groupIndex}.items.${itemIndex}.${fieldName}`;
+            updated[groupIndex].items[itemIndex][fieldName] = response.data.imgUrl;
+
+            // Update parent form data
+            handleInputChange({
+              target: {
+                name: 'facilities',
+                value: updated
+              }
+            });
+            return updated;
+          });
         }
-        
-        handleInputChange({
-          target: {
-            name: eventName,
-            value: response.data.imgUrl
-          }
-        });
-  
         setError("");
       } else {
         console.error('Invalid response:', response.data);
@@ -257,6 +225,55 @@ const HotelContent = ({ handleInputChange, formData }) => {
   const addButtonStyle = "button -sm -outline-blue-1 text-blue-1 mt-15";
 
   const renderImageUploader = (field, groupIndex, section, fieldName, label, itemIndex = null) => {
+    // Only modify handling for facilities section
+    if (section === 'facilities') {
+      const imageUrl = field[fieldName];
+      const refKey = `${section}-${groupIndex}-${itemIndex}`;
+
+      return (
+        <div className="form-input col-6">
+          <div className="d-flex flex-column">
+            <button
+              type="button"
+              onClick={() => triggerFileInput(groupIndex, section, itemIndex)}
+              className="button -blue-1 bg-blue-1-05 text-blue-1 py-15 rounded-4 mb-10"
+            >
+              {label}
+            </button>
+            {imageUrl && (
+              <div className="d-flex align-items-center">
+                <img 
+                  src={imageUrl}
+                  alt={label} 
+                  style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                  className="rounded-4"
+                  onError={(e) => {
+                    console.error(`Error loading facility icon:`, imageUrl);
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+          </div>
+          <input
+            type="file"
+            ref={el => fileInputRefs.current[refKey] = el}
+            accept="image/png, image/jpeg"
+            className="d-none"
+            onChange={(event) => handleFileUpload(
+              groupIndex, 
+              event, 
+              fieldName, 
+              section, 
+              setFacilities,
+              itemIndex
+            )}
+          />
+        </div>
+      );
+    }
+    
+    // Return original implementation for other sections
     const getSectionHandler = (section) => {
       switch(section) {
         case 'destinations':
@@ -271,13 +288,9 @@ const HotelContent = ({ handleInputChange, formData }) => {
     };
 
     const refKey = itemIndex !== null ? `${section}-${groupIndex}-${itemIndex}` : `${section}-${groupIndex}`;
-    
-    console.log('Rendering facility uploader:', {
-      groupIndex,
-      itemIndex,
-      refKey,
-      hasImage: field?.[fieldName]
-    });
+    const imageUrl = section === 'facilities' && itemIndex !== null 
+      ? field[fieldName]
+      : field?.[fieldName];
 
     return (
       <div className="form-input col-6">
@@ -289,15 +302,15 @@ const HotelContent = ({ handleInputChange, formData }) => {
           >
             {label}
           </button>
-          {field && field[fieldName] && (
+          {imageUrl && (
             <div className="d-flex align-items-center">
               <img 
-                src={field[fieldName]}
+                src={imageUrl}
                 alt={label} 
                 style={{ width: '100px', height: '100px', objectFit: 'cover' }}
                 className="rounded-4"
                 onError={(e) => {
-                  console.error(`Error loading image for ${section} ${groupIndex}:`, field[fieldName]);
+                  console.error(`Error loading image:`, imageUrl);
                   e.target.style.display = 'none';
                 }}
               />
@@ -306,9 +319,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
         </div>
         <input
           type="file"
-          ref={el => {
-            fileInputRefs.current[refKey] = el;
-          }}
+          ref={el => fileInputRefs.current[refKey] = el}
           accept="image/png, image/jpeg"
           className="d-none"
           onChange={(event) => handleFileUpload(
@@ -538,6 +549,44 @@ const HotelContent = ({ handleInputChange, formData }) => {
         </button>
       </div>
 
+      {/* Booking Policies Section */}
+      <div className="col-12">
+        <h3 className="text-16 fw-500">Booking Policies</h3>
+        {bookingPolicies.map((field, index) => (
+          <div key={`booking-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
+            <div className="form-input col-4">
+              <input
+                type="text"
+                name={`bookingPolicies.${index}.bookingPoliciesTitle`}
+                value={field.bookingPoliciesTitle}
+                required
+                onChange={handleInputChange}
+              />
+              <label className="lh-1 text-16 text-black">Booking Policies Title</label>
+            </div>
+            <div className="form-input pl-15 col-6">
+              <textarea
+                name={`bookingPolicies.${index}.bookingPolicies`}
+                value={field.bookingPolicies}
+                required
+                onChange={handleInputChange}
+              ></textarea>
+              <label className="lh-1 text-16 text-black">Booking Policies</label>
+            </div>
+            {bookingPolicies.length > 1 && (
+              <div className="col-2">
+                <button type="button" className={removeButtonStyle} onClick={() => handleRemove(index, 'bookingPolicies', setBookingPolicies)}>
+                  Remove
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+        <button type="button" className={addButtonStyle} onClick={() => handleAdd('bookingPolicies', setBookingPolicies)}>
+          Add Booking Policy
+        </button>
+      </div>
+
       {/* Destinations Section */}
       <div className="col-12">
         <h3 className="text-16 fw-500">Destinations</h3>
@@ -595,28 +644,26 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 Remove Group
               </button>
             </div>
-            {facilityGroup.items.map((item, itemIndex) => (
-              <div key={`facItem-${groupIndex}-${itemIndex}`} className="row x-gap-10 y-gap-10 pr-20 mb-15">
-                <div className="form-input col-4">
-                  <input
-                    type="text"
-                    name="title"
-                    value={item.title || ''}
-                    required
-                    onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, itemIndex)}
-                  />
-                  <label className="lh-1 text-16 text-black">Facility Title</label>
-                </div>
-                {renderImageUploader(
-                  item,
-                  groupIndex,
-                  'facilities',
-                  'icon',
-                  'Upload Facility Icon',
-                  itemIndex
-                )}
+            <div className="row x-gap-10 y-gap-10 pr-20 mb-15">
+              <div className="form-input col-4">
+                <input
+                  type="text"
+                  name="title"
+                  value={facilityGroup.items[0]?.title || ''}
+                  required
+                  onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, 0)}
+                />
+                <label className="lh-1 text-16 text-black">Facility Title</label>
               </div>
-            ))}
+              {renderImageUploader(
+                facilityGroup.items[0] || {},
+                groupIndex,
+                'facilities',
+                'icon',
+                'Upload Facility Icon',
+                0
+              )}
+            </div>
           </div>
         ))}
         <button 
@@ -629,6 +676,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       </div>
 
       {/* Property Highlights Section */}
+      
       <div className="col-12">
         <h3 className="text-16 fw-500">Property Highlights</h3>
         {propertyHighlights.map((field, index) => (

@@ -47,6 +47,10 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
     nearestPoints: [{
       pointName: '',
       distance: ''
+    }],
+    bookingPolicies: [{
+      bookingPoliciesTitle: '',
+      bookingPolicies: ''
     }]
   });
 
@@ -79,6 +83,10 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
         nearestPoints: initialData.nearestPoints || [{
           pointName: '',
           distance: ''
+        }],
+        bookingPolicies: initialData.bookingPolicies || [{
+          bookingPoliciesTitle: '',
+          bookingPolicies: ''
         }]
       };
       setFormData(processedData);
@@ -143,7 +151,8 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
       destinations: formData.destinations.filter(d => d.destinationLocation || d.destinationImg),
       facilities: formData.facilities.filter(f => f.items.some(item => item.title || item.icon)),
       propertyHighlights: formData.propertyHighlights.filter(h => h.highlightTitle || h.highlightIcon),
-      nearestPoints: formData.nearestPoints.filter(p => p.pointName || p.distance)
+      nearestPoints: formData.nearestPoints.filter(p => p.pointName || p.distance),
+      bookingPolicies: formData.bookingPolicies.filter(p => p.bookingPoliciesTitle || p.bookingPolicies)
     };
 
     if (isEditing) {
@@ -207,6 +216,10 @@ const ContentTabContent = ({ initialData = null, onSubmit, isEditing = false }) 
           nearestPoints: [{
             pointName: '',
             distance: ''
+          }],
+          bookingPolicies: [{
+            bookingPoliciesTitle: '',
+            bookingPolicies: ''
           }]
         });
       } catch (error) {

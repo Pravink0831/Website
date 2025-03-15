@@ -113,6 +113,24 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
 
                 <div className="col-12">
+                  <h3 className="text-60 Made fw-500 pt-20">
+                    Booking Rules
+                  </h3>
+                  <div className="row y-gap-10 pt-20">
+                    <div className="row y-gap-10">
+                      {hotel?.bookingPolicies?.map((policy, index) => (
+                        <div key={index} className="col-12">
+                          <div className="mb-10">
+                            <div className="fw-500 text-20">{policy.bookingPoliciesTitle}</div>
+                            <div className="text-18 text-light-1">{policy.bookingPolicies}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-12">
                   <h3 className="text-60 Made fw-500">
                   Location
                   </h3>

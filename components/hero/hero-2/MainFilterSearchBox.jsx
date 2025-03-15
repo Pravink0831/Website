@@ -27,7 +27,7 @@ const MainFilterSearchBox = () => {
   //const handleSearch = () => { const filteredData = properties.filter(property => property.location.includes(selectedLocation) && property.city.includes(selectedCity)); Router.push({ pathname: "/hotel-list-v5", query: { filteredData: JSON.stringify(filteredData) } }); };
   
   if (!properties) {
-    return <div>Loading...</div>; 
+    return <div></div>; 
   }
   return (
     <>
