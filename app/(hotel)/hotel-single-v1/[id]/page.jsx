@@ -12,7 +12,7 @@ import Facilities from "@/components/hotel-single/Facilities";
 import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 import Destinations from "@/components/destinations/TopDestinations2";
-import HousePolicies from "@/components/Policies/page";
+import PolicyList from "@/components/Policies/page";
 
 const HotelSingleV1Dynamic = ({ params }) => {
   const [hotel, setHotel] = useState(null);
@@ -108,7 +108,11 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   House Rules
                   </h3>
                   <div className="row y-gap-10 pt-20">
-                  <HousePolicies hotel={hotel}/>
+                    <PolicyList 
+                      policies={hotel?.housePolicies}
+                      titleKey="housePoliciesTitle"
+                      contentKey="housePolicies"
+                    />
                   </div>
                 </div>
 
@@ -117,16 +121,11 @@ const HotelSingleV1Dynamic = ({ params }) => {
                     Booking Rules
                   </h3>
                   <div className="row y-gap-10 pt-20">
-                    <div className="row y-gap-10">
-                      {hotel?.bookingPolicies?.map((policy, index) => (
-                        <div key={index} className="col-12">
-                          <div className="mb-10">
-                            <div className="fw-500 text-20">{policy.bookingPoliciesTitle}</div>
-                            <div className="text-18 text-light-1">{policy.bookingPolicies}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                    <PolicyList 
+                      policies={hotel?.bookingPolicies}
+                      titleKey="bookingPoliciesTitle"
+                      contentKey="bookingPolicies"
+                    />
                   </div>
                 </div>
 
