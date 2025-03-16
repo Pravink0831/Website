@@ -28,14 +28,14 @@ const Index = ({ title, location, city, img }) => {
           <div className="col-auto">
             <div className="text-center">
               <h1
-                className="text-100 Made lg:text-80 md:text-40 text-white"
+                className="text-100 Made sm:mb-0 lg:text-80 md:text-40 text-white"
                 data-aos="fade-up"
               >
                 {title || 'Hotel Title'}
               </h1>
               {(location || city) && (
                 <p
-                  className="text-white text-20 mt-6 md:mt-10"
+                  className="text-white text-20 mt-6 md:mt-10 sm:mt-0"
                   data-aos="fade-up"
                   data-aos-delay="100"
                 >
