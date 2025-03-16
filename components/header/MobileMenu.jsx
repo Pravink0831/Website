@@ -59,7 +59,7 @@ const MobileMenu = () => {
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
         <Link href="/">
-          <img src="/img/general/VillaMLogo.png" alt="brand" />
+          <img src="/img/general/VillaMLogo.png" alt="brand" style={{ maxWidth: "60%" }} />
         </Link>
         {/* End logo */}
 

@@ -77,7 +77,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
                 {/* End .col-12  Overview */}
 
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Features
                   </h3>
@@ -86,7 +86,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Amenities Available
                   </h3>
@@ -95,19 +95,19 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Spaces
                   </h3>
-                  <div className="row y-gap-10 pt-20 relative">
+                  <div className="row y-gap-10 pt-20 sm:pd-10 relative">
                     <Destinations hotel={hotel}/>
                   </div>
                 </div>
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   House Rules
                   </h3>
-                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 pt-20 sm:pt-0">
                     <PolicyList 
                       policies={hotel?.housePolicies}
                       titleKey="housePoliciesTitle"
@@ -116,11 +116,11 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                     Booking Rules
                   </h3>
-                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 pt-20 sm:pt-0">
                     <PolicyList 
                       policies={hotel?.bookingPolicies}
                       titleKey="bookingPoliciesTitle"
@@ -129,11 +129,11 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </div>
                 </div>
 
-                <div className="col-12">
-                  <h3 className="text-60 Made fw-500">
+                <div className="col-12 sm:py-5">
+                  <h3 className="text-60 Made sm:mb-0 fw-500">
                   Location
                   </h3>
-                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 pt-20 sm:pt-0">
                   <div className="row y-gap-10 ">
                     {/* Added renderSection7 map component */}
                     <div className="listingSection__wrap">
@@ -162,7 +162,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 sm:py-5">
                   <h3 className="text-20 fw-500">
                     Nearest points
                   </h3>
@@ -189,7 +189,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
             </div>
             {/* End .col-xl-7 */}
 
-            <div className="col-xl-5"><div className="sticky-sidebar">
+            <div className="col-xl-5 sm:mb-10"><div className="sticky-sidebar">
               <SidebarRight hotel={hotel} /></div>
             </div>
             {/* End .col-xl-4 */}

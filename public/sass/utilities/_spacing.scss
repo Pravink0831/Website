@@ -13,6 +13,10 @@ $sizes: 0, 4, 5, 10, 15, 20, 24, 28, 30, 35, 40, 45, 50, 60, 70,75, 80, 90, 120;
     padding-right: #{$size}px !important;
   }
 
+  .pd-#{$size} {
+    padding: #{$size}px !important;
+  }
+
   .pt-#{$size} {
     padding-top: #{$size}px !important;
   }
@@ -54,6 +58,10 @@ $sizes: 0, 4, 5, 10, 15, 20, 24, 28, 30, 35, 40, 45, 50, 60, 70,75, 80, 90, 120;
       .#{$break}\:px-#{$size} {
         padding-left: #{$size}px !important;
         padding-right: #{$size}px !important;
+      }
+
+      .#{$break}\:pd-#{$size} {
+        padding: #{$size}px !important;
       }
 
       .#{$break}\:pt-#{$size} {

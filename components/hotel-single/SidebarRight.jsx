@@ -113,9 +113,9 @@ const SidebarRight = ({ hotel }) => {
             <p className="text-20 bold text-black">Still not sure?</p>
           </div>
           <div className="col-6">
-            <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
+            <button className="button pd-10 -outline-yellow-1 rounded-100 bg-black-2 text-white">
               <img className="icon-phone-12 mr-5" src="/img/featureIcons/1/call-yellow.png" />
-              Call us now
+              Call us
             </button>
           </div>
         </div>
