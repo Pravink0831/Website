@@ -99,7 +99,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Spaces
                   </h3>
-                  <div className="row y-gap-10 pt-20 sm:pd-10 relative">
+                  <div className="row y-gap-10 pt-20 sm:pd-20 relative">
                     <Destinations hotel={hotel}/>
                   </div>
                 </div>
