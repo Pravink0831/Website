@@ -63,7 +63,7 @@ const index = () => {
                     data-aos-offset="0"
                   >
                     <p className="sectionTitle__title Made text-100 lh-8 text-white sm-pt">
-                    Discover the ultimate villa experience in Goa
+                    Discover the Ultimate Villa Experience in Goa
                     </p>
                     <p className="text-white text-25 md:text-20 mb-10">
                     Unwind in our collection of 10 luxurious villas, offering comfort, privacy,<br></br> and 
