@@ -1,75 +1,56 @@
-
 'use client'
 
 import Image from "next/image";
 import Link from "next/link";
-import Slider from "react-slick";
-import { hotelsData } from "../../../data/hotels";
 import isTextMatched from "../../../utils/isTextMatched";
+import { useEffect, useState } from "react";
 
 const HotelProperties = () => {
-  var itemSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // custom navigation
-  function ArrowSlick(props) {
-    let className =
-      props.type === "next"
-        ? "slick_arrow-between slick_arrow -next arrow-md flex-center button -blue-1 bg-white shadow-1 size-30 rounded-full sm:d-none js-next"
-        : "slick_arrow-between slick_arrow -prev arrow-md flex-center button -blue-1 bg-white shadow-1 size-30 rounded-full sm:d-none js-prev";
-    className += " arrow";
-    const char =
-      props.type === "next" ? (
-        <>
-          <i className="icon icon-chevron-right text-12"></i>
-        </>
-      ) : (
-        <>
-          <span className="icon icon-chevron-left text-12"></span>
-        </>
-      );
-    return (
-      <button className={className} onClick={props.onClick}>
-        {char}
-      </button>
-    );
-  }
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await fetch('/api/hotels');
+        const data = await response.json();
+        setProperties(data);
+      } catch (error) {
+        console.error('Error fetching properties:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
 
   return (
     <>
-      {hotelsData.slice(0, 8).map((item) => (
+      {properties.map((item) => (
         <div
           className="col-lg-3 col-sm-6"
-          key={item?.id}
+          key={item?._id}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}
         >
           <Link
-            href={`/hotel-single-v1/${item.id}`}
+            href={`/villa-details/${item._id}`}
             className="hotelsCard -type-1 hover-inside-slider"
           >
             <div className="hotelsCard__image">
               <div className="cardImage inside-slider">
-                <Slider>
-                  {item?.slideImg?.map((slide, i) => (
-                    <div className="cardImage ratio ratio-63:55" key={i}>
-                      <div className="cardImage__content ">
-                        <Image
-                          width={300}
-                          height={300}
-                          className="rounded-4 col-12 js-lazy"
-                          src={item?.img}
-                          alt="image"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
+                <div className="cardImage ratio ratio-63:55">
+                  <div className="cardImage__content">
+                    <Image
+                      width={640}
+                      height={480}
+                      className="rounded-4 col-12 js-lazy"
+                      src={item?.img || ''}
+                      alt={item?.title}
+                    />
+                  </div>
+                </div>
 
                 <div className="cardImage__leftBadge">
                   <div
@@ -81,41 +62,46 @@ const HotelProperties = () => {
                       isTextMatched(item?.tag, "best seller")
                         ? "bg-blue-1 text-white"
                         : ""
-                    } 
                     } ${
                       isTextMatched(item?.tag, "-25% today")
                         ? "bg-brown-1 text-white"
                         : ""
-                    } 
-                     ${
-                       isTextMatched(item?.tag, "top rated")
-                         ? "bg-yellow-1 text-dark-1"
-                         : ""
-                     }`}
+                    } ${
+                      isTextMatched(item?.tag, "top rated")
+                        ? "bg-yellow-1 text-dark-1"
+                        : ""
+                    }`}
                   >
                     {item?.tag}
                   </div>
                 </div>
               </div>
             </div>
-            <div className="hotelsCard__content pt-20 pl-5">
-              <h4 className="hotelsCard__title text-black text-20 lh-16 fw-500">
+            <div className="hotelsCard__content pt-5 pl-5">
+              <h4 className="hotelsCard__title text-black text-20 lh-16 fw-600">
                 <span>{item?.title}</span>
               </h4>
               <p className="text-black lh-14 text-14 fw-500">
-                {item?.location}
+                {item?.location}{item?.city ? `, ${item?.city}` : ''}
               </p>
               <div className="d-flex items-center">
                 <div className="text-14 text-black fw-500">
-                15 Guests | 5 Bedrooms | 5 Baths
+                  {item?.guests} Guests | {item?.bedrooms} Bedrooms | {item?.baths} Baths
                 </div>
               </div>
               
-                <div className="fw-600 mb-5">
+              <div className="d-flex justify-between items-center">
+                <div className="fw-600 lh-16 text-black text-14">
                   Starting from{" "}
-                  <span className="text-black">{item?.price}/-</span>
+                  <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
-              
+                <Link 
+                  href={`/villa-details/${item._id}`}
+                  className="button -sm -outline-blue-1 text-blue-1 py-5 px-15"
+                >
+                  View
+                </Link>
+              </div>
             </div>
           </Link>
         </div>
