@@ -129,7 +129,7 @@ const home_7 = () => {
           <div className="row justify-center text-center">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title Made text-80 lh-13">Core Comforts you Can Count On</h2>
+                <h2 className="sectionTitle__title Made text-80 lh-13">Core Comforts you can Count on</h2>
                 <p className=" sectionTitle__text mt-20 text-20  text-black sm:mt-10">
                   Our villas come fully equipped with modern amenties to make your stay effortless and relaxing
                 </p>
