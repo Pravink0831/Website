@@ -13,6 +13,7 @@ import DefaultFooter from "@/components/footer/footer-3";
 import GalleryOne from "@/components/hotel-single/GalleryOne";
 import Destinations from "@/components/destinations/TopDestinations2";
 import PolicyList from "@/components/Policies/page";
+import { auto } from "@popperjs/core";
 
 const HotelSingleV1Dynamic = ({ params }) => {
   const [hotel, setHotel] = useState(null);
@@ -46,6 +47,8 @@ const HotelSingleV1Dynamic = ({ params }) => {
           <img
             src="/favicon.ico"
             alt="Loading..."
+            style={{ maxWidth: "30%" }}
+            height="auto"
             className="w-8 h-8 animate-bounce mx-auto rounded-full"
           />
           <p className="mt-2 text-20 ">Loading villas...</p>
