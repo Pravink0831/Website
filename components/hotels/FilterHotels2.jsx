@@ -40,7 +40,7 @@ const FilterHotels2 = () => {
           data-aos-delay={item.delayAnimation}
         >
           <Link
-            href={`/hotel-single-v1/${item._id}`}
+            href={`/villa-details/${item._id}`}
             className="hotelsCard -type-1 hover-inside-slider" 
           >
             <div className="hotelsCard__image">
@@ -102,7 +102,7 @@ const FilterHotels2 = () => {
                   <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
                 <Link 
-                  href={`/hotel-single-v1/${item._id}`}
+                  href={`/villa-details/${item._id}`}
                   className="button -sm -outline-blue-1 text-blue-1 py-5 px-15"
                 >
                   View

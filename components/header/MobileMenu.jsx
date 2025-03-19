@@ -114,9 +114,9 @@ const MobileMenu = () => {
               About us
             </MenuItem>
             <MenuItem
-             onClick={()=>router.push("/hotel-list-v5")}
+             onClick={()=>router.push("/villa-lists")}
              className={
-              pathname === "/hotel-list-v5" ? "menu-active-link" : ""
+              pathname === "/villa-lists" ? "menu-active-link" : ""
             }
              
             >

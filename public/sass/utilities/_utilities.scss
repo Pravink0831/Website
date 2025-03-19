@@ -122,7 +122,12 @@
     padding-top: 100px;
   }
 }
-
+.center-fixed{
+top: 40%;
+  left: 40%;
+  right: 40%;
+  position: fixed;
+}
 .icon-phone-5{
   width: 4% !important;
 }

@@ -41,14 +41,14 @@ const HotelSingleV1Dynamic = ({ params }) => {
 
   if (loading || !hotel) {
     return (
-      <div className="fixed inset-0 bg-white z-50 grid place-items-center">
+      <div className="center-fixed inset-0 bg-white z-50 grid place-items-center">
         <div className="text-center">
           <img
             src="/favicon.ico"
             alt="Loading..."
             className="w-8 h-8 animate-bounce mx-auto rounded-full"
           />
-          <p className="mt-2 text-gray-600 text-sm">Loading amazing villas...</p>
+          <p className="mt-2 text-20 ">Loading villas...</p>
         </div>
       </div>
     );
