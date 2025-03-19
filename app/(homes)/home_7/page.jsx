@@ -88,7 +88,7 @@ const home_7 = () => {
               </div>
             </div>
           </div>
-          <div className="row text-center justify-between mt-30 mb-30">
+          <div className="row text-center justify-between sm:mt-0 sm:mb-0 mt-30 mb-30">
             <Counter />
           </div>
         </div>

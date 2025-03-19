@@ -54,13 +54,13 @@
 
 @media (max-width: 480px) { 
   .text-100{
-    font-size: 50px !important;
+    font-size: 45px !important;
   }
   .text-80{
-    font-size: 50px !important;
+    font-size: 40px !important;
   }
   .text-25{
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   .text-50{
     font-size: 38px !important;
@@ -69,7 +69,7 @@
     font-size: 36px !important; /* Adjust font size for smaller screens */ 
   } 
   .text-20{
-    font-size: 18px !important;
+    font-size: 14px !important;
   }
   .text-16 { 
     font-size: 12px !important; /* Adjust font size for smaller screens */ 
@@ -102,7 +102,7 @@
     justify-content: center !important;
   }
   .Made{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .single-field{
     margin-left: 20% !important;
@@ -110,6 +110,10 @@
   }
   .list{
     columns:1;
+  }
+  .text-align{
+    text-align: justify;
+    text-align-last: center;
   }
 }
 
