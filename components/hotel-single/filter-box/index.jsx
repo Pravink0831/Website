@@ -29,7 +29,7 @@ const index = () => {
       <div className="col-12">
         <div className="button-item h-full">
           <button className="button -yellow-1 px-35 h-60 rounded-100 col-12 bg-black text-white">
-            Check availability
+            Book Now
           </button>
         </div>
         {/* End search button_item */}
