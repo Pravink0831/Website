@@ -20,7 +20,7 @@ export default function FilterHotels4() {
     <div className="row justify-center">
       <div className="col-auto">
       <Link
-                  href="/hotel-list-v5"
+                  href="/villa-lists"
                   className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
                 >
                   Explore All Villas
