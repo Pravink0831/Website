@@ -163,10 +163,9 @@ const HotelContent = ({ handleInputChange, formData }) => {
   
       await validateImage(file);
   
-      // Compress and resize image
       const options = {
-        maxSizeMB: 1, // Max output file size in MB
-        maxWidthOrHeight: 2000, // Max width or height
+        maxSizeMB: 4,
+        maxWidthOrHeight: 2000,
         useWebWorker: true
       }
       const compressedFile = await imageCompression(file, options);
@@ -181,34 +180,39 @@ const HotelContent = ({ handleInputChange, formData }) => {
       });
   
       if (response.data && response.data.imgUrl) {
+        // Handle different sections
         if (section === 'facilities' && itemIndex !== null) {
           setFacilities(prev => {
             const updated = [...prev];
             if (!updated[groupIndex].items) {
               updated[groupIndex].items = [];
             }
-            if (!updated[groupIndex].items[itemIndex]) {
-              updated[groupIndex].items[itemIndex] = {};
-            }
             updated[groupIndex].items[itemIndex][fieldName] = response.data.imgUrl;
-
-            // Update parent form data
             handleInputChange({
-              target: {
-                name: 'facilities',
-                value: updated
-              }
+              target: { name: 'facilities', value: updated }
+            });
+            return updated;
+          });
+        } else {
+          // Handle destinations and propertyHighlights
+          setSection(prev => {
+            const updated = [...prev];
+            updated[groupIndex] = {
+              ...updated[groupIndex],
+              [fieldName]: response.data.imgUrl
+            };
+            handleInputChange({
+              target: { name: section, value: updated }
             });
             return updated;
           });
         }
         setError("");
       } else {
-        console.error('Invalid response:', response.data);
         setError("Upload failed: Invalid server response");
       }
     } catch (err) {
-      console.error("Upload error:", err.response?.data || err.message);
+      console.error("Upload error:", err);
       setError("Upload failed: " + (err.response?.data?.error || err.message));
     }
   };
