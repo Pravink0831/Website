@@ -15,9 +15,9 @@ const index = ({ villaTitle }) => {
       </div>
       {/* End .col-12 */}
 
-      <div className="col-12">
+      {/*<div className="col-12">
         <GuestSearch />
-        {/* End guest */}
+         
       </div>
       {/* End .col-12 */}
 
