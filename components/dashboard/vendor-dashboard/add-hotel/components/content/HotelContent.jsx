@@ -398,7 +398,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
             required 
             onChange={handleInputChange}
           >
-            {[1,2,3,4,5,6,7,8,9,10].map(num => ( 
+            {[1,2,3,4,5,6,7,8,9,10,11,12,13,14].map(num => ( 
               <option key={num} value={num}>{num}</option>
             ))}
           </select>
@@ -479,7 +479,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
       </div>
       {/* Popular Facilities Section */}
       <div className="col-12">
-        <h3 className="text-16 fw-500">Popular Facilities</h3>
+        <h3 className="text-16 fw-500">Features</h3>
         {popularFacilities.map((field, index) => (
           <div key={`pop-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
@@ -490,7 +490,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               />
-              <label className="lh-1 text-16 text-black">Popular Facilities Title</label>
+              <label className="lh-1 text-16 text-black">Feature Title</label>
             </div>
             <div className="form-input pl-15 col-6">
               <textarea
@@ -499,7 +499,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               ></textarea>
-              <label className="lh-1 text-16 text-black">Popular Facilities Description</label>
+              <label className="lh-1 text-16 text-black">Feature Description</label>
             </div>
             {popularFacilities.length > 1 && (
               <div className="col-2">
@@ -511,7 +511,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           </div>
         ))}
         <button type="button" className={addButtonStyle} onClick={() => handleAdd('popularFacilities', setPopularFacilities)}>
-          Add Popular Facility
+          Add new feature
         </button>
       </div>
 
@@ -528,7 +528,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               />
-              <label className="lh-1 text-16 text-black">House Policies Title</label>
+              <label className="lh-1 text-16 text-black">House Policy Title</label>
             </div>
             <div className="form-input pl-15 col-6">
               <textarea
@@ -537,7 +537,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               ></textarea>
-              <label className="lh-1 text-16 text-black">House Policies</label>
+              <label className="lh-1 text-16 text-black">House Policy</label>
             </div>
             {housePolicies.length > 1 && (
               <div className="col-2">
@@ -549,7 +549,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           </div>
         ))}
         <button type="button" className={addButtonStyle} onClick={() => handleAdd('housePolicies', setHousePolicies)}>
-          Add House Policy
+          Add new House Policy
         </button>
       </div>
 
@@ -566,7 +566,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               />
-              <label className="lh-1 text-16 text-black">Booking Policies Title</label>
+              <label className="lh-1 text-16 text-black">Booking Policy Title</label>
             </div>
             <div className="form-input pl-15 col-6">
               <textarea
@@ -575,7 +575,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               ></textarea>
-              <label className="lh-1 text-16 text-black">Booking Policies</label>
+              <label className="lh-1 text-16 text-black">Booking Policy</label>
             </div>
             {bookingPolicies.length > 1 && (
               <div className="col-2">
@@ -587,13 +587,13 @@ const HotelContent = ({ handleInputChange, formData }) => {
           </div>
         ))}
         <button type="button" className={addButtonStyle} onClick={() => handleAdd('bookingPolicies', setBookingPolicies)}>
-          Add Booking Policy
+          Add new Booking Policy
         </button>
       </div>
 
       {/* Destinations Section */}
       <div className="col-12">
-        <h3 className="text-16 fw-500">Destinations</h3>
+        <h3 className="text-16 fw-500">Spaces</h3>
         {destinations.map((field, index) => (
           <div key={`dest-${index}`} className="row x-gap-10 y-gap-10 pr-20 mb-30">
             <div className="form-input col-4">
@@ -604,14 +604,14 @@ const HotelContent = ({ handleInputChange, formData }) => {
                 required
                 onChange={handleInputChange}
               />
-              <label className="lh-1 text-16 text-black">Destination Location</label>
+              <label className="lh-1 text-16 text-black">Space Location</label>
             </div>
             {renderImageUploader(
               field, 
               index, 
               'destinations', 
               'destinationImg', 
-              'Upload Destination Image'
+              'Upload Space Image'
             )}
             <div className="col-2">
               <button 
@@ -629,23 +629,23 @@ const HotelContent = ({ handleInputChange, formData }) => {
           className={addButtonStyle}
           onClick={() => handleAdd('destinations', setDestinations)}
         >
-          Add Destination
+          Add new space
         </button>
       </div>
 
       {/* Facilities Section */}
       <div className="col-12">
-        <h3 className="text-16 fw-500">Facilities</h3>
+        <h3 className="text-16 fw-500">Amenities</h3>
         {facilities.map((facilityGroup, groupIndex) => (
           <div key={`facGroup-${groupIndex}`} className="mb-30 border-bottom-light pb-30">
             <div className="d-flex justify-between">
-              <h4 className="text-14 fw-500 mb-15">Facility Group {groupIndex + 1}</h4>
+              <h4 className="text-14 fw-500 mb-15">Amenities {groupIndex + 1}</h4>
               <button 
                 type="button"
                 className={removeButtonStyle}
                 onClick={() => handleRemove(groupIndex, 'facilities', setFacilities)}
               >
-                Remove Group
+                Remove
               </button>
             </div>
             <div className="row x-gap-10 y-gap-10 pr-20 mb-15">
@@ -657,14 +657,14 @@ const HotelContent = ({ handleInputChange, formData }) => {
                   required
                   onChange={(e) => handleFieldChange(groupIndex, e, 'facilities', setFacilities, 0)}
                 />
-                <label className="lh-1 text-16 text-black">Facility Title</label>
+                <label className="lh-1 text-16 text-black">Amenity Title</label>
               </div>
               {renderImageUploader(
                 facilityGroup.items[0] || {},
                 groupIndex,
                 'facilities',
                 'icon',
-                'Upload Facility Icon',
+                'Upload Amenity Icon',
                 0
               )}
             </div>
@@ -675,7 +675,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           className={addButtonStyle}
           onClick={() => handleAdd('facilities', setFacilities)}
         >
-          Add Facility Group
+          Add new Amenity
         </button>
       </div>
 
@@ -720,7 +720,7 @@ const HotelContent = ({ handleInputChange, formData }) => {
           className={addButtonStyle}
           onClick={() => handleAdd('propertyHighlights', setPropertyHighlights)}
         >
-          Add Property Highlight
+          Add new Property Highlight
         </button>
       </div>
 
