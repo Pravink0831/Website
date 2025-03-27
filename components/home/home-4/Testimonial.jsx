@@ -61,7 +61,7 @@ const Testimonial = () => {
                       height={60}
                       src={item.avatar}
                       alt="image"
-                      className="size-60"
+                      className="size-60 object-cover"
                     />
                   </div>
                   <div className="col-auto">
