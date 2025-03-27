@@ -1,14 +1,14 @@
 import GuestSearch from "./GuestSearch";
 import DateSearch from "./DateSearch";
 
-const index = () => {
+const index = ({ villaTitle }) => {
   return (
     <>
       <div className="col-12">
         <div className="searchMenu-date px-20 py-10 border-light rounded-4 -right js-form-dd js-calendar">
           <div>
-            <h4 className="text-16 fw-500 ls-2 lh-16">Check in - Check out</h4>
-            <DateSearch />
+            {/*<h4 className="text-16 fw-500 ls-2 lh-16">Check in - Check out</h4>*/}
+            <DateSearch villaTitle={villaTitle} />
           </div>
         </div>
         {/* End check-in-out */}

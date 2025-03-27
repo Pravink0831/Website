@@ -105,7 +105,7 @@ const SidebarRight = ({ hotel }) => {
           {/* End d-flex */}
 
           <div className="row y-gap-20 pt-30">
-            <FilterBox />
+            <FilterBox villaTitle={hotel?.title} />
           </div>
         </div>
         <div className="border-light px-20 py-20 mx-auto row align-items-center rounded-4 bg-egg-1">
