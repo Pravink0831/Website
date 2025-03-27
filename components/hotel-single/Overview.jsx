@@ -1,7 +1,7 @@
 const Overview = ({hotel}) => {
   return (
     <>
-      <h3 className="text-60 Made fw-500 sm:mb-0 border-top-light">Villa Overview</h3>
+      <h3 className="text-60 Made fw-500 sm:mb-0">Villa Overview</h3>
       <p className="text-black text-18 mt-20 sm:mt-0">
       {hotel?.overviewDescription}
       </p>

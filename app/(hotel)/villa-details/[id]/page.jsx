@@ -81,7 +81,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
                 {/* End .col-12 Property highlights */}
 
-                <div id="overview" className="col-12">
+                <div id="overview" className="border-top-light col-12">
                   <Overview hotel={hotel} />
                 </div>
                 {/* End .col-12  Overview */}
@@ -90,7 +90,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Features
                   </h3>
-                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 pt-20 sm:pt-0">
                     <PopularFacilities hotel={hotel}/>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Spaces
                   </h3>
-                  <div className="row y-gap-10 pt-20 sm:pd-20 relative">
+                  <div className="row y-gap-10 pt-20 sm:pt-5 sm:pl-20 sm:pr-20 relative">
                     <Destinations hotel={hotel}/>
                   </div>
                 </div>
@@ -148,7 +148,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                     <div className="listingSection__wrap">
                       {/* HEADING */}
                       <div>
-                        <span className="sectionTitle__text mt-10 text-18 text-black">
+                        <span className="sectionTitle__text mt-10 lh-16 text-18 text-black">
                         {hotel?.locationDescription}
                         </span>
                       </div>

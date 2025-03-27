@@ -1,6 +1,6 @@
 const PropertyHighlights = ({ hotel }) => {
   return (
-    <div className="row y-gap-20 pt-30">
+    <div className="row y-gap-20 pt-30 sm:pt-10">
       {hotel?.propertyHighlights?.map((item, index) => (
         <div className="col-lg-3 col-6" key={index}>
           <div className="text-center">

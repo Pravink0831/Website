@@ -15,7 +15,7 @@ const PolicyList = ({ policies, titleKey, contentKey }) => {
         <div className="container mt-4">
             <ol className="list-group border border-gray-2 rounded-10 p-2">
             {displayedPolicies?.map((policy, index) => (
-                <li className="mb-20 text-18 lh-16" key={index}>
+                <li className="mb-20 sm:mb-10 text-18 lh-16" key={index}>
                     <strong>{policy[titleKey]}:</strong> {policy[contentKey]}
                 </li>
             ))}
