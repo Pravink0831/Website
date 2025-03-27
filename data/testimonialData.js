@@ -44,7 +44,7 @@ export const testimonial2 = [
   {
     id: 1,
     meta: "Villa M - Solitude 2",
-    avatar: "/img/hotels/19.png",
+    avatar: "/img/avatars/15.png",
     name: "Sachin Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
@@ -60,7 +60,7 @@ markets are very close by.
   {
     id: 2,
     meta: "Villa M - Solitude 2",
-    avatar: "/img/hotels/19.png",
+    avatar: "/img/avatars/1.png",
     name: "Sachin Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
@@ -76,7 +76,7 @@ markets are very close by.
   {
     id: 3,
     meta: "Villa M - Solitude 2",
-    avatar: "/img/hotels/19.png",
+    avatar: "/img/avatars/3.png",
     name: "Sachin Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
@@ -92,7 +92,7 @@ markets are very close by.
   {
     id: 4,
     meta: "Villa M - Solitude 2",
-    avatar: "/img/hotels/19.png",
+    avatar: "/img/avatars/4.png",
     name: "Sachin Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
@@ -108,7 +108,7 @@ markets are very close by.
   {
     id: 5,
     meta: "Villa M - Solitude 2",
-    avatar: "/img/hotels/19.png",
+    avatar: "/img/avatars/5.png",
     name: "Sachin Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
