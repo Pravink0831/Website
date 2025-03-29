@@ -259,15 +259,22 @@
       .subnav {
         position: absolute;
         top: 100%;
+        
         background-color: white;
         border-radius: 4px;
         color: var(--color-dark-1) !important;
         min-width: 240px;
-        padding: 20px;
+        padding: 10px;
         box-shadow: 0px 10px 60px 0px #0510360d;
         opacity: 0;
         pointer-events: none;
         transition: all 0.2s $easeOutQuart;
+        z-index: 10;
+
+        &.d-block {
+          opacity: 1;
+          pointer-events: auto;
+        }
 
         &__backBtn {
           display: none;
@@ -281,6 +288,7 @@
         > li {
           > a {
             padding: 5px 15px;
+            font-size: 16px;
             border-radius: 4px;
 
             &:hover {

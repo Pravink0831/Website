@@ -103,7 +103,7 @@ const FilterHotels2 = () => {
                 </div>
                 <Link 
                   href={`/villa-details/${item._id}`}
-                  className="button -sm -outline-blue-1 text-blue-1 py-5 px-15"
+                  className="button -sm -outline-yellow-1 text-black-1 py-5 px-15"
                 >
                   View
                 </Link>
