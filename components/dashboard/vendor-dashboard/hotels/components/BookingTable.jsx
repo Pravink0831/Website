@@ -60,7 +60,7 @@ const BookingTable = () => {
   return (
     <>
       <div className="tabs -underline-2 js-tabs">
-        <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+       {/* <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
           {tabItems.map((item, index) => (
             <div className="col-auto" key={index}>
               <button
@@ -74,7 +74,7 @@ const BookingTable = () => {
             </div>
           ))}
         </div>
-        {/* End tabs */}
+         End tabs */}
 
         <div className="tabs__content pt-30 js-tabs-content">
           <div className="tabs__pane -tab-item-1 is-tab-el-active">

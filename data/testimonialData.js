@@ -43,32 +43,22 @@ export const testimonial1 = [
 export const testimonial2 = [
   {
     id: 1,
-    meta: "Villa M - Solitude 2",
+    meta: "Villa M - Savannah 7",
     avatar: "/img/avatars/15.png",
-    name: "Sachin Sachin",
-    designation: "Candolim",
-    text: `"Great place to stay with your friends
-and family. It's part of the gated
-community and very close to the
-beach (10 minutes walking distance).
-All the restaurants and super
-markets are very close by.
+    name: "Devansh",
+    designation: "Calangute",
+    text: `"The place was spotless, the host was very responsive, and helped us get an early check-in and late check-out! The team is very helpful and responsive, no matter what! The breakfast was also wonderful! Aloo Paratha was the highlight of the entire stay.
 "`,
     dealyAnimation: "100",
     Rating:3,
   },
   {
     id: 2,
-    meta: "Villa M - Solitude 2",
+    meta: "Villa M - Solitude 3",
     avatar: "/img/avatars/1.png",
-    name: "Sachin Sachin",
+    name: "Ramesh",
     designation: "Candolim",
-    text: `"Great place to stay with your friends
-and family. It's part of the gated
-community and very close to the
-beach (10 minutes walking distance).
-All the restaurants and super
-markets are very close by.
+    text: `"It's a great place for a group. We booked this villa for 3 families; it's very spacious and has good amenities. The housekeeping staff was very helpful. The location is close to all the restaurants and Candolim Beach, just about a 12-minute walk.
 "`,
     dealyAnimation: "200",
     Rating:5,
@@ -77,7 +67,7 @@ markets are very close by.
     id: 3,
     meta: "Villa M - Solitude 2",
     avatar: "/img/avatars/3.png",
-    name: "Sachin Sachin",
+    name: "Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
 and family. It's part of the gated
@@ -93,7 +83,7 @@ markets are very close by.
     id: 4,
     meta: "Villa M - Solitude 2",
     avatar: "/img/avatars/4.png",
-    name: "Sachin Sachin",
+    name: "Sachin",
     designation: "Candolim",
     text: `"Great place to stay with your friends
 and family. It's part of the gated

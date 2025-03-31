@@ -86,6 +86,7 @@ const SidebarRight = ({ hotel }) => {
         <div className="px-30 mb-20 py-30 border-light rounded-4 shadow-4">
           <div className="d-flex items-center justify-between">
             <div className="d-flex items-center">
+              <span className="text-16 mr-5">Starting from</span>
               <span className="text-20 fw-500">₹</span>
               <span className="text-20 fw-500">{hotel?.price}/</span>
               <span className="text-20 text-black ml-5">Nights</span>

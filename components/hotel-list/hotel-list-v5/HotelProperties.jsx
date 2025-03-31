@@ -95,12 +95,7 @@ const HotelProperties = () => {
                   Starting from{" "}
                   <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
-                <Link 
-                  href={`/villa-details/${item._id}`}
-                  className="button -sm -outline-blue-1 text-blue-1 py-5 px-15"
-                >
-                  View
-                </Link>
+                
               </div>
             </div>
           </Link>

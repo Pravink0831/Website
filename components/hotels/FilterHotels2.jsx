@@ -101,12 +101,7 @@ const FilterHotels2 = () => {
                   Starting from{" "}
                   <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
-                <Link 
-                  href={`/villa-details/${item._id}`}
-                  className="button -sm -outline-yellow-1 text-black-1 py-5 px-15"
-                >
-                  View
-                </Link>
+                
               </div>
               
             </div>

@@ -5,7 +5,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="sidebar -dashboard" id="vendorSidebarMenu">
-        <div className="sidebar__item ">
+        {/*<div className="sidebar__item ">
           <Link
             href="/vendor-dashboard/dashboard"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
@@ -20,7 +20,7 @@ const Sidebar = () => {
             Dashboard
           </Link>
         </div>
-        {/* End accordion__item */}
+         End accordion__item */}
 
         {/* End accordion__item */}
 

@@ -1,15 +1,19 @@
-import React from "react";
+'use client';
+
+import React, { useState } from "react";
 import DashboardPage from "../../../../components/dashboard/vendor-dashboard/add-hotel";
+import VendorLogin from "../../../../components/auth/VendorLogin";
 
-export const metadata = {
-  title: "Vendor Details",
-  description: "",
-};
+export default function Page() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-export default function page() {
   return (
     <>
-      <DashboardPage />
+      {!isAuthenticated ? (
+        <VendorLogin onLogin={setIsAuthenticated} />
+      ) : (
+        <DashboardPage />
+      )}
     </>
   );
 }
