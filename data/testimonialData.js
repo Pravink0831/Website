@@ -44,22 +44,20 @@ export const testimonial2 = [
   {
     id: 1,
     meta: "Villa M - Savannah 7",
-    avatar: "/img/avatars/15.png",
+    avatar: "/img/avatars/1.png",
     name: "Devansh",
     designation: "Calangute",
-    text: `"The place was spotless, the host was very responsive, and helped us get an early check-in and late check-out! The team is very helpful and responsive, no matter what! The breakfast was also wonderful! Aloo Paratha was the highlight of the entire stay.
-"`,
+    text: `"The place was spotless, the host was responsive, and arranged check-in/check-out! The team was helpful, breakfast wonderful, and Aloo Paratha the highlight of the stay."`,
     dealyAnimation: "100",
     Rating:3,
   },
   {
     id: 2,
     meta: "Villa M - Solitude 3",
-    avatar: "/img/avatars/1.png",
+    avatar: "/img/avatars/4.png",
     name: "Ramesh",
     designation: "Candolim",
-    text: `"It's a great place for a group. We booked this villa for 3 families; it's very spacious and has good amenities. The housekeeping staff was very helpful. The location is close to all the restaurants and Candolim Beach, just about a 12-minute walk.
-"`,
+    text: `"Spacious villa for 3 families with good amenities and helpful staff. Just 12 minutes to Candolim Beach and near amazing restaurants—highly recommend!"`,
     dealyAnimation: "200",
     Rating:5,
   },
@@ -69,47 +67,19 @@ export const testimonial2 = [
     avatar: "/img/avatars/3.png",
     name: "Sachin",
     designation: "Candolim",
-    text: `"Great place to stay with your friends
-and family. It's part of the gated
-community and very close to the
-beach (10 minutes walking distance).
-All the restaurants and super
-markets are very close by.
-"`,
+    text: `"Great for friends or families, located in a gated community just 10 minutes to the beach. Restaurants and supermarkets nearby made it perfect for our stay!"`,
     dealyAnimation: "300",
     Rating:1,
   },
   {
     id: 4,
-    meta: "Villa M - Solitude 2",
-    avatar: "/img/avatars/4.png",
-    name: "Sachin",
-    designation: "Candolim",
-    text: `"Great place to stay with your friends
-and family. It's part of the gated
-community and very close to the
-beach (10 minutes walking distance).
-All the restaurants and super
-markets are very close by.
-"`,
+    meta: "Villa M - White Castle A",
+    avatar: "/img/avatars/5.png",
+    name: "Sai Sree Ram",
+    designation: "Vagator",
+    text: `"Responsive host who ensured all our needs were met. The villa’s private pool added so much fun, and the space was perfect for our group of 12 friends."`,
     dealyAnimation: "400",
     Rating:2,
-  },
-  {
-    id: 5,
-    meta: "Villa M - Solitude 2",
-    avatar: "/img/avatars/5.png",
-    name: "Sachin Sachin",
-    designation: "Candolim",
-    text: `"Great place to stay with your friends
-and family. It's part of the gated
-community and very close to the
-beach (10 minutes walking distance).
-All the restaurants and super
-markets are very close by.
-"`,
-    dealyAnimation: "500",
-    Rating:3,
   },
 ];
 

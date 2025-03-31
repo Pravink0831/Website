@@ -8,9 +8,12 @@ import Subscribe from "./Subscribe";
 const index = () => {
   return (
     <footer className="footer -type-1">
-      <div className="video-background">
-        <video autoPlay muted loop id="background-video">
-          <source src="/img/video/3.mp4" type="video/mp4" /> Your browser does not support the video tag. 
+      <div className="video-background"> 
+        <video autoPlay muted loop className="desktop-video">
+          <source src="/img/video/3.mp4" type="video/mp4" /> Your browser does not support the video tag.
+        </video>
+        <video autoPlay muted loop className="mobile-video">
+          <source src="/img/video/4.mp4" type="video/mp4" /> Your browser does not support the video tag.
         </video>
       </div>
       <div className="container content">

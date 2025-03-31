@@ -35,9 +35,21 @@
     min-height: 100%;
     width: auto;
     height: auto;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); 
     background-size: cover;
     object-fit: cover;
+  }
+
+  // New video display rules:
+  .desktop-video { display: block; }
+  .mobile-video { display: none; }
+}
+
+@media (max-width: 768px) {
+  .video-background {
+    .desktop-video { display: none; }
+    .mobile-video { display: block; }
+    padding-top: 0% !important;
   }
 }
 
