@@ -17,7 +17,7 @@ const ParallaxBanner = () => {
           <div className="row justify-center text-center text-black pd-20">
             <div className="col-xl-9" data-aos="fade">
             <div className="sectionTitle -md">
-                      <h2 className="sectionTitle__title text-80 Made">Your Luxury Retreat in North Goa</h2>
+                      <h2 className="sectionTitle__title text-80 Made">Your Retreat in North Goa</h2>
                       <div className="d-flex justify-center mb-20">
                         <img src="/img/featureIcons/1/Palm.png" className="js-lazy" />
                       </div>

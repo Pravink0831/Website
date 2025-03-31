@@ -59,7 +59,7 @@ button {
 
   .button.-outline-#{$name} {
     //border-color: var(--color-#{$name});
-    border-color: transparent;
+    border-color: black;
 
     &:hover {
       background-color: var(--color-#{$name});

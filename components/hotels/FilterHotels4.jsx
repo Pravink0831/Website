@@ -10,7 +10,7 @@ export default function FilterHotels4() {
     const [filterOption, setFilterOption] = useState(false);
   return (
     <div className="tabs -pills-2">
-    <div className="tabs__content pt-40">
+    <div className="tabs__content pt-40 sm:pt-10">
       <div className="row">
         <FilterHotels2/>
       </div>
