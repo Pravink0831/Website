@@ -2,6 +2,7 @@
 
 import Aos from "aos";
 import { useEffect } from "react";
+import ScrollToTop from "../components/common/ScrollToTop";
 import SrollTop from "../components/common/ScrollTop";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
       <body>
         <main>
           <Provider store={store}>
+            <ScrollToTop />
             {children}
             <SrollTop />
           </Provider>

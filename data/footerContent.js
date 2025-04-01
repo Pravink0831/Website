@@ -5,10 +5,10 @@ module.exports = [
     menuList: [
       { name: "Home", routerPath: "/" },
       { name: "About us", routerPath: "/about" },
-      { name: "Our villas", routerPath: "/hotel-list-v5" },
+      { name: "Our villas", routerPath: "/villa-lists" },
       { name: "Partner with us", routerPath: "/partner-with-us" },
       { name: "Contact", routerPath: "/contact" },
-      { name: "Booking & Cancellations", routerPath: "/" },
+      
     ],
   },  
 ];
