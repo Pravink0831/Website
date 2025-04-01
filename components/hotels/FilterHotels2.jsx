@@ -34,7 +34,7 @@ const FilterHotels2 = () => {
     <>
       {properties.slice(0, 8).map((item) => (
         <div
-          className="col-xl-3 col-lg-3 col-sm-6"
+          className="col-xl-3 col-lg-3 col-sm-6 marginb"
           key={item?._id}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}

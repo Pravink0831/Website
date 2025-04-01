@@ -25,8 +25,8 @@ const PopularDestinations = () => {
         }}
         breakpoints={{
           500: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
           768: {
             slidesPerView: 2,
@@ -41,7 +41,7 @@ const PopularDestinations = () => {
         }}
       >
         {destinations2.map((item) => (
-          <SwiperSlide key={item.id}>
+          <SwiperSlide key={item.id} className="small-slide">
             <Link
               href="#"
               className="citiesCard -type-1 d-block rounded-60"

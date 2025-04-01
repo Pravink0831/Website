@@ -45,11 +45,12 @@
   .mobile-video { display: none; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 486px) {
   .video-background {
     .desktop-video { display: none; }
     .mobile-video { display: block; }
     padding-top: 0% !important;
+    height: 200%;
   }
 }
 
