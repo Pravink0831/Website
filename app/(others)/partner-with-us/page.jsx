@@ -33,7 +33,7 @@ const Contact = () => {
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle__title Made text-80 text-white sm-pt">
+                    <p className="sectionTitle__title Made text-80 text-white sm:pt-0">
                     Partner With Us
                     </p>
                     <p className="text-white text-20 md:text-12 mb-10">
