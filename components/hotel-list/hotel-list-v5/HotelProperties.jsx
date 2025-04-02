@@ -29,7 +29,7 @@ const HotelProperties = () => {
     <>
       {properties.map((item) => (
         <div
-          className="col-lg-3 col-sm-6"
+          className="col-lg-3 col-sm-6 marginb"
           key={item?._id}
           data-aos="fade"
           data-aos-delay={item.delayAnimation}
@@ -95,7 +95,12 @@ const HotelProperties = () => {
                   Starting from{" "}
                   <span className="text-black text-14">₹{item?.price}/-</span>
                 </div>
-                
+                <Link 
+                                  href={`/villa-details/${item._id}`}
+                                  className="button -sm -outline-yellow-1 text-black-1 py-5 px-15"
+                                >
+                                  View
+                </Link>
               </div>
             </div>
           </Link>
