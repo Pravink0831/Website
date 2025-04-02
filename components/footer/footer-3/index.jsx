@@ -13,7 +13,7 @@ const index = () => {
           <source src="/img/video/3.mp4" type="video/mp4" /> Your browser does not support the video tag.
         </video>
         <video autoPlay muted loop className="mobile-video">
-          <source src="/img/video/5.mp4" type="video/mp4" /> Your browser does not support the video tag.
+          <source src="/img/video/6.mp4" type="video/mp4" /> Your browser does not support the video tag.
         </video>
       </div>
       <div className="container content">
@@ -50,17 +50,19 @@ const index = () => {
                 Get in touch
                 </h2>
                 <p className="sectionTitle__text text-18 text-white mt-30">
-                Office address will come here.
-lorem ipsum lorem ipsum lorem
-ipsum lorem ipsum
+                Have questions or want to connect? Reach out to us today, and we'll be happy to assist you!
                 </p>
                 <p className="text-18 text-white mt-20">
                 <img className="icon-phone-5 mr-10" src="/img/featureIcons/1/call-yellow.png" />
                 +91 77789 02229
                   </p>
+                  <p className="text-18 text-white mt-20">
+                <img className="icon-phone-5 mr-10" src="/img/featureIcons/1/Email.png" />
+                mohhospitality@gmail.com
+                  </p>
             <div className="mt-60">
                 <h5 className="text-18 fw-500 mb-10">
-                  Follow us on social media
+                Connect with us
                 </h5>
                 <div className="d-flex x-gap-20 items-center">
                   <Social />
