@@ -70,20 +70,20 @@ Reach out for bookings, inquiries, or any assistance – we’d love to hear fro
           <div className="col-auto">
           <h2 className="sectionTitle__title Made text-60 text-center">The Keys to Villa M Are Just a Click Away</h2>
           </div>
-          <div className="col-xl-6 px-60 py-60">
+          <div className="col-xl-6 px-60 py-60 sm:py-20">
             <ContactForm />
           </div>
-          <div className="col-xl-6 px-60 bg-egg-1 mt-75 md:mt-20 lg:mt-40 mb-60 text-black">
-            <div className="mt-40">
-              <h3 className="text-30 Made fw-500 mb-5 ">Call Us</h3>
+          <div className="col-xl-6 px-60 bg-egg-1 mt-75 md:mt-20 lg:mt-40 sm:mb-20 mb-60 text-black">
+            <div className="mt-40 sm:mt-20">
+              <h3 className="text-30 Made fw-500 mb-5 sm:mb-0">Call Us</h3>
               <p className="text-16 text-black"><img className="icon-phone-5 mr-10 " src="/img/featureIcons/1/call-yellow.png" />+91 77789 02229</p>
             </div>
-            <div className="mt-40">
-              <h3 className="text-30 Made fw-500 mb-5">Email</h3>  
-              <p className="text-16 "><img className="icon-phone-5 mr-10 " src="/img/featureIcons/1/Email.png" /> <a href="mailto:" className="text-black">emailid@gmail.com</a> </p>
+            <div className="mt-40 sm:mt-20">
+              <h3 className="text-30 Made fw-500 mb-5 sm:mb-0">Email</h3>  
+              <p className="text-16 "><img className="icon-phone-5 mr-10 " src="/img/featureIcons/1/Email.png" /> <a href="mailto:" className="text-black">mohhospitality@gmail.com</a> </p>
             </div>
-            <div className="mt-40">
-                <h5 className="text-30 Made fw-500 mb-10">
+            <div className="mt-40 sm:mt-20 sm:mb-20">
+                <h5 className="text-30 Made fw-500 mb-10 sm:mb-0">
                   Follow us
                 </h5>
                 <div className="d-flex x-gap-20 items-center">

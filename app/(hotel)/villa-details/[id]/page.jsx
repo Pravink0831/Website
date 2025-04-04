@@ -99,13 +99,13 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   <h3 className="text-60 Made fw-500 sm:mb-0">
                   Amenities Available
                   </h3>
-                  <div className="row y-gap-10 pt-20">
+                  <div className="row y-gap-10 sm:pt-0 pt-20">
                   <Facilities hotel={hotel}/>
                   </div>
                 </div>
 
                 <div className="col-12 sm:py-5">
-                  <h3 className="text-60 Made fw-500 sm:mb-0">
+                  <h3 className="text-60 Made fw-500 sm:mb-0 sm:pt-20">
                   Spaces
                   </h3>
                   <div className="row y-gap-10 pt-20 sm:pt-5 sm:pl-20 sm:pr-20 relative">
@@ -113,7 +113,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                   </div>
                 </div>
                 <div className="col-12 sm:py-5">
-                  <h3 className="text-60 Made fw-500 sm:mb-0">
+                  <h3 className="text-60 Made fw-500 sm:mb-0 sm:pt-20">
                   House Rules
                   </h3>
                   <div className="row y-gap-10 pt-20 sm:pt-0">
@@ -126,7 +126,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
 
                 <div className="col-12 sm:py-5">
-                  <h3 className="text-60 Made fw-500 sm:mb-0">
+                  <h3 className="text-60 Made fw-500 sm:mb-0 sm:pt-20">
                     Booking Rules
                   </h3>
                   <div className="row y-gap-10 pt-20 sm:pt-0">
@@ -139,7 +139,7 @@ const HotelSingleV1Dynamic = ({ params }) => {
                 </div>
 
                 <div className="col-12 sm:py-5">
-                  <h3 className="text-60 Made sm:mb-0 fw-500">
+                  <h3 className="text-60 Made sm:mb-0 fw-500 sm:pt-20">
                   Location
                   </h3>
                   <div className="row y-gap-10 pt-20 sm:pt-0">

@@ -22,10 +22,13 @@ const CallToActions = () => {
               {/* End email input */}
 
                       <div>
-                      <button className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white">
-                        <img className="icon-phone-12 mr-10 " src="/img/featureIcons/1/call-yellow.png" />
-                      Call us on now
-                      </button>
+                      <a 
+                        href="tel:+917778902229"
+                        className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white d-flex items-center"
+                      >
+                        <img className="icon-phone-12 mr-10" src="/img/featureIcons/1/call-yellow.png" />
+                        Call us now
+                      </a>
                       </div>
                       {/* End subscribe btn */}
 

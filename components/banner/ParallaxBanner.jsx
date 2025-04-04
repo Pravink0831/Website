@@ -19,7 +19,7 @@ const ParallaxBanner = () => {
             <div className="sectionTitle -md">
                       <h2 className="sectionTitle__title text-80 Made">Your Retreat in North Goa</h2>
                       <div className="d-flex justify-center mb-20">
-                        <img src="/img/featureIcons/1/Palm.png" className="js-lazy" />
+                        <img src="/img/featureIcons/1/Palm.png" className="js-lazy mx-100" />
                       </div>
                       <p className=" sectionTitle__text text-black text-20 text-align mt-5 sm:mt-0  lh-19">
                       At Villa M, we are passionate about creating vacations that perfectly balance relaxation,
