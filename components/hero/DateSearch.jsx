@@ -31,7 +31,7 @@ const DateSearch = () => {
     
     document.body.appendChild(script);
 
-    return () => {
+    return () => { 
       if (document.getElementById('propInfo')) {
         document.getElementById('propInfo').remove();
       }

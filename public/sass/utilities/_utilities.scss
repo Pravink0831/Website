@@ -2406,12 +2406,12 @@ table.table-5 {
 }
 
 
-div#quickbook-widget .MbsSearchWidget .rdrCalendarWrapper.rdrDateRangeWrapper {
+.Configure-quickBook-Widget .MbsSearchWidget .rdrCalendarWrapper.rdrDateRangeWrapper {
   left: -150px !important;
   right: -150px !important;
 }
 
-div#quickbook-widget .MbsSearchWidget{
+.Configure-quickBook-Widget .MbsSearchWidget{
   @media (max-width: 480px) { 
     width: 100% !important;
     flex-wrap: wrap !important;
@@ -2425,18 +2425,18 @@ div#quickbook-widget .MbsSearchWidget{
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
 }
 
-div#quickbook-widget .MbsSearchWidget .formGroup label.lbl {
+.Configure-quickBook-Widget .MbsSearchWidget .formGroup label.lbl {
   font-size: 16px !important;
   font-weight: 500 !important;
   color: var(--color-dark-1) !important;
 }
 
-div#quickbook-widget .MbsSearchWidget .searchBlock {
+.Configure-quickBook-Widget .MbsSearchWidget .searchBlock {
   width: 100px !important;
   
 }
 
-div#quickbook-widget .MbsSearchWidget .searchBtn {
+.Configure-quickBook-Widget .MbsSearchWidget .searchBtn {
   &.active {
     border-color: black !important;
     background-color: black !important;

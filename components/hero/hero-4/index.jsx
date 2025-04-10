@@ -27,7 +27,7 @@ const index = () => {
           >
             <SwiperSlide>
               <div className="masthead__image">
-                <img alt="image" src="/img/masthead/7/6.jpg" />
+                <img alt="image"  src="/img/masthead/7/6.jpg" />
               </div>
             </SwiperSlide>
             <SwiperSlide>
