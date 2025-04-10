@@ -1,0 +1,76 @@
+'use client'
+
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+import Image from "next/image";
+
+const TopDestinations2 = ({ hotel }) => {
+  return (
+    <>
+      <Swiper
+        spaceBetween={30}
+        className="overflow-hidden"
+        modules={[Navigation]}
+        navigation={{
+          nextEl: ".js-top-desti2-next_active",
+          prevEl: ".js-top-desti2-prev_active",
+        }}
+        breakpoints={{
+          540: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 22,
+          },
+          1024: {
+            slidesPerView: 2.5,
+          },
+          1200: {
+            slidesPerView: 3,
+          },
+        }}
+      >
+        {hotel?.destinations?.map((item) => (
+          <SwiperSlide key={item.destinationLocation}>
+            <Link
+              href="#"
+              className="citiesCard -type-2"
+            >
+              <div className="citiesCard__image rounded-4 ratio ratio-15:9">
+                <Image
+                  width={191}
+                  height={191}
+                  className="img-ratio rounded-4 js-lazy"
+                  src={item.destinationImg}
+                  alt="image"
+                />
+              </div>
+              <div className="citiesCard__content mt-10">
+                <h4 className="text-18 lh-13 fw-500 text-black text-capitalize">
+                  {item.destinationLocation}
+                </h4>
+                <div className="text-14 text-light-1">
+                  {/*{item.properties} properties */}
+                </div>
+              </div>
+            </Link>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Start naviation button for next prev slide */}
+      <button className="section-slider-nav -prev flex-center bg-white button -yellow-1 size-40  rounded-full shadow-1  js-top-desti2-prev_active">
+        <i className="icon icon-chevron-left text-16" />
+      </button>
+      <button className="section-slider-nav -next flex-center bg-white button -yellow-1 size-40 rounded-full shadow-1  js-top-desti2-next_active">
+        <i className="icon icon-chevron-right text-16" />
+      </button>
+      {/* End navigation button for next prev  slide */}
+    </>
+  );
+};
+
+export default TopDestinations2;

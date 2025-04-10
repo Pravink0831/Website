@@ -1,0 +1,10 @@
+[build]
+  command = "next build"
+  publish = ".next"
+
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "18"
