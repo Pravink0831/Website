@@ -255,6 +255,10 @@
   @include media-below(xl) {
     margin: 0;
   }
+  @media (max-width: 480px) {
+    
+    height: 80vh !important;
+  }
 
   .masthead {
     &__content {
@@ -270,7 +274,7 @@
       }
 
       @include media-below(md) {
-        padding-top: 90px;
+        padding-top: 0px;
         padding-bottom: 0px;
       }
     }

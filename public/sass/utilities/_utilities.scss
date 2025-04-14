@@ -120,6 +120,12 @@
     padding: 0% !important;
     margin-left: 0% !important;
   }
+  .small-slide1{
+    width: 230px !important;
+    overflow: none !important;
+    padding: 0% !important;
+    margin-left: 0% !important;
+  }
   .list{
     columns:1;
   }
@@ -169,10 +175,19 @@ top: 40%;
 .icon-phone-12{
   width: 12% !important;
 }
+.icon-booking-12{
+  width: 12% !important;
+}
+.icon-booking-9{
+  width: 9% !important;
+}
 
 @media (max-width: 480px) {
   .sm-center {
     text-align: center;
+  }
+  .icon-booking-9{
+    width: 12% !important;
   }
 }
 

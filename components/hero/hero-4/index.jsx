@@ -62,10 +62,10 @@ const index = () => {
                     data-aos-delay="300"
                     data-aos-offset="0"
                   >
-                    <p className="sectionTitle__title Made text-100 lh-8 text-white sm-pt">
+                    <p className="sectionTitle__title Made text-100 lh-8 text-white">
                     Discover the Ultimate Villa Experience in Goa
                     </p>
-                    <p className="text-white text-25 md:text-20 mb-10">
+                    <p className="text-white text-25 md:text-20 mb-10 sm:mb-45">
                     Unwind in our collection of 10 luxurious villas, offering comfort, privacy,<br></br> and 
                     proximity to Goa’s finest attractions
                     </p>

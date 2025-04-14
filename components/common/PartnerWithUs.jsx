@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 const PartnerForm = () => {
   const [formValues, setFormValues] = useState({
@@ -25,7 +26,8 @@ const PartnerForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/partner', {
+      // Submit to partner API
+      const partnerResponse = await fetch('/api/partner', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,8 +35,16 @@ const PartnerForm = () => {
         body: JSON.stringify(formValues),
       });
 
-      if (response.ok) {
-        alert('Partner added successfully!');
+      // Send email using EmailJS
+      await emailjs.send(
+        'service_t5iz8y9',
+        'template_dxjbkil',
+        formValues,
+        'GtZDcPo178_1i3Gvk'
+      );
+
+      if (partnerResponse.ok) {
+        alert('Partner form submitted successfully!');
         setFormValues({
           firstname: "",
           lastname: "",
@@ -46,10 +56,12 @@ const PartnerForm = () => {
           additionalinfo: ""
         });
       } else {
-        console.error('Error submitting data:', await response.json());
+        alert('There was an error processing your submission.');
+        console.error('Error submitting data:', await partnerResponse.json());
       }
     } catch (error) {
-      console.error('Error submitting data:', error);
+      alert('There was an error processing your submission.');
+      console.error('Error:', error);
     }
   };
 
@@ -64,7 +76,11 @@ const PartnerForm = () => {
               <input type={key === 'email' ? 'email' : 'text'} id={key} value={formValues[key]} onChange={handleChange} required />
             )}
             <label htmlFor={key} className="lh-1 text-12 text-black">
-              {key.replace('_', ' ').replace(/\b\w/g, (l) => l.toUpperCase())} 
+              {key === 'additionalinfo' 
+                ? 'Additional Info'
+                : key === 'propertytype'
+                  ? 'Property Type'
+                  : key.replace('_', ' ').replace(/\b\w/g, (l) => l.toUpperCase())} 
               {key !== 'amenities' && key !== 'additionalinfo' && formValues[key] === "" && <span style={{ color: 'red' }}>*</span>}
             </label>
           </div>

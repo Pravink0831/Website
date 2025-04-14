@@ -55,7 +55,7 @@ export default function GalleryOne({hotel}) {
                   >
                     {({ ref, open }) => (
                       <div
-                        className="button rounded-100 -yellow-1 px-24 py-15 bg-black text-white js-gallery"
+                        className="button text-18 rounded-100 -yellow-1 sm:px-12 sm:py-10 px-24 py-15 bg-black text-white js-gallery"
                         ref={ref}
                         onClick={open}
                         role="button"

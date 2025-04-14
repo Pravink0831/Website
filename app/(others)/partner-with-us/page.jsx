@@ -67,7 +67,7 @@ dedicated support, and seamless management.
           </div>
           {/* End .row */}
 
-          <div className="row y-gap-40 justify-between pt-50">
+          <div className="row y-gap-40 justify-between pt-50 sm:pt-0">
             <WhyChoose />
           </div>
           {/* End row */}

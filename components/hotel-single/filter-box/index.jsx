@@ -64,14 +64,15 @@ const index = ({ villaTitle }) => {
       
 
       <div className="col-12">
-        <div className="button-item h-full">
+        <div className="button-item h-full sm:ml-50 sm:mr-50 ml-30 mr-30">
           <a
             href={getBookingLink()}
-            className="button -yellow-1 px-35 text-20 h-60 rounded-100 col-12 bg-black text-white"
+            className="button -md -outline-yellow-1 px-35 text-20 rounded-100 col-12 bg-black-2 text-white"
             target="_blank"
             rel="noopener noreferrer"
           >
             Book Now
+            <img className="icon-booking-9 ml-10" src="/img/featureIcons/1/BookingWhite.png" />
           </a>
         </div>
         {/* End search button_item */}

@@ -87,7 +87,7 @@ Reach out for bookings, inquiries, or any assistance – we’d love to hear fro
                   Follow us
                 </h5>
                 <div className="d-flex x-gap-20 items-center">
-                  <Social />
+                  <Social variant="black"/>
                 </div>
               </div>
           </div>

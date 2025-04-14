@@ -17,16 +17,16 @@ export default function FilterHotels4() {
     </div>
     {/* End .tabs__content */}
 
-    <div className="row justify-center">
+    <div className="row justify-center" style={{ position: 'relative', zIndex: 10 }}>
       <div className="col-auto">
-      <Link
-                  href="/villa-lists"
-                  className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
-                >
-                  Explore all villas
-                  <i className="icon-arrow-right text-20 ml-10" />
-                </Link>
-        
+        <Link
+          href="/villa-lists"
+          className="button -md -outline-yellow-1 rounded-100 bg-black-2 text-white"
+          style={{ position: 'relative', zIndex: 10 }}
+        >
+          Explore all villas
+          <i className="icon-arrow-right text-20 ml-10" />
+        </Link>
       </div>
     </div>
   </div>

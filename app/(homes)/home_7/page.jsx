@@ -96,7 +96,7 @@ const home_7 = () => {
       {/* End counter section */}
 
       {/* End blog section */}
-      <section className="section-bg layout-pt-md layout-pb-lg">
+      <section className="section-bg layout-pt-md layout-pb-lg sm:pb-0">
         <div className="section-bg__item -left -right bg-egg-1" />
         <div className="container">
           <div className="row justify-center text-center">

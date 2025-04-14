@@ -12,7 +12,7 @@ const Testimonial = () => {
       <Swiper
         modules={[Navigation]}
         spaceBetween={30}
-        className="overflow-visible"
+        className="overflow-visible small-slide1"
         navigation={{
           nextEl: ".js-hm4tm-next-active",
           prevEl: ".js-hm4tm-prev-active",
@@ -37,7 +37,7 @@ const Testimonial = () => {
         {testimonial2.map((item) => (
           <SwiperSlide key={item.id}>
             <div
-              className="testimonials -type-1 bg-white rounded-16 pt-40 pb-30 px-40"
+              className="testimonials  -type-1 bg-white rounded-16 sm:px-20 pt-40 pb-30 px-40"
               key={item.id}
               data-aos="fade"
               data-aos-delay={item.dealyAnimation}

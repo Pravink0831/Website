@@ -49,6 +49,9 @@ const MainMenu = ({ style = "" }) => {
             ))}
           </ul>
         </li>
+        <li className={pathname === "/booking" ? "current" : ""}>
+          <Link href="https://www.swiftbook.io/inst/#home?propertyId=941MDbfLGozUzcqbW5hF0nX1EWB7FwXBeKZIf5I6HtGQjxnSDJLjA4Mjg=&JDRN=Y">Book now</Link>
+        </li>
         <li className={pathname === "/partner-with-us" ? "current" : ""}>
           <Link href="/partner-with-us">Partner with us</Link>
         </li>
